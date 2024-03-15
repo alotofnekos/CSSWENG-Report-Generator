@@ -1,10 +1,7 @@
-.root {
+#root {
     position: relative;
-    width: 1920px;
-    height: 1080px;
-    align-items: flex-start;
-    background-color: #fff;
-    overflow: hidden;
+    
+    transform: scale(0.67);
   }
   .rectangle84 {
     position: absolute;

@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+*{
+	font-family: "Inter", sans-serif;
+	font-size: 1rem;
+	margin: 0;
+	padding: 0;
+}
+
+header{
+	top: 0;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+header .left{
+	float: left;
+	display: flex;
+	position: relative;
+	align-items: center;
+}
+
+header .left #CompanyLogo{
+	width: 150px;
+	height: 153px;
+	background-color: #F3B52A;
+}
+
+header .left #ReportLogo {
+	margin-left: 46;
+}
+
+header .left img{
+	margin: 29px 26px;
+}
+
+header .left h2{
+	font-size: 102.81px;
+	font-weight: bold;
+	color: #0B0B0B;
+}
+
+header .left h3{
+	font-size: 40.52px;
+	margin-top: 30px;
+	margin-left: 35px;
+	color: #0B0B0B;
+}
+
+header .right{
+	float: right;
+	margin-right: 34px;
+}
+
+header .right .Profile{
+	border: 5px solid #F3B52A;
+	border-radius: 50%;
+	height: 92px;
+	width: 92px;
+	background-color: #0b0b0b;
+}
+
+header .right .Profile:hover{
+	border: 5px solid #FFD36F;
+}
+
+.line1{
+	border: 5px solid #F3B52A;
+	margin-bottom: 12px;
+}
+
+.line2{
+	border: 1.5px solid #F3B52A;
+}
+
+.ReportBody h3{
+	font-size: 40.52px;
+	color: #6C6C6C;
+	margin: 50px 140px;
+}
+
+footer{
+	position: relative;
+	margin-right: 36px;
+}
+
+footer a{
+	font-size: 26px;
+	padding: 19px 35px 19px 35px;
+	background-color: #F3B52A;
+	float: right;
+	border-radius: 40px;
+	color: #0B0B0B;
+	text-decoration: none;
+	font-weight: bold;
+	filter: drop-shadow(0px 4px 4px #B9B9B9)
+}
+
+footer a:hover{
+	background-color: #FFD36F;
+}

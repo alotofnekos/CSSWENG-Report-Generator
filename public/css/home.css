@@ -1,0 +1,13 @@
+header{
+    position: sticky !important;
+    top: 0;
+    background-color: #f3b52a;
+    width: 100%;
+    height: 10vh;
+}
+
+.logo-holder {
+    background-image: url(".../public/images/Icn_Kevler.png");
+    width: 3vh;
+    height: 3vh;
+}
