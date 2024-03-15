@@ -1,0 +1,497 @@
+.root {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    align-items: flex-start;
+    background-color: #fff;
+    overflow: hidden;
+  }
+  .rectangle84 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    background-color: #fff;
+  }
+  .rectangle18 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 171px;
+    background-color: #fff;
+  }
+  .generateReport {
+    color: #000;
+    font-size: 96px;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    position: absolute;
+    left: 174px;
+    top: 25px;
+    width: min-content;
+    height: min-content;
+    white-space: nowrap;
+    flex-direction: column;
+  }
+  .vector3 {
+    position: absolute;
+    left: 0;
+    top: 153px;
+    width: 1920px;
+    max-width: 100%;
+    height: 10px;
+    max-height: 100%;
+    overflow: visible;
+  }
+  .icon {
+    width: 100%;
+    height: 100%;
+  }
+  .vector4 {
+    position: absolute;
+    left: 0;
+    top: 171px;
+    width: 1920px;
+    max-width: 100%;
+    height: 3px;
+    max-height: 100%;
+    overflow: visible;
+  }
+  .icon2 {
+    width: 100%;
+    height: 100%;
+  }
+  .rectangle11 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 150px;
+    height: 153px;
+    background-color: #f3b52a;
+  }
+  .btn_Logo {
+    position: absolute;
+    left: 26px;
+    top: 29px;
+    width: 97px;
+    height: 95px;
+    background-image:/* webpackIgnore: true */ url('assets/btn_Logo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .btnUser {
+    position: absolute;
+    left: 1794px;
+    top: 32px;
+    width: 90px;
+    height: 92px;
+    outline: solid 5px #f3b52a;
+    outline-offset: -2px;
+    border-radius: 60px;
+    background-color: #000;
+  }
+  .rectangle8 {
+    position: absolute;
+    left: 161px;
+    top: 328.6758px;
+    width: 360.1978px;
+    height: 498.3244px;
+    border-radius: 35.8672px;
+    background-color: #faf8f8;
+    box-shadow: 0px 3.0525px 3.0525px 0px #00000040;
+  }
+  .group3 {
+    position: absolute;
+    left: 239.6027px;
+    top: 384.3889px;
+    width: 202.7005px;
+    height: 250.7086px;
+    overflow: visible;
+  }
+  .icon3 {
+    width: 100%;
+    height: 100%;
+  }
+  .iTEMQUANTITYPERMODEL {
+    color: #000;
+    font-size: 30.5252px;
+    line-height: 120%;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    position: absolute;
+    left: 161px;
+    top: 674.935px;
+    width: 360.4405px;
+    height: 120.5407px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0px -1.181771993637085px 0.945417582988739px #00000040, 0px 2.36354398727417px 1.7726579904556274px #fff;
+    flex-direction: column;
+  }
+  .rectangle10 {
+    position: absolute;
+    left: 779.6953px;
+    top: 328.6758px;
+    width: 360.1978px;
+    height: 498.3244px;
+    border-radius: 35.8672px;
+    background-color: #faf8f8;
+    box-shadow: 0px 3.0525px 3.0525px 0px #00000040;
+  }
+  .group4 {
+    position: absolute;
+    left: 825.487px;
+    top: 402.6983px;
+    width: 256.4127px;
+    height: 244.2015px;
+    overflow: visible;
+  }
+  .icon4 {
+    width: 100%;
+    height: 100%;
+  }
+  .tOPDEFECTSPERMODEL {
+    color: #000;
+    font-size: 30.5252px;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    position: absolute;
+    left: 779.6953px;
+    top: 674.9348px;
+    width: 360.4405px;
+    height: 120.5407px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0px -1.181771993637085px 0.945417582988739px #00000040, 0px 2.36354398727417px 1.7726579904556274px #fff;
+    flex-direction: column;
+  }
+  .rectangle9 {
+    position: absolute;
+    left: 1397.6953px;
+    top: 328.6758px;
+    width: 360.1978px;
+    height: 498.3244px;
+    border-radius: 35.8672px;
+    background-color: #faf8f8;
+    box-shadow: 0px 3.0525px 0px 0.7631px #00000057;
+  }
+  .pENDINGTASKSPERMODEL {
+    color: #000;
+    font-size: 30.5252px;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    position: absolute;
+    left: 1397.6953px;
+    top: 675.1358px;
+    width: 360.4586px;
+    height: 119.8115px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0px -1.181771993637085px 0.945417582988739px #00000040, 0px 2.36354398727417px 1.7726579904556274px #fff;
+    flex-direction: column;
+  }
+  .group5 {
+    position: absolute;
+    left: 1463.8753px;
+    top: 403.128px;
+    width: 207.4238px;
+    height: 248.1724px;
+    overflow: visible;
+  }
+  .icon5 {
+    width: 100%;
+    height: 100%;
+  }
+  
+  ._src_App_module__root {
+    height: 100%;
+    font-family: sans-serif;
+    background-color: __backgroundColor__;
+    flex-basis: 100%;
+    overflow-y: auto;
+    /* __center__ */
+  }
+
+._src_components_resets_module__storybrainResets,
+._src_components_resets_module__storybrainResets * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  flex-shrink: 0;
+  text-decoration: none;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+._src_components_resets_module__storybrainResets,
+._src_components_resets_module__storybrainResets :not(span, a, ul, ol, li, p) {
+  display: flex;
+}
+
+._src_components_resets_module__storybrainResets ul,
+._src_components_resets_module__storybrainResets ol {
+  text-indent: 0;
+  padding-inline-start: 1.5em;
+}
+
+._src_components_resets_module__storybrainResets p:empty::before {
+  content: '';
+  display: inline-block;
+}
+
+._src_components_resets_module__storybrainResets img {
+  object-fit: contain;
+}
+
+._src_components_resets_module__storybrainResets svg {
+  overflow: visible;
+}
+
+
+_src_components_GenerateReport_GenerateReport_module__root {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    align-items: flex-start;
+    background-color: #fff;
+    overflow: hidden;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__rectangle84 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    background-color: #fff;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__rectangle18 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 171px;
+    background-color: #fff;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__generateReport {
+    color: #000;
+    font-size: 96px;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    position: absolute;
+    left: 174px;
+    top: 25px;
+    width: min-content;
+    height: min-content;
+    white-space: nowrap;
+    flex-direction: column;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__vector3 {
+    position: absolute;
+    left: 0;
+    top: 153px;
+    width: 1920px;
+    max-width: 100%;
+    height: 10px;
+    max-height: 100%;
+    overflow: visible;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__icon {
+    width: 100%;
+    height: 100%;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__vector4 {
+    position: absolute;
+    left: 0;
+    top: 171px;
+    width: 1920px;
+    max-width: 100%;
+    height: 3px;
+    max-height: 100%;
+    overflow: visible;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__icon2 {
+    width: 100%;
+    height: 100%;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__rectangle11 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 150px;
+    height: 153px;
+    background-color: #f3b52a;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__btn_Logo {
+    position: absolute;
+    left: 26px;
+    top: 29px;
+    width: 97px;
+    height: 95px;
+    background-image:/* webpackIgnore: true */ url('assets/btn_Logo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__btnUser {
+    position: absolute;
+    left: 1794px;
+    top: 32px;
+    width: 90px;
+    height: 92px;
+    outline: solid 5px #f3b52a;
+    outline-offset: -2px;
+    border-radius: 60px;
+    background-color: #000;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__rectangle8 {
+    position: absolute;
+    left: 161px;
+    top: 328.6758px;
+    width: 360.1978px;
+    height: 498.3244px;
+    border-radius: 35.8672px;
+    background-color: #faf8f8;
+    box-shadow: 0px 3.0525px 3.0525px 0px #00000040;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__group3 {
+    position: absolute;
+    left: 239.6027px;
+    top: 384.3889px;
+    width: 202.7005px;
+    height: 250.7086px;
+    overflow: visible;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__icon3 {
+    width: 100%;
+    height: 100%;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__iTEMQUANTITYPERMODEL {
+    color: #000;
+    font-size: 30.5252px;
+    line-height: 120%;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    position: absolute;
+    left: 161px;
+    top: 674.935px;
+    width: 360.4405px;
+    height: 120.5407px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0px -1.181771993637085px 0.945417582988739px #00000040, 0px 2.36354398727417px 1.7726579904556274px #fff;
+    flex-direction: column;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__rectangle10 {
+    position: absolute;
+    left: 779.6953px;
+    top: 328.6758px;
+    width: 360.1978px;
+    height: 498.3244px;
+    border-radius: 35.8672px;
+    background-color: #faf8f8;
+    box-shadow: 0px 3.0525px 3.0525px 0px #00000040;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__group4 {
+    position: absolute;
+    left: 825.487px;
+    top: 402.6983px;
+    width: 256.4127px;
+    height: 244.2015px;
+    overflow: visible;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__icon4 {
+    width: 100%;
+    height: 100%;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__tOPDEFECTSPERMODEL {
+    color: #000;
+    font-size: 30.5252px;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    position: absolute;
+    left: 779.6953px;
+    top: 674.9348px;
+    width: 360.4405px;
+    height: 120.5407px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0px -1.181771993637085px 0.945417582988739px #00000040, 0px 2.36354398727417px 1.7726579904556274px #fff;
+    flex-direction: column;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__rectangle9 {
+    position: absolute;
+    left: 1397.6953px;
+    top: 328.6758px;
+    width: 360.1978px;
+    height: 498.3244px;
+    border-radius: 35.8672px;
+    background-color: #faf8f8;
+    box-shadow: 0px 3.0525px 0px 0.7631px #00000057;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__pENDINGTASKSPERMODEL {
+    color: #000;
+    font-size: 30.5252px;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    position: absolute;
+    left: 1397.6953px;
+    top: 675.1358px;
+    width: 360.4586px;
+    height: 119.8115px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0px -1.181771993637085px 0.945417582988739px #00000040, 0px 2.36354398727417px 1.7726579904556274px #fff;
+    flex-direction: column;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__group5 {
+    position: absolute;
+    left: 1463.8753px;
+    top: 403.128px;
+    width: 207.4238px;
+    height: 248.1724px;
+    overflow: visible;
+  }
+  ._src_components_GenerateReport_GenerateReport_module__icon5 {
+    width: 100%;
+    height: 100%;
+  }
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  display: flex;
+  flex-basis: 100%;
+  width: 100%;
+}
+
+#root {
+  position: relative;
+}
+
+body button:not(:disabled) {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
