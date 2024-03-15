@@ -78,7 +78,14 @@ header .right .Profile:hover{
 .ReportBody h3{
 	font-size: 40.52px;
 	color: #6C6C6C;
-	margin: 50px 140px;
+	margin: 40px 140px;
+}
+
+.ReportBody .chart{
+	width: 52.5%;
+	height: 50%;
+	margin-left: 25%;
+	position: relative;
 }
 
 footer{
