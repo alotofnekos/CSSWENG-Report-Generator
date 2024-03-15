@@ -2,6 +2,7 @@
 :root {
     --primary: #F3B52A;
     --bg: #FFFF;
+    --box-bg: #FAF8F8;
     --accent: #8c519b;
     --accent-2: #ed4d77; 
     --accent-3: #3595fc;
@@ -31,6 +32,11 @@ header{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+    background-color: var(--bg);
+    border-bottom: solid 5px var(--primary);
+    position: sticky;
+    top: 0;
+    height: 15vh;
 }
 
 header .left{
@@ -38,12 +44,12 @@ header .left{
 	display: flex;
 	position: relative;
 	align-items: center;
-    
 }
 
 header .left #CompanyLogo{
-    height: 100%;
-	background-color: var(--primary);
+	width: 15vh;
+	height: 15vh;
+	background-color: #F3B52A;
 }
 
 header .left #ReportLogo {
@@ -51,12 +57,13 @@ header .left #ReportLogo {
 }
 
 header .left img{
-	margin: 29px 26px;
-    height: 100%;    
+	margin: auto;
+    width: 15vh;
+	height: 15vh;
 }
 
 header .left h2{
-	font-size: 102.81px;
+	font-size: 10vh;
 	font-weight: bold;
 	color: #0B0B0B;
 }
@@ -74,23 +81,68 @@ header .right{
 }
 
 header .right .Profile{
-	border: 5px solid var(--bg);
+	border: 1vh solid var(--bg);
 	border-radius: 50%;
-	height: 92px;
-	width: 92px;
+	height: 10vh;
+	width: 10vh;
 	background-color: #0b0b0b;
 }
 
 header .right .Profile:hover{
-	border: 5px solid ;
+	border: 1vh solid #FFD36F;
 }
 
 .line1{
-	border: 5px solid var(--primary);
+	border: 5px solid #F3B52A;
 	margin-bottom: 12px;
 }
 
 .line2{
-	border: 1.5px solid var(--primary);
+	border: 1.5px solid #F3B52A;
 }
 
+.reports-menu{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-report-holder{
+    width: 40vh;
+    height: 60vh;
+    background-color: var(--box-bg);
+    border-radius: 25px;
+    box-shadow: -2px 10px 14px -13px var(--dm-box-nested-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 9vh;
+}
+
+.btn-report-holder div{
+    margin: 5%;
+}
+
+.btn-report-holder .report-icon{
+    width: 35vh;
+    height: 35vh;
+}
+
+.btn-report-holder .report-name{
+    font-size: 3vh;
+    text-align: center;
+    font-weight: bolder;
+}
+
+h2{
+    font-size: 1px;
+}
+
+
+@media screen and (max-width:800px){
+
+    header .left h2{
+        font-size: 6vh;
+    }
+}
