@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Pixelify+Sans&family=Roboto+Mono&display=swap');
+:root {
+    --primary: #F3B52A;
+    --bg: #FFFF;
+    --accent: #8c519b;
+    --accent-2: #ed4d77; 
+    --accent-3: #3595fc;
+    --dm-description: #9fa0a4;
+    --dm-bg: #3c404f; /*lighter bg*/
+    --dm-box-bg: #2d303f; /*box bg*/
+    --dm-box-nested-bg: #212433;
+    --dm-box-bg-2: #ecffea;
+    --easy: #f0c82b;
+    --moderate: #f99c2d;
+    --difficult: #e84349;
+    --very-difficult: #ed4d77;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+*{
+	font-family: "Inter", sans-serif;
+	font-size: 1rem;
+	margin: 0;
+	padding: 0;
+}
+
+header{
+	top: 0;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+header .left{
+	float: left;
+	display: flex;
+	position: relative;
+	align-items: center;
+    
+}
+
+header .left #CompanyLogo{
+    height: 100%;
+	background-color: var(--primary);
+}
+
+header .left #ReportLogo {
+	margin-left: 46;
+}
+
+header .left img{
+	margin: 29px 26px;
+    height: 100%;    
+}
+
+header .left h2{
+	font-size: 102.81px;
+	font-weight: bold;
+	color: #0B0B0B;
+}
+
+header .left h3{
+	font-size: 40.52px;
+	margin-top: 30px;
+	margin-left: 35px;
+	color: #0B0B0B;
+}
+
+header .right{
+	float: right;
+	margin-right: 34px;
+}
+
+header .right .Profile{
+	border: 5px solid var(--bg);
+	border-radius: 50%;
+	height: 92px;
+	width: 92px;
+	background-color: #0b0b0b;
+}
+
+header .right .Profile:hover{
+	border: 5px solid ;
+}
+
+.line1{
+	border: 5px solid var(--primary);
+	margin-bottom: 12px;
+}
+
+.line2{
+	border: 1.5px solid var(--primary);
+}
+
