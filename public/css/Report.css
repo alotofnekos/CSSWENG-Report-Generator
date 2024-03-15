@@ -78,14 +78,42 @@ header .right .Profile:hover{
 .ReportBody h3{
 	font-size: 40.52px;
 	color: #6C6C6C;
-	margin: 40px 140px;
+	margin: 5vh 7vw;
 }
 
 .ReportBody .chart{
-	width: 52.5%;
-	height: 50%;
+	width: 52vw;
+	height: 50vh;
 	margin-left: 25%;
 	position: relative;
+}
+.ReportBody table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 90vw;
+	position: relative;
+	margin-left: 4.7vw;
+	margin-bottom: 10vh;
+}
+
+.ReportBody table th{
+	text-align: center;
+}
+  
+.ReportBody table  td, th {
+	border: 1px solid #5B5B5B;
+	text-align: left;
+	padding: 8px;
+}
+
+.ReportBody table #tableHead{
+	background-color: #F3B52A;
+	color: #fff;
+	
+}
+  
+.ReportBody table  tr:nth-child(odd) {
+	background-color: #DEDEDE;
 }
 
 footer{
