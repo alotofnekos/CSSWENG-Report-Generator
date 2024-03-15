@@ -7,7 +7,8 @@
 	padding: 0;
 }
 
-header{
+
+/* header{
 	top: 0;
 	position: relative;
 	display: flex;
@@ -73,57 +74,28 @@ header .right .Profile:hover{
 
 .line2{
 	border: 1.5px solid #F3B52A;
-}
+} */
 
+.ReportBody{
+	display: flex;
+	flex-direction: column;
+}
 .ReportBody h3{
-	font-size: 40.52px;
+	font-size: 4vh;
 	color: #6C6C6C;
-	margin: 5vh 7vw;
-}
-
-.ReportBody .chart{
-	width: 52vw;
-	height: 50vh;
-	margin-left: 25%;
-	position: relative;
-}
-.ReportBody table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 90vw;
-	position: relative;
-	margin-left: 4.7vw;
-	margin-bottom: 10vh;
-}
-
-.ReportBody table th{
-	text-align: center;
-}
-  
-.ReportBody table  td, th {
-	border: 1px solid #5B5B5B;
-	text-align: left;
-	padding: 8px;
-}
-
-.ReportBody table #tableHead{
-	background-color: #F3B52A;
-	color: #fff;
-	
-}
-  
-.ReportBody table  tr:nth-child(odd) {
-	background-color: #DEDEDE;
+	margin: 1vh;
 }
 
 footer{
-	position: relative;
-	margin-right: 36px;
+	right: 0;
+	bottom: 0;
+	margin-right: 3vh;
+	height:6vh;
 }
 
 footer a{
-	font-size: 26px;
-	padding: 19px 35px 19px 35px;
+	font-size: 3vh;
+	padding: 3vh;
 	background-color: #F3B52A;
 	float: right;
 	border-radius: 40px;
@@ -135,4 +107,9 @@ footer a{
 
 footer a:hover{
 	background-color: #FFD36F;
+}
+
+.chart{
+	width: 130vh;
+	height: 40vh;
 }
