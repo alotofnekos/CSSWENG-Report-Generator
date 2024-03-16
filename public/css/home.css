@@ -1,13 +1,169 @@
-header{
-    position: sticky !important;
-    top: 0;
-    background-color: #f3b52a;
-    width: 100%;
-    height: 10vh;
+.overlay-holder{
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    display: none;
 }
 
-.logo-holder {
-    background-image: url(".../public/images/Icn_Kevler.png");
+.popup{
+    margin-top: 12.5%;
+    margin-left: 30%;
+    margin-right: 30%;
+    z-index: 2;
+    position: absolute;
+    width:  80vh;
+    height: 75vh;
+    background-color: var(--box-bg);
+    border-radius: 4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly;
+}
+
+.popup .popup-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    width: 96%;
+    border-bottom: solid 0.5vh var(--primary);
+}
+
+.popup .popup-text{
+    font-size: 4vh;
+    font-weight: bolder;
+}
+
+.popup .btn-close img{
+    width: 4vh;
+    height: 4vh;
+}
+
+.popup-subheader{
+    width: 96%;
+    display: flex;
+}
+.popup-subheader .popup-text-one{
+    width: 70%;
+    text-align: center;
+    font-size: 3vh;
+    font-weight: 500;
+    margin-left:1vh;
+    margin-right:1vh;
+}
+
+.popup .dashed-line{
+    width: 100%;
+    height: 2vh;
+    border-bottom: dashed 0.40vh var(--primary);
+}
+
+.btn-generate-report{
+    width: 30%;
+    background-color: var(--primary);
+    border-radius: 1vh;
+    text-align: center;
+    padding: 1vh;
+}
+
+.btn-generate-report :hover{
+    background-color: var(--muted-primary);
+    cursor: pointer;
+}
+
+.popup-options{
+    width: 96%;
+    display: flex;
+    margin-bottom: 3vh;
+    justify-content: space-between;
+}
+
+.btn-dropdown-mock{
+    width: 29%;
+    background-color: var(--nested-box-bg);
+    border-radius: 1vh;
+    text-align: center;
+    padding: 1vh;
+    font-size: 2.7vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-report-holder div:hover{
+    cursor: pointer;
+    transform: scale(102.0);
+    transition: 1s;
+}
+
+.btn-dropdown-mock img{
     width: 3vh;
     height: 3vh;
+}
+
+.dark-overlay{
+    z-index: 1;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--near-black);
+    opacity: 50%;
+    /* display: none; */
+}
+
+.reports-menu{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header .right .Profile:hover{
+    font-weight: bolder;
+}
+
+.reports-menu{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-report-holder{
+    width: 40vh;
+    height: 60vh;
+    background-color: var(--box-bg);
+    border-radius: 25px;
+    box-shadow: -2px 10px 14px -13px var(--near-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 9vh;
+}
+
+.btn-report-holder div{
+    margin: 5%;
+}
+
+.btn-report-holder .report-icon{
+    width: 35vh;
+    height: 35vh;
+}
+
+.btn-report-holder .report-name{
+    font-size: 3vh;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.btn-report-holder div:hover{
+    transform: scale(1.045);
+    transition-duration: 0.5s;
+}
+
+.btn-report-holder img:hover{
+    filter: invert(52%) sepia(3%) saturate(20%) hue-rotate(350deg) brightness(95%) contrast(82%);
+    transition-duration: 1s;
 }

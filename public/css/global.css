@@ -48,13 +48,14 @@ header .left #CompanyLogo{
 }
 
 header .left #ReportLogo {
-	margin-left: 46;
+	margin-left: 2vh;
+	margin-top: 0.5vh;
 }
 
 header .left img{
 	margin: auto;
-    width: 15vh;
-	height: 15vh;
+    width: 11vh;
+	height: 13vh;
 }
 
 header .left h2{

@@ -6,7 +6,6 @@ $(document).ready(function () {
 
         alert(report);
         var popup=`
-        <div class="popup ${report}-popup">
         <div class="popup-header">
             <div class="popup-text">${reportname}</div>
             <div class="btn-close"><img src="/public/images/close.svg" alt="close popup"></div>
@@ -50,10 +49,9 @@ $(document).ready(function () {
         <div class="btn-generate-report">
                 <a href="${report}.html">Generate report</a>
         </div>
-    </div>
         `;        
-        $('.overlay-holder').append(popup);
-        $(".dark-overlay").fadeIn('fast', 'swing');
+        $('.popup').append(popup);
+
         $(".overlay-holder").fadeIn('fast', 'swing');
     });
 
