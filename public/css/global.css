@@ -1,20 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Pixelify+Sans&family=Roboto+Mono&display=swap');
 :root {
     --primary: #F3B52A;
+    --muted-primary: #FACF70: 
     --bg: #FFFF;
     --box-bg: #FAF8F8;
-    --accent: #8c519b;
-    --accent-2: #ed4d77; 
-    --accent-3: #3595fc;
-    --dm-description: #9fa0a4;
-    --dm-bg: #3c404f; /*lighter bg*/
-    --dm-box-bg: #2d303f; /*box bg*/
-    --dm-box-nested-bg: #212433;
-    --dm-box-bg-2: #ecffea;
-    --easy: #f0c82b;
-    --moderate: #f99c2d;
-    --difficult: #e84349;
-    --very-difficult: #ed4d77;
+    --nested-box-bg: #DEDEDE; 
+    --near-black: #0B0B0B;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
@@ -24,6 +14,10 @@
 	font-size: 1rem;
 	margin: 0;
 	padding: 0;
+}
+
+body{
+    min-height: 100vh;
 }
 
 header{
@@ -37,6 +31,7 @@ header{
     position: sticky;
     top: 0;
     height: 15vh;
+    background-color: var(--bg);
 }
 
 header .left{
@@ -65,13 +60,13 @@ header .left img{
 header .left h2{
 	font-size: 10vh;
 	font-weight: bold;
+    margin-left: 1.5vh;
 	color: #0B0B0B;
 }
 
 header .left h3{
-	font-size: 40.52px;
-	margin-top: 30px;
-	margin-left: 35px;
+	font-size: 5vh;
+    margin-left: 2vh;
 	color: #0B0B0B;
 }
 
@@ -101,48 +96,15 @@ header .right .Profile:hover{
 	border: 1.5px solid #F3B52A;
 }
 
-.reports-menu{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-}
-
-.btn-report-holder{
-    width: 40vh;
-    height: 60vh;
-    background-color: var(--box-bg);
-    border-radius: 25px;
-    box-shadow: -2px 10px 14px -13px var(--dm-box-nested-bg);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 9vh;
-}
-
-.btn-report-holder div{
-    margin: 5%;
-}
-
-.btn-report-holder .report-icon{
-    width: 35vh;
-    height: 35vh;
-}
-
-.btn-report-holder .report-name{
-    font-size: 3vh;
-    text-align: center;
-    font-weight: bolder;
-}
-
-h2{
-    font-size: 1px;
-}
-
 
 @media screen and (max-width:800px){
 
     header .left h2{
         font-size: 6vh;
     }
+}
+
+a{
+    text-decoration: none;
+    color: var(--near-black);
 }
