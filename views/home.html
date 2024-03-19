@@ -1,60 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script defer type="module" src="/src/home_reportBtn.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/global.css">
-    <link rel="stylesheet" href="/public/css/home.css">
-    <!-- <link rel="stylesheet" href="/public/css/home.css"> -->
-    <title>Document</title>
-</head>
+<DOCTYPE! html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../public/css/global.css">
+        <link rel="stylesheet" href="../public/css/home.css">
+        <script src="../public/home_reportBtn.js" defer></script>
+        <title>Document</title>
+    </head>
     
-<body>
-    <!-- popup -->
-    <div class="overlay-holder">
-        <div class="popup"></div>
-        <div class="dark-overlay"></div>
-    </div>
+    <body>
+        <div class="overlay-holder">
+            <div class="popup"></div>
+            <div class="dark-overlay"></div>
+        </div>
 
-    <!-- header -->
-    <header>
-        <div class="left">
-            <div id="CompanyLogo">
-                <img src="/public/images/Btn_Logo.png">
+        <header>
+            <div class="left">
+                <div id="CompanyLogo">
+                    <img src="../public/images/Btn_Logo.png">
+                </div>
+                <h2 class="Title">Generate Report </h2>
+                <h3></h3>
             </div>
-            <h2 class="Title">Generate Report </h2>
-            <h3></h3>
-        </div>
-        <div class="right">
-            <div class="Profile"></div>
-        </div>
-    </header>
-    <hr class="line1">
-    <hr class="line2">  
-    <!--  -->
-    <div class="reports-menu">
-        <div class="btn-report-holder" data-report="IQPM">
-            <div>
-                <img class="report-icon" src="/public/images/IQPM.svg" alt="Item Quantity per Model"/>  
-                <div class="report-name">ITEM QUANTITY PER MODEL</div>
+            <div class="right">
+                <div class="Profile"></div>
+            </div>
+        </header>
+        <hr class="line1">
+        <hr class="line2">  
+        <div class="reports-menu">
+            <div class="btn-report-holder" data-report="IQPM">
+                <div>
+                    <img class="report-icon" src="../public/images/IQPM.svg" alt="Item Quantity per Model"/>  
+                    <div class="report-name">ITEM QUANTITY PER MODEL</div>
+                </div>
+            </div>
+            <div class="btn-report-holder"  data-report="TDPM">
+                <div>
+                    <img class="report-icon" src="../public/images/TDPM.svg" alt="Top Defects Per Model"/>  
+                    <div class="report-name">TOP DEFECTS PER MODEL</div>
+                </div>
+            </div>
+            <div class="btn-report-holder" data-report="PTPM">
+                <div>
+                    <img class="report-icon" src="../public/images/PTPM.svg" alt="Pending Tasks per Model"/>  
+                    <div class="report-name">PENDING TASKS PER MODEL</div>
+                </div>
             </div>
         </div>
-        <div class="btn-report-holder"  data-report="TDPM">
-            <div>
-                <img class="report-icon" src="/public/images/TDPM.svg" alt="Top Defects Per Model"/>  
-                <div class="report-name">TOP DEFECTS PER MODEL</div>
-            </div>
-        </div>
-        <div class="btn-report-holder" data-report="PTPM">
-            <div>
-                <img class="report-icon" src="/public/images/PTPM.svg" alt="Pending Tasks per Model"/>  
-                <div class="report-name">PENDING TASKS PER MODEL</div>
-            </div>
-        </div>
-    </div>
-</body>
-
-
-</html>
+    </body>
+    </html>
+</DOCTYPE>
