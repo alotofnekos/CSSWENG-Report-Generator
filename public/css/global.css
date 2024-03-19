@@ -48,14 +48,14 @@ header .left #CompanyLogo{
 }
 
 header .left #ReportLogo {
-	margin-left: 2vh;
-	margin-top: 0.5vh;
+	margin-left: 0.5vh;
+    transform: scale(0.80);
 }
 
 header .left img{
 	margin: auto;
-    width: 11vh;
-	height: 13vh;
+    width: 15vh;
+	height: 15vh;
 }
 
 header .left h2{
@@ -108,4 +108,8 @@ header .right .Profile:hover{
 a{
     text-decoration: none;
     color: var(--near-black);
+}
+
+.text-1{
+	columns: var(--primary);
 }
