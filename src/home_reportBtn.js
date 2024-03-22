@@ -4,8 +4,8 @@ $(document).ready(function () {
         var report = $(this).data('report'); //Get report abbreviation from data attribute in .btn-report-holder
         var reportname= $(this).find('.report-name').text();
 
-        alert(report);
         var popup=`
+        <div class="popup ${report}-popup">
         <div class="popup-header">
             <div class="popup-text">${reportname}</div>
             <div class="btn-close"><img src="/public/images/close.svg" alt="close popup"></div>
@@ -49,9 +49,10 @@ $(document).ready(function () {
         <div class="btn-generate-report">
                 <a href="${report}.html">Generate report</a>
         </div>
+    </div>
         `;        
-        $('.popup').append(popup);
-
+        $('.overlay-holder').append(popup);
+        $(".dark-overlay").fadeIn('fast', 'swing');
         $(".overlay-holder").fadeIn('fast', 'swing');
     });
 

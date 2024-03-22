@@ -1,0 +1,54 @@
+:root {
+    --primary: #F3B52A;
+    --muted-primary: #FACF70: 
+    --bg: #FFFF;
+    --box-bg: #FAF8F8;
+    --nested-box-bg: #DEDEDE; 
+    --near-black: #0B0B0B;
+}
+
+.upperbox{
+    height: 40vh;
+    background-color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upperbox img{
+    width: 100vh;
+    height: 25vh;
+}
+
+.lowerbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 40vh;
+}
+
+.lowebox input{
+    margin: 4vh;
+}
+
+.btn-login{
+    background-color: var(--primary);
+    height: 4vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 5vh;
+    padding-right: 5vh;
+    border-radius: 3vh;
+    font-weight: bold;
+}
+
+.btn-login :hover{
+    background-color: var(--muted-primary);
+    cursor: pointer;
+
+}
+
+.input-box{
+    border-radius: 2vh;
+}
