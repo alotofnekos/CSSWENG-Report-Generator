@@ -23,12 +23,14 @@ appExp.use(morgan('dev'));
 // let mainWindow
 
 appExp.set(`view engine`, `hbs`);
+appExp.set('views', path.join(__dirname, 'views'));
 // hbs.registerPartials(__dirname + '/views/partials')
 // hbs.registerPartials(__dirname + `/views/partials`)
 
 appExp.use(bodyParser.json())
 appExp.use(bodyParser.urlencoded( {extended: true } ))
-appExp.use(express.static(`./public`));
+appExp.use(express.static(__dirname + '/public'));
+// appExp.use(express.static(`./public`));
 appExp.use(`/`, routes);
 
 // var excelStorage = multer.diskStorage({  

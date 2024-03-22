@@ -5,7 +5,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const port = 3000
 const formidable = require('formidable');
 const fs = require('fs');
-const repairModel = require('../models/repairSchem.js');
+const repairModel = require('../models/repairSchema.js');
+const querystring = require('node:querystring'); 
 
 function base64_decode(base64str, file) {
     // console.log(base64str)
@@ -56,52 +57,59 @@ const importController = {
         console.log("post called");
         var form = new formidable.IncomingForm();
         form.parse(req, async function (err, fields, files) {
-            console.log(files);
-            console.log(fields);
+            console.log("line 59" + files);
+            console.log("line 60" + fields);
+            console.log("help me" + fields.data);
             base64_decode(fields.data, fields.file);
-            
-            var repairId;
+            // console.log("fields =" + JSON.parse(fields.excelValues));
+
+            console.log(fields.excelValues);
+            // var string = JSON.stringify(fields.excelValues);
+            // const query = querystring.stringify(fields.excelValues);
+            // console.log(query);
+            res.redirect('/insertRepair/' + fields.excelValues);
+            // var repairId;
 
             
 
-            const repairIdExists = await reservationIdModel.findOne({}).then(id => {
-                console.log("awman", id);
-                if(id == null)
-                    return false;
-                else {
-                    reservationId = id.idCounter + 1;
-                    return true;
-                }
-            })
+            // const repairIdExists = await reservationIdModel.findOne({}).then(id => {
+            //     console.log("awman", id);
+            //     if(id == null)
+            //         return false;
+            //     else {
+            //         reservationId = id.idCounter + 1;
+            //         return true;
+            //     }
+            // })
 
-            console.log(reservationIdExists);
+            // console.log(reservationIdExists);
 
-            if(reservationIdExists) {
-                console.log("bruh", reservationId);
-                await reservationIdModel.findOneAndUpdate({
-                    idCounter: reservationId,
-                })
-            } else {
-                console.log("in here");
-                const newReservationId = new reservationIdModel({});
-                await newReservationId.save();
-                await reservationIdModel.findOne({}).then(id => {
-                    console.log(id);
-                    reservationId = id.idCounter;
-                })
-            };
+            // if(reservationIdExists) {
+            //     console.log("bruh", reservationId);
+            //     await reservationIdModel.findOneAndUpdate({
+            //         idCounter: reservationId,
+            //     })
+            // } else {
+            //     console.log("in here");
+            //     const newReservationId = new reservationIdModel({});
+            //     await newReservationId.save();
+            //     await reservationIdModel.findOne({}).then(id => {
+            //         console.log(id);
+            //         reservationId = id.idCounter;
+            //     })
+            // };
 
 
-            const newRepair = new repairModel({
-                repairId: req.body.fName,
-                lastName: req.body.lName,
-                idNumber: req.body.StudentId,
-                dateOfBirth: req.body.birth,
-                userName: req.body.user,
-                password: await hashPassword(req.body.password),
-                userType: "studentUser"
-            });
-            await newRepair.save();
+            // const newRepair = new repairModel({
+            //     repairId: req.body.fName,
+            //     lastName: req.body.lName,
+            //     idNumber: req.body.StudentId,
+            //     dateOfBirth: req.body.birth,
+            //     userName: req.body.user,
+            //     password: await hashPassword(req.body.password),
+            //     userType: "studentUser"
+            // });
+            // await newRepair.save();
         // console.log(fields.data);
 
         //   var oldpath = files.filetoupload.path;

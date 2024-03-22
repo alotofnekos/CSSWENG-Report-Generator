@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,14 +34,14 @@
                     console.log(file instanceof Blob);
                     console.log(typeof(file));
                     var workbook = XLSX.read(await file.arrayBuffer(), { type: "array" });
-                    workbook.addDataValidation({
-                        type: 'list',
-                        allowBlank: 1,
-                        sqref: 'C1:C10',
-                        formulas: [
-                            '=$G$6:$I$6'
-                        ]
-                    });
+                    // workbook.addDataValidation({
+                    //     type: 'list',
+                    //     allowBlank: 1,
+                    //     sqref: 'C1:C10',
+                    //     formulas: [
+                    //         '=$G$6:$I$6'
+                    //     ]
+                    // });
 
                     console.log(workbook);
                     var wopts = { bookType:'xlsx', bookSST:false, type:'base64' };
