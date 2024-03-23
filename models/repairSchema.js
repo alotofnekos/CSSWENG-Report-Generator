@@ -1,6 +1,7 @@
 const mongoose = require(`mongoose`);
 const Schema = mongoose.Schema;
 
+//Row entry input of a repair
 const repairSchema = new Schema({
     repairId: {
         type: Number,
@@ -84,4 +85,5 @@ const repairSchema = new Schema({
 
 const Repair = mongoose.model('repair', repairSchema);
 
+//Export Repair model to be used
 module.exports = Repair;

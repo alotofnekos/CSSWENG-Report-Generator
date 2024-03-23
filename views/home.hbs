@@ -77,12 +77,6 @@
 
                 console.log("name = " + file.name);
                 console.log(workbook);
-                console.log(workbook.Sheets.Sheet1[1]);
-                console.log(workbook.Strings.Count);
-                var wbString = JSON.stringify(workbook.Strings)
-                var parsedWbString = JSON.parse(wbString);
-                console.log("wb string 0 = " + wbString);
-                console.log("parsed wb string = " + JSON.stringify(parsedWbString[0].t));
                 var wopts = { bookType:'xlsx', bookSST:false, type:'base64' };
                 var wbout = XLSX.write(workbook,wopts);
                 //RESTRICT TO EXCEL FILE ONLY
@@ -93,20 +87,22 @@
 
 
                 const wbValues = [];
-                for(var i = 0; i != workbook.Strings.Count; i++) {
-                    wbValues[i] = workbook.Strings[i].t;
-                    console.log("yo");
+                var index = 0;
+                //Store workbook values into wbValues array
+                for(var i in workbook.Sheets.IMPORT_DATA) {
+                    wbValues[index] = workbook.Sheets.IMPORT_DATA[i].v;
+                    //console.log(workbook.Sheets.IMPORT_DATA[i].v);
+                    //console.log(i);
+                    index++;
                 }
-                for(var i in workbook.Sheets.Sheet1) {
-                    console.log(workbook.Sheets.Sheet1[i]);
-                    console.log(i);
-                }
-                console.log(wbValues);
+                console.log("wb Values = " + wbValues);
+                //Create JSON object of wbValues array
                 wbValuesJson = JSON.stringify(wbValues);
+                console.log("wbValuesJson = " + wbValuesJson);
                 
-                // formData.append('filetoupload', blob, 'test.xlsx');
                 formData.append('file', file.name);
                 formData.append('data', wbout);
+                //Pass JSON object array
                 formData.append('excelValues', wbValuesJson)
 
                 $.ajax({

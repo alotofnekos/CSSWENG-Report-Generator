@@ -7,9 +7,6 @@ const routes = require('./routes/routes.js');
 const exphbs = require('express-handlebars');
 const hbs = require('hbs');
 const connect = require('./public/database/server.js');
-const fileUpload = require('express-fileupload');
-const morgan = require('morgan');
-// const multer  = require('multer')
 // const { app, protocol, BrowserWindow, ipcMain } = require('electron');
 // const axios = require('axios');
 const appExp = express();
@@ -17,32 +14,26 @@ const path = require('path');
 // const url = require('url');
 // const fs = require('fs');
 // const os = require('os');
+const http = require("http");
 
+//Just checking max size of header that can be sent
+let size = http.maxHeaderSize;
+console.log('Max HTTP Header size is', size);
 dotenv.config();
-appExp.use(morgan('dev'));
-// let mainWindow
 
+//Set hbs as view engine
 appExp.set(`view engine`, `hbs`);
 appExp.set('views', path.join(__dirname, 'views'));
-// hbs.registerPartials(__dirname + '/views/partials')
 // hbs.registerPartials(__dirname + `/views/partials`)
 
 appExp.use(bodyParser.json())
 appExp.use(bodyParser.urlencoded( {extended: true } ))
+//Set static directory
 appExp.use(express.static(__dirname + '/public'));
-// appExp.use(express.static(`./public`));
+//User a router for controllers
 appExp.use(`/`, routes);
 
-// var excelStorage = multer.diskStorage({  
-//   destination:(req,file,cb)=>{  
-//        cb(null,'./public/excelUploads');      // file added to the public folder of the root directory
-//   },  
-//   filename:(req,file,cb)=>{  
-//        cb(null,file.originalname);  
-//   }  
-// });  
-// var excelUploads = multer({storage:excelStorage}); 
-
+//Run on Local Host and connect to Mongo DB
 appExp.listen(process.env.SERVER_PORT, async function(){
   console.log("Running on port: " + process.env.SERVER_PORT);
   try{

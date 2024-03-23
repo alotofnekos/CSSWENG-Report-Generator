@@ -6,8 +6,95 @@ const port = 3000
 const formidable = require('formidable');
 const fs = require('fs');
 const repairModel = require('../models/repairSchema.js');
+const repairIdModel = require('../models/repairIdSchema.js');
 const querystring = require('node:querystring'); 
 
+//Check if a repair ID model exists and update it
+async function idExists(repairId){
+
+    await repairIdModel.findOneAndUpdate({
+        idCounter: repairId,
+    });
+};
+
+//Create neww repair model ID
+async function notIdExists(){
+    // var repairId;
+    const newRepairId = new repairIdModel({});
+    await newRepairId.save();
+};
+
+async function insertRepair(excelValues) {
+    const hatdog = parseInt(excelValues[1]);
+    console.log(hatdog);
+    console.log("this is the final value ", excelValues);
+    const excelValuesLength = excelValues.length;
+    console.log("this is json length = ", excelValuesLength);
+    var repairId;
+
+    //Check if a repair ID model exists. If yes return true, if no create a new one
+    const done = await repairIdModel.findOne({}).then(id => {
+        console.log("awman", id);
+        if(id == null) {
+            notIdExists();
+        }
+
+        return true;
+    });
+    
+    //Iterate of the length of excel values. Starts from 1 because of an additional automatic entry and excelValuesLength - 1
+    //because of another additional automatic entry
+    for(i = 1; i < excelValuesLength - 1; i += 20){
+        console.log('help ' + excelValues[i]);
+
+        //If all of the inputs in a row = "NULL", do not enter into DB. Otherwise, insert into DB
+        if((excelValues[i] && excelValues[i+1] && excelValues[i+2] && excelValues[i+3] && excelValues[i+4] && excelValues[i+5]
+            && excelValues[i+6] && excelValues[i+7] && excelValues[i+8] && excelValues[i+9] && excelValues[i+10]
+            && excelValues[i+11] && excelValues[i+12] && excelValues[i+13] && excelValues[i+14] && excelValues[i+15]
+            && excelValues[i+16] && excelValues[i+17] && excelValues[i+18] && excelValues[i+19]) == "NULL") {
+            console.log("no input");
+        } else {
+            //If creating or finding the repair ID model is done, find and store its idCounter value to repairId 
+            if(done) {
+                await repairIdModel.findOne({}).then(id => {
+                    console.log("awman", id);
+                    
+                    repairId = id.idCounter + 1;
+                    idExists(repairId)
+                });
+            };
+
+            //Create new repair model
+            const newRepair = new repairModel({
+                repairId: repairId,
+                repairDate: excelValues[i],
+                repairPLNumber: 1234,//parseInt(excelValues[i+1]) 
+                repairCustomer: excelValues[i+2],
+                repairItemModel: excelValues[i+3],
+                repairDescription: excelValues[i+4],
+                repairQuantity: 0,//parseInt(excelValues[i+5])
+                repairPullOutBy: excelValues[i+6],
+                repairCategory: excelValues[i+7],
+                // repairSerialNumber: parseInt(excelValues[i+8]), //commented out because can't be null entries
+                // repairJobOrderNumber: parseInt(excelValues[i+9]), //commented out because can't be null entries
+                repairDateStarted: excelValues[i+10],
+                repairDateFinished: excelValues[i+11],
+                repairTechnician: excelValues[i+12],
+                repairItemStatus: excelValues[i+13],
+                repairDeliveryStatus: excelValues[i+14],
+                repairRemarks: excelValues[i+15],
+                // repairCost: parseInt(excelValues[i+16]), //commented out because can't be null entries
+                // repairReturnFormNumber: parseInt(excelValues[i+17]), //commented out because can't be null entries
+                repairDateReturned: excelValues[i+18],
+                repairDefect: excelValues[i+19]
+            });
+            //Insert new rapir model into DB
+            await newRepair.save();
+        };
+    };
+}
+
+//Decode string with base 64
 function base64_decode(base64str, file) {
     // console.log(base64str)
     console.log(file)
@@ -33,22 +120,21 @@ function base64_decode(base64str, file) {
 
     // Convert the JSON object to a string
     const jsonString = JSON.stringify(json);
-    try {
-        fs.writeFileSync(file.toString('base64'), bitmap);
-        //file written successfully
-    } catch (err) {
-        console.error(err)
-    }
+    // try {
+    //     fs.writeFileSync(file.toString('base64'), bitmap);
+    //     //file written successfully
+    // } catch (err) {
+    //     console.error(err)
+    // }
 
-    console.log("this is jsonString:", jsonString);
-    console.log("this is bitmap:", bitmap);
-    console.log('******** File created from base64 encoded string ********');
+    // console.log("this is jsonString:", jsonString);
+    // console.log("this is bitmap:", bitmap);
+    // console.log('******** File created from base64 encoded string ********');
 };
 
 const importController = {
     //Get file from import.html and send it.
     getFile: function(req, res) {
-        // res.render('import');
         res.sendFile(__dirname +'/import.html');
     },
 
@@ -57,60 +143,16 @@ const importController = {
         console.log("post called");
         var form = new formidable.IncomingForm();
         form.parse(req, async function (err, fields, files) {
-            console.log("line 59" + files);
-            console.log("line 60" + fields);
-            console.log("help me" + fields.data);
+            console.log("files = " + files);
+            console.log("fields = " + fields);
+            console.log("fields data = " + fields.data);
             base64_decode(fields.data, fields.file);
-            // console.log("fields =" + JSON.parse(fields.excelValues));
 
-            console.log(fields.excelValues);
-            // var string = JSON.stringify(fields.excelValues);
-            // const query = querystring.stringify(fields.excelValues);
-            // console.log(query);
-            res.redirect('/insertRepair/' + fields.excelValues);
-            // var repairId;
-
+            //Parse passed JSON object
+            var excelValues = JSON.parse(fields.excelValues);
+            insertRepair(excelValues);
+            // res.redirect('/insertRepair/' + excelValues);
             
-
-            // const repairIdExists = await reservationIdModel.findOne({}).then(id => {
-            //     console.log("awman", id);
-            //     if(id == null)
-            //         return false;
-            //     else {
-            //         reservationId = id.idCounter + 1;
-            //         return true;
-            //     }
-            // })
-
-            // console.log(reservationIdExists);
-
-            // if(reservationIdExists) {
-            //     console.log("bruh", reservationId);
-            //     await reservationIdModel.findOneAndUpdate({
-            //         idCounter: reservationId,
-            //     })
-            // } else {
-            //     console.log("in here");
-            //     const newReservationId = new reservationIdModel({});
-            //     await newReservationId.save();
-            //     await reservationIdModel.findOne({}).then(id => {
-            //         console.log(id);
-            //         reservationId = id.idCounter;
-            //     })
-            // };
-
-
-            // const newRepair = new repairModel({
-            //     repairId: req.body.fName,
-            //     lastName: req.body.lName,
-            //     idNumber: req.body.StudentId,
-            //     dateOfBirth: req.body.birth,
-            //     userName: req.body.user,
-            //     password: await hashPassword(req.body.password),
-            //     userType: "studentUser"
-            // });
-            // await newRepair.save();
-        // console.log(fields.data);
 
         //   var oldpath = files.filetoupload.path;
         //   var newpath = __dirname + "/" + files.filetoupload.name;

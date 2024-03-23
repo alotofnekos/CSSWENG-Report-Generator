@@ -4,7 +4,6 @@ const mainController = {
     //Load Home Page
     getMain: async function(req, res) {
         res.render('home');
-        // res.render('home');
     },
 
     //Login feature
