@@ -31,11 +31,9 @@ const repairSchema = new Schema({
         type: Number,
         required: true
     },
-    // repairUOM: {
-    //     type: Number,
-    //     required: true,
-    //     unique: true
-    // },
+    repairUOM: {
+        type: String
+    },
     repairPullOutBy: {
         type: String,
         required: true
@@ -55,9 +53,15 @@ const repairSchema = new Schema({
         required: true
     },
     repairDateFinished: {
-        type: String,
+        type: String
     },
     repairTechnician: {
+        type: String
+    },
+    repairDifficulty: {
+        type: String
+    },
+    repairMerit: {
         type: String
     },
     repairItemStatus: {
@@ -75,9 +79,9 @@ const repairSchema = new Schema({
     repairReturnFormNumber: {
         type: Number
     },
-    repairDateReturned: {
-        type: String
-    },
+    // repairDateReturned: {
+    //     type: String
+    // },
     repairDefect: {
         type: String
     }

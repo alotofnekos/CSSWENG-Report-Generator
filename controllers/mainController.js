@@ -27,4 +27,5 @@ const mainController = {
     }
 };
 
+//Export mainController to be used
 module.exports = mainController;

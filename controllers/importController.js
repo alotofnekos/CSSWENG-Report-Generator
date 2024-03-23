@@ -11,7 +11,6 @@ const querystring = require('node:querystring');
 
 //Check if a repair ID model exists and update it
 async function idExists(repairId){
-
     await repairIdModel.findOneAndUpdate({
         idCounter: repairId,
     });
@@ -19,7 +18,6 @@ async function idExists(repairId){
 
 //Create neww repair model ID
 async function notIdExists(){
-    // var repairId;
     const newRepairId = new repairIdModel({});
     await newRepairId.save();
 };
@@ -44,7 +42,7 @@ async function insertRepair(excelValues) {
     
     //Iterate of the length of excel values. Starts from 1 because of an additional automatic entry and excelValuesLength - 1
     //because of another additional automatic entry
-    for(i = 1; i < excelValuesLength - 1; i += 20){
+    for(i = 1; i < excelValuesLength - 1; i += 22){
         console.log('help ' + excelValues[i]);
 
         //If all of the inputs in a row = "NULL", do not enter into DB. Otherwise, insert into DB
@@ -73,20 +71,23 @@ async function insertRepair(excelValues) {
                 repairItemModel: excelValues[i+3],
                 repairDescription: excelValues[i+4],
                 repairQuantity: 0,//parseInt(excelValues[i+5])
-                repairPullOutBy: excelValues[i+6],
-                repairCategory: excelValues[i+7],
-                // repairSerialNumber: parseInt(excelValues[i+8]), //commented out because can't be null entries
-                // repairJobOrderNumber: parseInt(excelValues[i+9]), //commented out because can't be null entries
-                repairDateStarted: excelValues[i+10],
-                repairDateFinished: excelValues[i+11],
-                repairTechnician: excelValues[i+12],
-                repairItemStatus: excelValues[i+13],
-                repairDeliveryStatus: excelValues[i+14],
-                repairRemarks: excelValues[i+15],
-                // repairCost: parseInt(excelValues[i+16]), //commented out because can't be null entries
-                // repairReturnFormNumber: parseInt(excelValues[i+17]), //commented out because can't be null entries
-                repairDateReturned: excelValues[i+18],
-                repairDefect: excelValues[i+19]
+                repairUOM: excelValues[i+6],
+                repairPullOutBy: excelValues[i+7],
+                repairCategory: excelValues[i+8],
+                // repairSerialNumber: parseInt(excelValues[i+9]), //commented out because can't be null entries
+                // repairJobOrderNumber: parseInt(excelValues[i+10]), //commented out because can't be null entries
+                repairDateStarted: excelValues[i+11],
+                repairDateFinished: excelValues[i+12],
+                repairTechnician: excelValues[i+13],
+                repairDifficulty: excelValues[i+14],
+                repairMerit: excelValues[i+15],
+                repairItemStatus: excelValues[i+16],
+                repairDeliveryStatus: excelValues[i+17],
+                repairRemarks: excelValues[i+18],
+                // repairCost: parseInt(excelValues[i+19]), //commented out because can't be null entries
+                // repairReturnFormNumber: parseInt(excelValues[i+20]), //commented out because can't be null entries
+                // repairDateReturned: excelValues[i+21],
+                repairDefect: excelValues[i+21]
             });
             //Insert new rapir model into DB
             await newRepair.save();
@@ -196,4 +197,5 @@ const importController = {
     // },
 };
 
+//Export importController to be used
 module.exports = importController;
