@@ -8,7 +8,7 @@ const mainController = {
 
     //Login feature
     login: async function(req, res) {
-        
+        res.render('login');
     },
 
     //Load Item Quantity Per Model Filter

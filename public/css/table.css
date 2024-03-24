@@ -1,0 +1,33 @@
+table, td {
+    border: 1px solid var(--nested-box-bg);
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th{
+    border: 1px solid var(--bg);
+    padding-top: 2vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--primary);
+    color: var(--near-black);
+}
+
+tr:nth-child(odd){background-color: var(--nested-box-bg);}
+
+tr:hover {
+    background-color: var(--muted-primary);
+    border: 1px solid var(--primary);
+}
+
+.table-holder{
+    margin: 3vh;
+    overflow: scroll;
+}
+
+  /* Attribution for styling */
+  /* https://www.w3schools.com/Css/tryit.asp?filename=trycss_table_fancy */

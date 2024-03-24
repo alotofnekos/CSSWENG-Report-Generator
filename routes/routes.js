@@ -15,5 +15,6 @@ app.get('/TDPM', mainController.getTopDefectsPerModel);
 //Import file and insert into DB
 app.post('/importFile', importController.importFile);
 // app.get('/insertRepair/:excelValues', repairController.insertRepair);
+app.get('/table', repairController.getRepair);
 
 module.exports = app;
