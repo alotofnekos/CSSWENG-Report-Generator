@@ -1,7 +1,7 @@
 :root {
     --primary: #F3B52A;
-    --muted-primary: #FACF70: 
-    --bg: #FFFF;
+    --muted-primary: #FACF70; 
+    --bg: #FFFFFF;
     --box-bg: #FAF8F8;
     --nested-box-bg: #DEDEDE; 
     --near-black: #0B0B0B;
@@ -26,7 +26,6 @@ header{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-    background-color: var(--bg);
     border-bottom: solid 5px var(--primary);
     position: sticky;
     top: 0;
@@ -44,31 +43,26 @@ header .left{
 header .left #CompanyLogo{
 	width: 15vh;
 	height: 15vh;
-	background-color: #F3B52A;
-}
-
-header .left #ReportLogo {
-	margin-left: 2vh;
-	margin-top: 0.5vh;
+	background-color: var(--primary);
 }
 
 header .left img{
-	margin: auto;
+	margin: 2vh;
     width: 11vh;
-	height: 13vh;
+	height: 11vh;
 }
 
 header .left h2{
 	font-size: 10vh;
 	font-weight: bold;
     margin-left: 1.5vh;
-	color: #0B0B0B;
+	color: var(--near-black);
 }
 
 header .left h3{
 	font-size: 5vh;
     margin-left: 2vh;
-	color: #0B0B0B;
+	color: var(--near-black);
 }
 
 header .right{
@@ -81,7 +75,7 @@ header .right .Profile{
 	border-radius: 50%;
 	height: 10vh;
 	width: 10vh;
-	background-color: #0b0b0b;
+	background-color: var(--near-black);
 }
 
 header .right .Profile:hover{
@@ -89,12 +83,12 @@ header .right .Profile:hover{
 }
 
 .line1{
-	border: 5px solid #F3B52A;
+	border: 5px solid var(--primary);
 	margin-bottom: 12px;
 }
 
 .line2{
-	border: 1.5px solid #F3B52A;
+	border: 1.5px solid var(--primary);
 }
 
 
@@ -108,4 +102,9 @@ header .right .Profile:hover{
 a{
     text-decoration: none;
     color: var(--near-black);
+}
+
+.text-1{
+	color: var(--near-black);
+	font-weight: 600;
 }

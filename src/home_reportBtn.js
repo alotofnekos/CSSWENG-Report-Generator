@@ -4,11 +4,12 @@ $(document).ready(function () {
         var report = $(this).data('report'); //Get report abbreviation from data attribute in .btn-report-holder
         var reportname= $(this).find('.report-name').text();
 
+        alert("HI");
         var popup=`
         <div class="popup ${report}-popup">
         <div class="popup-header">
             <div class="popup-text">${reportname}</div>
-            <div class="btn-close"><img src="/public/images/close.svg" alt="close popup"></div>
+            <a href="/"> <div class="btn-close"><img src="../public/images/close.svg" alt="close popup"> </div> </a>
         </div>
         <div class="popup-subheader">
             <div class="dashed-line"></div>
@@ -43,8 +44,8 @@ $(document).ready(function () {
             </div>
         </div>
         <div class="popup-options">
-            <div class="btn-dropdown-mock">(select) <img src="/public/images/dropdownArrow.svg" alt="dropdown"></div>
-            <div class="btn-dropdown-mock">(select) <img src="/public/images/dropdownArrow.svg" alt="dropdown"></div>
+            <div class="btn-dropdown-mock">(select) <img src="../public/images/dropdownArrow.svg" alt="dropdown"></div>
+            <div class="btn-dropdown-mock">(select) <img src="../public/images/dropdownArrow.svg" alt="dropdown"></div>
         </div>
         <div class="btn-generate-report">
                 <a href="${report}.html">Generate report</a>
@@ -57,6 +58,7 @@ $(document).ready(function () {
     });
 
     $('.btn-close').click(function(){
+        alert("hi");
         $(".dark-overlay").fadeOut('fast', 'swing');
         $(".overlay-holder").fadeOut('fast', 'swing');
         $(this).closest(".popup").remove();
