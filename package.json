@@ -28,6 +28,7 @@
     "node": "^21.1.0",
     "node-xlsx": "^0.23.0",
     "parser": "^0.1.4",
+    "query-string": "^9.0.0",
     "xls-to-json-lc": "^0.3.4",
     "xlsx": "^0.19.3",
     "xlsx-to-json-lc": "^0.5.0"

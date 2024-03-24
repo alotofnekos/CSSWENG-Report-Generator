@@ -1,8 +1,8 @@
 #root {
-  background-color: #000;
-  transform: scale(0.50);
-}
-
+    position: relative;
+    
+    transform: scale(0.67);
+  }
   .rectangle84 {
     position: absolute;
     left: 0;
@@ -257,7 +257,11 @@
 }
 
 
-._src_components_GenerateReport_GenerateReport_module__root {
+_src_components_GenerateReport_GenerateReport_module__root {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    align-items: flex-start;
     background-color: #fff;
     overflow: hidden;
   }

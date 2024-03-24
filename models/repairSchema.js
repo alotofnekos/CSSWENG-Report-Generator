@@ -1,6 +1,7 @@
 const mongoose = require(`mongoose`);
 const Schema = mongoose.Schema;
 
+//Row entry input of a repair
 const repairSchema = new Schema({
     repairId: {
         type: Number,
@@ -30,11 +31,9 @@ const repairSchema = new Schema({
         type: Number,
         required: true
     },
-    // repairUOM: {
-    //     type: Number,
-    //     required: true,
-    //     unique: true
-    // },
+    repairUOM: {
+        type: String
+    },
     repairPullOutBy: {
         type: String,
         required: true
@@ -54,9 +53,15 @@ const repairSchema = new Schema({
         required: true
     },
     repairDateFinished: {
-        type: String,
+        type: String
     },
     repairTechnician: {
+        type: String
+    },
+    repairDifficulty: {
+        type: String
+    },
+    repairMerit: {
         type: String
     },
     repairItemStatus: {
@@ -74,9 +79,9 @@ const repairSchema = new Schema({
     repairReturnFormNumber: {
         type: Number
     },
-    repairDateReturned: {
-        type: String
-    },
+    // repairDateReturned: {
+    //     type: String
+    // },
     repairDefect: {
         type: String
     }
@@ -84,4 +89,5 @@ const repairSchema = new Schema({
 
 const Repair = mongoose.model('repair', repairSchema);
 
+//Export Repair model to be used
 module.exports = Repair;

@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-// const repairModel = require('../models/repairSchema.js')
+// const mongoose = require('mongoose');
 
 const mainController = {
     //Load Home Page
@@ -7,24 +6,26 @@ const mainController = {
         res.render('home');
     },
 
-    // getMain: async function(req, res) {
-    //     res.render('home');
-    // },
+    //Login feature
+    login: async function(req, res) {
+        
+    },
 
-    //Load Per Model Page
-    // get: async function(req, res) {
-    //     res.render('IQPM');
-    // },
+    //Load Item Quantity Per Model Filter
+    getItemQuantityPerModel: async function(req, res) {
+        res.render('IQPM');
+    },
 
-    // //Load Per Model Page
-    // getMain: async function(req, res) {
-    //     res.render('PTPM');
-    // },
+    //Load Pending Tasks Per Model Filter
+    getPendingTasksPerModel: async function(req, res) {
+        res.render('PTPM');
+    },
 
-    // //Load Top Defects Per Model Page
-    // getTopDefectsPerModel: async function(req, res) {
-    //     res.render('TDPM');
-    // },
+    //Load Top Defects Per Model Filter
+    getTopDefectsPerModel: async function(req, res) {
+        res.render('TDPM');
+    }
 };
 
+//Export mainController to be used
 module.exports = mainController;
