@@ -10,10 +10,9 @@
 }
 
 .popup{
-    margin-top: 20vh;
+    margin-top: 6.5%;
     margin-left: 30%;
     margin-right: 30%;
-    margin-bottom: 12.5%;
     z-index: 2;
     position: absolute;
     width:  80vh;
@@ -40,18 +39,10 @@
     font-weight: bolder;
 }
 
-.popup .btn-close:hover{
-    cursor: pointer;
-    filter: invert(52%) sepia(3%) saturate(20%) hue-rotate(350deg) brightness(95%) contrast(82%);
-    transition-duration: 1s;
-}
-
 .popup .btn-close img{
-    z-index: 3;
     width: 4vh;
     height: 4vh;
 }
-
 
 .popup-subheader{
     width: 96%;
@@ -101,6 +92,7 @@
     font-size: 2.7vh;
     display: flex;
     justify-content: space-between;
+    border: none;
 }
 
 .btn-report-holder div:hover{
@@ -176,3 +168,4 @@ header .right .Profile:hover{
     filter: invert(52%) sepia(3%) saturate(20%) hue-rotate(350deg) brightness(95%) contrast(82%);
     transition-duration: 1s;
 }
+
