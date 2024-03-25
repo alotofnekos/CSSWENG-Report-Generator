@@ -1,88 +1,123 @@
-// const mongoose = require('mongoose');
-// const repairModel = require('../models/repairSchema.js');
-// const repairIdModel = require('../models/repairIdSchema.js');
+const repairModel = require('../models/repairSchema.js');
+const repairIdModel = require('../models/repairIdSchema.js');
 
-// async function idExists(repairId){
-//     await repairIdModel.findOneAndUpdate({
-//         idCounter: repairId,
-//     });
-// };
+const repairController = {
+    //Get all repairs and display
+    getAllRepairs: async function(req, res) {
+        //Find all repairs
+        await repairModel.find({}).then(repair => {
+            console.log(repair);
+            
+            //Send to hbs template used
+            res.render('table', {repair: repair});
+        });
+    },
 
-// async function notIdExists(){
-//     // var repairId;
-//     const newRepairId = new repairIdModel({});
-//     await newRepairId.save();
-// };
+    //Get Total Item Quantity Per Technician
+    getTotalItemQuantityPerTechnician: async function(req, res) {
+        //Find all unique repair Technicians
+        await repairModel.find({}).distinct('repairTechnician').then(async repairTechnician => {
+            // console.log(repairTechnician);
+            var repairTalliedQuantities = [];
+          
+            //Find all repairs associated with each unique repair technician
+            await repairModel.find({repairTechnician: repairTechnician}).then(repair => {
+                var repair = repair;
+                var tempInt = 0;
+                // console.log(repair);
+                // console.log("rep tech length = " + repairTechnician.length)
+                // console.log("rep length = " + repair.length)
 
-// const repairController = {
-//     insertRepair: async function(req, res) {
-//         const excelValues = JSON.parse(req.params.excelValues);
-//         const hatdog = parseInt(excelValues[1]);
-//         console.log(hatdog);
-//         console.log("this is the final value ", excelValues);
-//         const excelValuesLength = excelValues.length;
-//         console.log("this is json length = ", excelValuesLength);
-//         // for(i = 0; i < )
-//         var repairId;
-        
-//         console.log("query =" + excelValues);
-
-//         const done = await repairIdModel.findOne({}).then(id => {
-//             console.log("awman", id);
-//             if(id == null) {
-//                 notIdExists();
-//             }
-
-//             return true;
-//         });
-
-//         for(i = 20; i < excelValuesLength; i += 20){
-//             console.log('help ' + excelValues[i]);
-
-//             const repairDate = excelValues[i];
-//             if((excelValues[i] && excelValues[i+1] && excelValues[i+2] && excelValues[i+3] && excelValues[i+4] && excelValues[i+5]
-//                 && excelValues[i+6] && excelValues[i+7] && excelValues[i+8] && excelValues[i+9] && excelValues[i+10]
-//                 && excelValues[i+11] && excelValues[i+12] && excelValues[i+13] && excelValues[i+14] && excelValues[i+15]
-//                 && excelValues[i+16] && excelValues[i+17] && excelValues[i+18] && excelValues[i+19]) == "NULL") {
-//                 console.log("no input");
-//             } else {
-//                 if(done) {
-//                     await repairIdModel.findOne({}).then(id => {
-//                         console.log("awman", id);
+                //Iterate over the array of unique repair technicians
+                for(i = 0; i < repairTechnician.length; i++) {
+                    //Reset temporary int
+                    tempInt = 0;
+                    //Iterate over the array of repairs associated with each unique repair technician
+                    for(j = 0; j < repair.length; j++) {
+                        //   console.log(i, j);
+                        // console.log("repair tech 1", repairTechnician[i]);
+                        // console.log("repair tech 2", repair[j].repairTechnician);
                         
-//                         repairId = id.idCounter + 1;
-//                         idExists(repairId)
-//                     });
-//                 };
+                        //If repair technician in array of unique repair technicians == repair technician in array of repairs
+                        //associated with each unique repair technician, add its repair quantity value to temporary int
+                        if(repairTechnician[i] == repair[j].repairTechnician) {
+                            console.log("hatdog");
+                            tempInt += repair[j].repairQuantity;
+                        };
+                    };
+                    //Store temporary int to repairTalliedQuantities
+                    repairTalliedQuantities[i] = tempInt;
+                };
+            });
+            console.log("tallied = " + repairTalliedQuantities);
+            //Send to hbs template used
+            res.render('whatever hbs template to be used', {repairTechnician: repairTechnician, repairTalliedQuantities: repairTalliedQuantities})
+        });
+    },
 
-//                 const newRepair = new repairModel({
-//                     repairId: repairId,
-//                     repairDate: repairDate,
-//                     repairPLNumber: 1234,//parseInt(excelValues[i+1])
-//                     repairCustomer: excelValues[i+2],
-//                     repairItemModel: excelValues[i+3],
-//                     repairDescription: excelValues[i+4],
-//                     repairQuantity: 0,//parseInt(excelValues[i+5])
-//                     repairPullOutBy: excelValues[i+6],
-//                     repairCategory: excelValues[i+7],
-//                     // repairSerialNumber: parseInt(excelValues[i+8]),
-//                     // repairJobOrderNumber: parseInt(excelValues[i+9]),
-//                     repairDateStarted: excelValues[i+10],
-//                     repairDateFinished: excelValues[i+11],
-//                     repairTechnician: excelValues[i+12],
-//                     repairItemStatus: excelValues[i+13],
-//                     repairDeliveryStatus: excelValues[i+14],
-//                     repairRemarks: excelValues[i+15],
-//                     // repairCost: parseInt(excelValues[i+16]),
-//                     // repairReturnFormNumber: parseInt(excelValues[i+17]),
-//                     repairDateReturned: excelValues[i+18],
-//                     repairDefect: excelValues[i+19]
-//                 });
-//                 await newRepair.save();
-//             };
-//         };
-//     }
-// };
+    //Get Total Item Quantity Per Item Model Per Technician
+    getTotalItemQuantityPerItemModelPerTechnician: async function(req, res) {
+        await repairModel.find({}).distinct('repairTechnician').then(async repairTechnician => {
+            // console.log(repairTechnician);
+            var repairTalliedQuantities = [];
+          
+            await repairModel.find({repairTechnician: repairTechnician}).distinct('repairItemModel').then(async repairItemModel => {
+                await repairModel.find({repairTechnician: repairTechnician, repairItemModel:repairItemModel}).then(repair => {
+                    var tempInt = 0;
+                    // console.log("repair technicians =" + repairTechnician);
+                    // console.log("repair item models =" + repairItemModel);
+                    // console.log("repair = " + repair);
+                    // console.log("rep tech length = " + repairTechnician.length)
+                    // console.log("rep length = " + repair.length)
+                    for(i = 0; i < repairTechnician.length; i++) {
+                    tempArray = [];
+                        for(j = 0; j < repairItemModel.length; j++) {
+                            tempInt = 0;
+                            for(k = 0; k < repair.length; k++) {
+                            //   console.log(i, j);
+                            // console.log("repair tech 1", [i]);
+                            // console.log("repair tech 2", repair[k].repairTechnician);
+                            // console.log("repair item model 1", repairItemModel[j])
+                            // console.log("repair item model 2", repair[k].repairItemModel);
+                                if(repairTechnician[i] == repair[k].repairTechnician && repairItemModel[j] == repair[k].repairItemModel) {
+                                    // console.log("repair quantity =" + repair[k].repairQuantity);
+                                    tempInt += repair[k].repairQuantity;
+                                };
+                            };
+                            tempArray[j] = tempInt;
+                            // console.log(tempArray);
+                        };
+                    repairTalliedQuantities[i] = tempArray;
+                    };
+                }); 
+            });
+          
+            // console.log("tallied = " + repairTalliedQuantities);
+            console.log(repairTalliedQuantities);
+            res.render('whatever hbs template to be used', {repairTechnician: repairTechnician, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities})
+        });
+    },
 
-// //Export repairController to be used
-// module.exports = repairController;
+    getAverageWorkingDaysPerTechnician: async function(req, res) {
+
+    },
+
+    getTotalItemQuantityPerItemModel: async function(req, res) {
+
+    },
+
+    getTopDefectsRegardlessOfItemModel: async function(req, res) {
+
+    },
+
+    getTopDefectsPerItemModel: async function(req, res) {
+
+    },
+
+    getPendingStatusPerItemModel: async function(req, res) {
+
+    }, 
+};
+
+//Export repairController to be used
+module.exports = repairController;

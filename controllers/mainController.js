@@ -1,5 +1,3 @@
-// const mongoose = require('mongoose');
-
 const mainController = {
     //Load Home Page
     getMain: async function(req, res) {
@@ -8,7 +6,7 @@ const mainController = {
 
     //Login feature
     login: async function(req, res) {
-        
+        res.render('login');
     },
 
     //Load Item Quantity Per Model Filter

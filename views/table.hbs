@@ -1,0 +1,85 @@
+<head>
+    <meta lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <script src="/src/home_reportBtn.js" defer></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+        <header>
+        <div class="left">
+            <div id="CompanyLogo">
+                <img src="/images/Btn_Logo.png">
+            </div>
+            <h2 class="Title">View table </h2>
+            <h3></h3>
+        </div>
+        <div class="right">
+            <div class="Profile"></div>
+        </div>
+    </header>
+    <hr class="line1">
+    <hr class="line2">  
+
+    <div class="table-holder">
+        <table>
+            <tr class="row"> 
+                <th class="col">Id</th>
+                <th class="col">Date</th>
+                <th class="col">PL #</th>
+                <th class="col">Customer</th>
+                <th class="col">Item model</th>
+                <th class="col">Description</th>
+                <th class="col">Quantity</th>
+                <th class="col">UOM</th>
+                <th class="col">PullOutBy</th>
+                <th class="col">Category</th>
+                <th class="col">SerialNumber</th>
+                <th class="col">JobOrderNumber</th>
+                <th class="col">DateStarted</th>
+                <th class="col">DateFinished</th>
+                <th class="col">Technician</th>
+                <th class="col">Difficulty</th>
+                <th class="col">Merit</th>
+                <th class="col">Item Status</th>
+                <th class="col">Delivery Status</th>
+                <th class="col">Remarks</th>
+                <th class="col">Cost</th>
+                <th class="col">Return Form Number</th>
+                <th class="col">Defect</th>
+            </tr>
+        {{#each repair}}
+            <tr>
+                <td><div class="col repairId"><strong>{{repairId}}</strong></div></td>
+                <td><div class="col repairDate"><strong>{{repairDate}}</strong></div></td>
+                <td><div class="col repairPLNumber"><strong>{{repairPLNumber}}</strong></div></td>
+                <td><div class="col repairCustomer"><strong>{{repairCustomer}}</strong></div></td>
+                <td><div class="col repairItemModel"><strong>{{repairItemModel}}</strong></div></td>
+                <td><div class="col repairDescription"><strong>{{repairDescription}}</strong></div></td>
+                <td><div class="col repairQuantity"><strong>{{repairQuantity}}</strong></div></td>
+                <td><div class="col repairUOM"><strong>{{repairUOM}}</strong></div></td>
+                <td><div class="col repairPullOutBy"><strong>{{repairPullOutBy}}</strong></div></td>
+                <td><div class="col repairCategory"><strong>{{repairCategory}}</strong></div></td>
+                <td><div class="col repairSerialNumber"><strong>{{repairSerialNumber}}</strong></div></td>
+                <td><div class="col repairJobOrderNumber"><strong>{{repairJobOrderNumber}}</strong></div></td>
+                <td><div class="col repairDateStarted"><strong>{{repairDateStarted}}</strong></div></td>
+                <td><div class="col repairDateFinished"><strong>{{repairDateFinished}}</strong></div></td>
+                <td><div class="col repairTechnician"><strong>{{repairTechnician}}</strong></div></td>
+                <td><div class="col repairDifficulty"><strong>{{repairDifficulty}}</strong></div></td>
+                <td><div class="col repairMerit"><strong>{{repairMerit}}</strong></div></td>
+                <td><div class="col repairItemStatus"><strong>{{repairItemStatus}}</strong></div></td>
+                <td><div class="col repairDeliveryStatus"><strong>{{repairDeliveryStatus}}</strong></div></td>
+                <td><div class="col repairRemarks"><strong>{{repairRemarks}}</strong></div></td>
+                <td><div class="col repairCost"><strong>{{repairCost}}</strong></div></td>
+                <td><div class="col repairReturnFormNumber"><strong>{{repairReturnFormNumber}}</strong></div></td>
+                <td><div class="col repairDefect"><strong>{{repairDefect}}</strong></div></td>
+            <tr>
+        {{/each}}
+        </table>
+    </div>
+</body>

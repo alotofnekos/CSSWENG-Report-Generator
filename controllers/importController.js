@@ -7,7 +7,6 @@ const formidable = require('formidable');
 const fs = require('fs');
 const repairModel = require('../models/repairSchema.js');
 const repairIdModel = require('../models/repairIdSchema.js');
-const querystring = require('node:querystring'); 
 
 //Check if a repair ID model exists and update it
 async function idExists(repairId){
@@ -55,27 +54,29 @@ async function insertRepair(excelValues) {
             //If creating or finding the repair ID model is done, find and store its idCounter value to repairId 
             if(done) {
                 await repairIdModel.findOne({}).then(id => {
-                    console.log("awman", id);
+                    console.log("awman 2", id);
                     
                     repairId = id.idCounter + 1;
                     idExists(repairId)
                 });
             };
 
+            console.log(parseInt(excelValues[i+1]));
+            console.log(typeof parseInt(excelValues[i+1]));
             //Create new repair model
             const newRepair = new repairModel({
                 repairId: repairId,
                 repairDate: excelValues[i],
-                repairPLNumber: 1234,//parseInt(excelValues[i+1]) 
+                repairPLNumber: parseInt(excelValues[i+1]) ,//parseInt(excelValues[i+1]) 
                 repairCustomer: excelValues[i+2],
                 repairItemModel: excelValues[i+3],
                 repairDescription: excelValues[i+4],
-                repairQuantity: 0,//parseInt(excelValues[i+5])
+                repairQuantity: parseInt(excelValues[i+5]),//parseInt(excelValues[i+5])
                 repairUOM: excelValues[i+6],
                 repairPullOutBy: excelValues[i+7],
                 repairCategory: excelValues[i+8],
-                // repairSerialNumber: parseInt(excelValues[i+9]), //commented out because can't be null entries
-                // repairJobOrderNumber: parseInt(excelValues[i+10]), //commented out because can't be null entries
+                repairSerialNumber: parseInt(excelValues[i+9]), //commented out because can't be null entries
+                repairJobOrderNumber: parseInt(excelValues[i+10]), //commented out because can't be null entries
                 repairDateStarted: excelValues[i+11],
                 repairDateFinished: excelValues[i+12],
                 repairTechnician: excelValues[i+13],
@@ -84,8 +85,8 @@ async function insertRepair(excelValues) {
                 repairItemStatus: excelValues[i+16],
                 repairDeliveryStatus: excelValues[i+17],
                 repairRemarks: excelValues[i+18],
-                // repairCost: parseInt(excelValues[i+19]), //commented out because can't be null entries
-                // repairReturnFormNumber: parseInt(excelValues[i+20]), //commented out because can't be null entries
+                repairCost: parseInt(excelValues[i+19]), //commented out because can't be null entries
+                repairReturnFormNumber: parseInt(excelValues[i+20]), //commented out because can't be null entries
                 // repairDateReturned: excelValues[i+21],
                 repairDefect: excelValues[i+21]
             });
