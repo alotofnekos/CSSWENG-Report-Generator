@@ -1,5 +1,3 @@
-// const mongoose = require('mongoose');
-
 const mainController = {
     //Load Home Page
     getMain: async function(req, res) {

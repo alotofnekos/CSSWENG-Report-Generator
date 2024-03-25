@@ -7,7 +7,6 @@ const formidable = require('formidable');
 const fs = require('fs');
 const repairModel = require('../models/repairSchema.js');
 const repairIdModel = require('../models/repairIdSchema.js');
-const querystring = require('node:querystring'); 
 
 //Check if a repair ID model exists and update it
 async function idExists(repairId){
