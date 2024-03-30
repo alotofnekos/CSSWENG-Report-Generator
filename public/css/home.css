@@ -20,10 +20,16 @@
     height: 75vh;
     background-color: var(--box-bg);
     border-radius: 4vh;
+    
+}
+
+.popup .popup-body{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content:space-evenly;
+    width:  100%;
+    height: 100%;
 }
 
 .popup .popup-header{
@@ -40,10 +46,9 @@
     font-weight: bolder;
 }
 
-.popup .btn-close:hover{
-    cursor: pointer;
-    filter: invert(52%) sepia(3%) saturate(20%) hue-rotate(350deg) brightness(95%) contrast(82%);
-    transition-duration: 1s;
+.popup .btn-close{
+    border: none;
+    background-color: var(--box-bg);
 }
 
 .popup .btn-close img{
@@ -52,6 +57,11 @@
     height: 4vh;
 }
 
+.popup .btn-close img:hover{
+    cursor: pointer;
+    filter: invert(52%) sepia(3%) saturate(20%) hue-rotate(350deg) brightness(95%) contrast(82%);
+    transition-duration: 1s;
+}
 
 .popup-subheader{
     width: 96%;
@@ -90,6 +100,50 @@
     display: flex;
     margin-bottom: 3vh;
     justify-content: space-between;
+    
+}
+
+.popup-options button{
+    border: none;
+}
+
+.date-options{
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+    background-color: var(--box-bg);
+    width: 96%;
+    padding-bottom: 0.5vh;
+}
+
+.date-options .selection{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--box-bg);
+    width: 100%;
+}
+
+select{
+    border: none;
+}
+
+.dropdown-selection{
+    appearance: none;
+    background-image: url(/images/dropdownArrow.svg);
+    background-repeat: no-repeat;
+    background-position: right 0.7rem top 50%;
+    background-size: 3vh;
+}
+
+.date-options .btn-option-close{
+    background-color: var(--box-bg);
+    position: absolute;
+    
+}
+
+.date-options .btn-option-close img{
+    width: 4.5vh;
+    height: 4.5vh;
 }
 
 .btn-dropdown-mock{
@@ -175,4 +229,19 @@ header .right .Profile:hover{
 .btn-report-holder img:hover{
     filter: invert(52%) sepia(3%) saturate(20%) hue-rotate(350deg) brightness(95%) contrast(82%);
     transition-duration: 1s;
+}
+
+.taskType .taskOption span{
+    font-size: 3vh;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.taskType .taskOption input{
+    appearance: none;
+    position: absolute;
+}
+
+.taskType .taskOption input:checked + span{
+    background-color: rgb(193, 193, 193);
 }
