@@ -15,7 +15,7 @@ const path = require('path');
 // const fs = require('fs');
 // const os = require('os');
 const http = require("http");
-// const repairModel = require('./models/repairSchema.js');
+const repairModel = require('./models/repairSchema.js');
 
 //Just checking max size of header that can be sent
 let size = http.maxHeaderSize;
@@ -33,6 +33,10 @@ appExp.use(bodyParser.urlencoded( {extended: true } ))
 appExp.use(express.static(__dirname + '/public'));
 //User a router for controllers
 appExp.use(`/`, routes);
+
+//Include date parameter in all repair controller functions except get all
+//Include task type parameter or 'status' TIQPIMPT and PSPM and TDPM repair controller function
+//Include if for technician empty, item model empty, and category empty
 
 //Run on Local Host and connect to Mongo DB
 appExp.listen(process.env.SERVER_PORT, async function(){

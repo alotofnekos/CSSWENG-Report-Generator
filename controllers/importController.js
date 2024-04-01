@@ -63,8 +63,37 @@ async function insertRepair(excelValues) {
 
             console.log(parseInt(excelValues[i+1]));
             console.log(typeof parseInt(excelValues[i+1]));
+            // var repairDate = new Date(Math.round((45358 - 25569)*86400*1000));
+            // console.log("help me" + repairDate);
             //Create new repair model
             const newRepair = new repairModel({
+                repairId: repairId,
+                repairDate: excelValues[i],
+                // repairDate: addDays('1900-01-01', excelValues[i]?['Date']),
+                repairPLNumber: parseInt(excelValues[i+1]) ,//parseInt(excelValues[i+1]) 
+                repairCustomer: excelValues[i+2],
+                repairItemModel: excelValues[i+3],
+                repairDescription: excelValues[i+4],
+                repairQuantity: parseInt(excelValues[i+5]),//parseInt(excelValues[i+5])
+                repairUOM: excelValues[i+6],
+                repairPullOutBy: excelValues[i+7],
+                repairCategory1: excelValues[i+8],
+                repairCategory2: excelValues[i+9],
+                repairSerialNumber: parseInt(excelValues[i+10]), //commented out because can't be null entries
+                repairJobOrderNumber: parseInt(excelValues[i+11]), //commented out because can't be null entries
+                repairDateStarted: excelValues[i+12],
+                repairDateFinished: excelValues[i+13],
+                repairTechnician1: excelValues[i+14],
+                repairTechnician2: excelValues[i+15],
+                repairItemStatus: excelValues[i+16],
+                repairDeliveryStatus: excelValues[i+17],
+                repairRemarks: excelValues[i+18],
+                repairCost: parseInt(excelValues[i+19]), //commented out because can't be null entries
+                repairReturnFormNumber: parseInt(excelValues[i+20]), //commented out because can't be null entries
+                repairDateReturned: excelValues[i+21],
+                repairStatus: excelValues[i+22],
+                repairDefect: excelValues[i+23]
+
                 // repairId: repairId,
                 // repairDate: excelValues[i],
                 // repairPLNumber: parseInt(excelValues[i+1]) ,//parseInt(excelValues[i+1]) 
@@ -74,47 +103,21 @@ async function insertRepair(excelValues) {
                 // repairQuantity: parseInt(excelValues[i+5]),//parseInt(excelValues[i+5])
                 // repairUOM: excelValues[i+6],
                 // repairPullOutBy: excelValues[i+7],
-                // repairCategory1: excelValues[i+8],
-                // repairCategory2: excelValues[i+9],
-                // repairSerialNumber: parseInt(excelValues[i+10]), //commented out because can't be null entries
-                // repairJobOrderNumber: parseInt(excelValues[i+11]), //commented out because can't be null entries
-                // repairDateStarted: excelValues[i+12],
-                // repairDateFinished: excelValues[i+13],
-                // repairTechnician1: excelValues[i+14],
-                // repairTechnician2: excelValues[i+15],
+                // repairCategory: excelValues[i+8],
+                // repairSerialNumber: parseInt(excelValues[i+9]), //commented out because can't be null entries
+                // repairJobOrderNumber: parseInt(excelValues[i+10]), //commented out because can't be null entries
+                // repairDateStarted: excelValues[i+11],
+                // repairDateFinished: excelValues[i+12],
+                // repairTechnician: excelValues[i+13],
+                // repairDifficulty: excelValues[i+14],
+                // repairMerit: excelValues[i+15],
                 // repairItemStatus: excelValues[i+16],
                 // repairDeliveryStatus: excelValues[i+17],
                 // repairRemarks: excelValues[i+18],
                 // repairCost: parseInt(excelValues[i+19]), //commented out because can't be null entries
                 // repairReturnFormNumber: parseInt(excelValues[i+20]), //commented out because can't be null entries
-                // repairDateReturned: excelValues[i+21],
-                // repairStatus: excelValues[i+22],
-                // repairDefect: excelValues[i+23]
-
-                repairId: repairId,
-                repairDate: excelValues[i],
-                repairPLNumber: parseInt(excelValues[i+1]) ,//parseInt(excelValues[i+1]) 
-                repairCustomer: excelValues[i+2],
-                repairItemModel: excelValues[i+3],
-                repairDescription: excelValues[i+4],
-                repairQuantity: parseInt(excelValues[i+5]),//parseInt(excelValues[i+5])
-                repairUOM: excelValues[i+6],
-                repairPullOutBy: excelValues[i+7],
-                repairCategory: excelValues[i+8],
-                repairSerialNumber: parseInt(excelValues[i+9]), //commented out because can't be null entries
-                repairJobOrderNumber: parseInt(excelValues[i+10]), //commented out because can't be null entries
-                repairDateStarted: excelValues[i+11],
-                repairDateFinished: excelValues[i+12],
-                repairTechnician: excelValues[i+13],
-                repairDifficulty: excelValues[i+14],
-                repairMerit: excelValues[i+15],
-                repairItemStatus: excelValues[i+16],
-                repairDeliveryStatus: excelValues[i+17],
-                repairRemarks: excelValues[i+18],
-                repairCost: parseInt(excelValues[i+19]), //commented out because can't be null entries
-                repairReturnFormNumber: parseInt(excelValues[i+20]), //commented out because can't be null entries
-                // repairDateReturned: excelValues[i+21],
-                repairDefect: excelValues[i+21]
+                // // repairDateReturned: excelValues[i+21],
+                // repairDefect: excelValues[i+21]
             });
             //Insert new rapir model into DB
             await newRepair.save();
