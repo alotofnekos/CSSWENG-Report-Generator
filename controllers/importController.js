@@ -128,42 +128,42 @@ async function insertRepair(excelValues) {
 }
 
 //Decode string with base 64
-function base64_decode(base64str, file) {
-    // console.log(base64str)
-    // console.log(file)
-    // var hatdog = "hatdog"
-    // var string = hatdog.toString('base64')
-    base64str = base64str.toString('base64')
-    var bitmap = new Buffer.from(base64str, 'base64');
-    // var length = base64str.length;
+// function base64_decode(base64str, file) {
+//     // console.log(base64str)
+//     // console.log(file)
+//     // var hatdog = "hatdog"
+//     // var string = hatdog.toString('base64')
+//     base64str = base64str.toString('base64')
+//     var bitmap = new Buffer.from(base64str, 'base64');
+//     // var length = base64str.length;
     
-    // console.log(bitmap);
-    var view = new Uint8Array(bitmap);
+//     // console.log(bitmap);
+//     var view = new Uint8Array(bitmap);
     
-    for (var i=0; i!=base64str.length; ++i)
-    {
-      view[i] = base64str.charCodeAt(i) & 0xFF;
-    }
-    // console.log(view);
-    // return buf;
-    // const base64Data = bitmap.toString('base64');
+//     for (var i=0; i!=base64str.length; ++i)
+//     {
+//       view[i] = base64str.charCodeAt(i) & 0xFF;
+//     }
+//     // console.log(view);
+//     // return buf;
+//     // const base64Data = bitmap.toString('base64');
 
-    // Create a JSON object with the Base64-encoded data
-    const json = { data: base64str };
+//     // Create a JSON object with the Base64-encoded data
+//     const json = { data: base64str };
 
-    // Convert the JSON object to a string
-    const jsonString = JSON.stringify(json);
-    // try {
-    //     fs.writeFileSync(file.toString('base64'), bitmap);
-    //     //file written successfully
-    // } catch (err) {
-    //     console.error(err)
-    // }
+//     // Convert the JSON object to a string
+//     const jsonString = JSON.stringify(json);
+//     // try {
+//     //     fs.writeFileSync(file.toString('base64'), bitmap);
+//     //     //file written successfully
+//     // } catch (err) {
+//     //     console.error(err)
+//     // }
 
-    // console.log("this is jsonString:", jsonString);
-    // console.log("this is bitmap:", bitmap);
-    // console.log('******** File created from base64 encoded string ********');
-};
+//     // console.log("this is jsonString:", jsonString);
+//     // console.log("this is bitmap:", bitmap);
+//     // console.log('******** File created from base64 encoded string ********');
+// };
 
 const importController = {
     //Get file from import.html and send it.
@@ -179,7 +179,7 @@ const importController = {
             // console.log("files = " + files);
             // console.log("fields = " + fields);
             // console.log("fields data = " + fields.data);
-            base64_decode(fields.data, fields.file);
+            // base64_decode(fields.data, fields.file);
 
             //Parse passed JSON object
             var excelValues = JSON.parse(fields.excelValues);
