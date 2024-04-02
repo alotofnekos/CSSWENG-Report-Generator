@@ -23,7 +23,7 @@ async function notIdExists(){
 
 async function insertRepair(excelValues) {
     const hatdog = parseInt(excelValues[1]);
-    console.log(hatdog);
+    // console.log(hatdog);
     console.log("this is the final value ", excelValues);
     const excelValuesLength = excelValues.length;
     console.log("this is json length = ", excelValuesLength);
@@ -41,14 +41,15 @@ async function insertRepair(excelValues) {
     
     //Iterate of the length of excel values. Starts from 1 because of an additional automatic entry and excelValuesLength - 1
     //because of another additional automatic entry
-    for(i = 1; i < excelValuesLength - 1; i += 22){
+    for(i = 1; i < excelValuesLength - 1; i += 24){
         console.log('help ' + excelValues[i]);
 
         //If all of the inputs in a row = "NULL", do not enter into DB. Otherwise, insert into DB
         if((excelValues[i] && excelValues[i+1] && excelValues[i+2] && excelValues[i+3] && excelValues[i+4] && excelValues[i+5]
             && excelValues[i+6] && excelValues[i+7] && excelValues[i+8] && excelValues[i+9] && excelValues[i+10]
             && excelValues[i+11] && excelValues[i+12] && excelValues[i+13] && excelValues[i+14] && excelValues[i+15]
-            && excelValues[i+16] && excelValues[i+17] && excelValues[i+18] && excelValues[i+19]) == "NULL") {
+            && excelValues[i+16] && excelValues[i+17] && excelValues[i+18] && excelValues[i+19] && excelValues[i+20]
+            && excelValues[i+21] && excelValues[i+22] && excelValues[i+23]) == "NULL") {
             console.log("no input");
         } else {
             //If creating or finding the repair ID model is done, find and store its idCounter value to repairId 
@@ -61,6 +62,7 @@ async function insertRepair(excelValues) {
                 });
             };
 
+            console.log("pl no = " + excelValues[i+1]);
             console.log(parseInt(excelValues[i+1]));
             console.log(typeof parseInt(excelValues[i+1]));
             // var repairDate = new Date(Math.round((45358 - 25569)*86400*1000));
@@ -128,21 +130,21 @@ async function insertRepair(excelValues) {
 //Decode string with base 64
 function base64_decode(base64str, file) {
     // console.log(base64str)
-    console.log(file)
+    // console.log(file)
     // var hatdog = "hatdog"
     // var string = hatdog.toString('base64')
     base64str = base64str.toString('base64')
     var bitmap = new Buffer.from(base64str, 'base64');
     // var length = base64str.length;
     
-    console.log(bitmap);
+    // console.log(bitmap);
     var view = new Uint8Array(bitmap);
     
     for (var i=0; i!=base64str.length; ++i)
     {
       view[i] = base64str.charCodeAt(i) & 0xFF;
     }
-    console.log(view);
+    // console.log(view);
     // return buf;
     // const base64Data = bitmap.toString('base64');
 
@@ -174,9 +176,9 @@ const importController = {
         console.log("post called");
         var form = new formidable.IncomingForm();
         form.parse(req, async function (err, fields, files) {
-            console.log("files = " + files);
-            console.log("fields = " + fields);
-            console.log("fields data = " + fields.data);
+            // console.log("files = " + files);
+            // console.log("fields = " + fields);
+            // console.log("fields data = " + fields.data);
             base64_decode(fields.data, fields.file);
 
             //Parse passed JSON object
