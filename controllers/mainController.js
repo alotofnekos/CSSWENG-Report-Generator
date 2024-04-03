@@ -22,7 +22,12 @@ const mainController = {
     //Load Top Defects Per Model Filter
     getTopDefectsPerModel: async function(req, res) {
         res.render('TDPM');
+    },
+
+    getImport: async function(req, res) {
+        res.render('import');
     }
+
 };
 
 //Export mainController to be used

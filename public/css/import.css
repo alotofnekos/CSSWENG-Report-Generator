@@ -1,0 +1,10 @@
+input{
+    margin: 1vh;
+}
+
+#submit {
+    background-color: var(--primary);
+    padding: 2vh;
+    border: none;
+    border-radius: 2vh;
+}

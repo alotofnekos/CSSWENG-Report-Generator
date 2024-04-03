@@ -4,8 +4,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/home.css">
-    <script src="/src/home_reportBtn.js" defer></script>
+    <link rel="stylesheet" href="/css/import.css">
     <script src="/src/nav.js" defer></script>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -22,7 +21,7 @@
             <button id="CompanyLogo">
                 <img src="/images/Btn_Logo.png">
             </button>
-            <h2 class="Title">Generate Report </h2>
+            <h2 class="Title">Import file </h2>
             <h3></h3>
         </div>
         <div class="right">
@@ -36,50 +35,12 @@
     <hr class="line2">  
 
     <div class="mainContent">
-        <div class="reports-menu">
-                <div class="btn-report-holder" data-report="IQPM">
-                    <div>
-                        <img class="report-icon" src="/images/IQPM.svg" alt="Item Quantity per Model"/>  
-                        <div class="report-name">ITEM QUANTITY PER MODEL</div>
-                    </div>
-                </div>
-                <div class="btn-report-holder"  data-report="TDPM">
-                    <div>
-                        <img class="report-icon" src="/images/TDPM.svg" alt="Top Defects Per Model"/>  
-                        <div class="report-name">TOP DEFECTS PER MODEL</div>
-                    </div>
-                </div>
-                <div class="btn-report-holder" data-report="PTPM">
-                    <div>
-                        <img class="report-icon" src="/images/PTPM.svg" alt="Pending Tasks per Model"/>  
-                        <div class="report-name">PENDING TASKS PER MODEL</div>
-                    </div>
-                </div>
-                        <div class="btn-report-holder" data-report="TIQPT">
-                    <div>
-                        <img class="report-icon" src="/images/TIQPT.svg" alt="Total Item Quantity per Technician"/>  
-                        <div class="report-name">TOTAL ITEM QUANTITY PER TECHNICIAN</div>
-                    </div>
-                </div>
-                <div class="btn-report-holder"  data-report="TIQPMPT">
-                    <div>
-                        <img class="report-icon" src="/images/TIQPMPT.svg" alt="Total Item Quantity per Model per Technician"/>  
-                        <div class="report-name">TOTAL ITEM QUANTITY PER MODEL PER TECHNICIAN</div>
-                    </div>
-                </div>
-                <div class="btn-report-holder" data-report="AWDPT">
-                    <div>
-                        <img class="report-icon" src="/images/AWDPT.svg" alt="Average Working Days per Technician"/>  
-                        <div class="report-name">AVERAGE WORKING DAYS PER TECHNICIAN</div>
-                    </div>
-                </div>
-            </div>
-    </div>
-
-    {{!-- <form id="form" action="/" method="post" enctype="multipart/form-data">
+        <form id="form" action="/" method="post" enctype="multipart/form-data">
         <input type="file" name="filetoupload" id="filetoupload"><br>
         <input type="submit" id="submit">
     </form>
+    </div>
+
     <script>
         function blob2file(blobData) {
             const fd = new FormData();
@@ -143,5 +104,5 @@
                 });
             });
         });
-    </script> --}}
+    </script>
 </body>

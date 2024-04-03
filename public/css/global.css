@@ -44,6 +44,12 @@ header .left #CompanyLogo{
 	width: 15vh;
 	height: 15vh;
 	background-color: var(--primary);
+
+	border: none;
+}
+
+header .left #CompanyLogo:hover{
+	cursor: pointer;
 }
 
 header .left img{
@@ -91,6 +97,61 @@ header .right .Profile:hover{
 	border: 1.5px solid var(--primary);
 }
 
+@keyframes smooth-appear {
+	to{
+	  left: 0px;
+	  opacity: 100%;
+	}
+  }
+  nav {
+	/* border-top: 5vh solid var(--primary); */
+	width: 15vh;
+	height: 100%;
+	background-color: var(--primary);
+	position: fixed;
+	left: -20%;
+	opacity: 0%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 10px 10px 14px -13px var(--near-black);
+	animation: smooth-appear 0.5s ease forwards;
+  }
+
+nav button{
+	border: none;
+	background: var(--bg);
+	width: 8vh;
+	height: 8vh;
+	border-radius: 1vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 2vh;
+}
+
+nav button img{
+	width: 9vh;
+	height: 9vh;
+}
+
+.horizTranslate {
+	-webkit-transition: 3s;
+	-moz-transition: 3s;
+	-ms-transition: 3s;
+	-o-transition: 3s;
+	transition: 3s;
+	margin-left: -50% !important;
+  }
+
+/* https://css-tricks.com/controlling-css-animations-transitions-javascript/ */
+
+.mainContent{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 30vh;
+}
 
 @media screen and (max-width:800px){
 
@@ -107,4 +168,8 @@ a{
 .text-1{
 	color: var(--near-black);
 	font-weight: 600;
+}
+
+button:hover{
+	cursor: pointer;
 }

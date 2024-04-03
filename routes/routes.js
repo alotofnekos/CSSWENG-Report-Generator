@@ -16,6 +16,8 @@ app.get('/TDPM', mainController.getTopDefectsPerModel);
 app.post('/importFile', importController.importFile);
 // app.get('/insertRepair/:excelValues', repairController.insertRepair);
 app.get('/table', repairController.getAllRepairs);
+
+app.get('/import', mainController.getImport);
 // app.get('/name of action or url', repairController.getTotalItemQuantityPerTechnician);
 // app.get('/name of action or url', repairController.getTotalItemQuantityPerItemModelPerTechnician);
 // app.get('/name of action or url', repairController.getAverageWorkingDaysPerTechnician);

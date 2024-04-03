@@ -178,10 +178,6 @@ select{
     /* display: none; */
 }
 
-.reports-menu{
-    display: flex;
-    flex-wrap: wrap;
-}
 
 header .right .Profile:hover{
     font-weight: bolder;
@@ -191,8 +187,13 @@ header .right .Profile:hover{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    
     width: 100%;
+    height: 80vh;
+    overflow: scroll;
+    right: 0;
 }
+
 
 .btn-report-holder{
     width: 40vh;
@@ -203,7 +204,7 @@ header .right .Profile:hover{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 9vh;
+    margin: 5vh;
 }
 
 .btn-report-holder div{
@@ -229,6 +230,11 @@ header .right .Profile:hover{
 .btn-report-holder img:hover{
     filter: invert(52%) sepia(3%) saturate(20%) hue-rotate(350deg) brightness(95%) contrast(82%);
     transition-duration: 1s;
+}
+
+.navBtn img:hover{
+    filter: contrast(70%) brightness(200%) hue-rotate(-25deg) saturate(0%);
+    transition-duration: 0.3s;
 }
 
 .taskType .taskOption span{
