@@ -287,6 +287,8 @@ const repairController = {
         var dateFrom = req.params.dateFrom;
         var dateTo = req.params.dateTo;
         var category1 = req.params.category1;
+        
+        console.log(dateFrom +" "+ dateTo +" "+category1);
 
         if(category1 == null) {
             //Find all unique repair item models

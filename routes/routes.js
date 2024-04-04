@@ -7,7 +7,7 @@ const repairController = require('../controllers/repairController.js');
 //Open Home
 app.get('/', mainController.getMain);
 //Open IQPM
-app.get('/IQPM', mainController.getItemQuantityPerModel);
+app.get('/post', repairController.getTotalItemQuantityPerItemModel);
 //Open PTPM
 app.get('/PTPM', mainController.getPendingTasksPerModel);
 //Open TDPM
@@ -18,6 +18,8 @@ app.post('/importFile', importController.importFile);
 app.get('/table', repairController.getAllRepairs);
 
 app.get('/import', mainController.getImport);
+
+// app.get('/IQPM', mainController.generateIQPM(reportParameters));
 // app.get('/name of action or url', repairController.getTotalItemQuantityPerTechnician);
 // app.get('/name of action or url', repairController.getTotalItemQuantityPerItemModelPerTechnician);
 // app.get('/name of action or url', repairController.getAverageWorkingDaysPerTechnician);

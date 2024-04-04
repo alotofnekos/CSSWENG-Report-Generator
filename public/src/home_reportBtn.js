@@ -5,45 +5,58 @@ $(document).ready(function () {
         var reportname= $(this).find('.report-name').text();
 
         // alert(report);
+
         var popup=`
-        <div class="popup-body">
-            <div class="popup-header">
-                <div class="popup-text">${reportname}</div>
-                <button class="btn-close" onclick="hidePopup()"><img src="/images/close.svg" alt="close popup"></button>
+        <form id ="hello" action="/post" method="post">
+            <div class="popup-body">
+                <div class="popup-header">
+                    <div class="popup-text">${reportname}</div>
+                    <button class="btn-close" onclick="hidePopup()"><img src="/images/close.svg" alt="close popup"></button>
+                </div>
+                <div class="popup-subheader">
+                    <div class="dashed-line"></div>
+                    <div class="popup-text-one">Date range</div>
+                    <div class="dashed-line"></div>
+                </div>
+                <div class="popup-options date_range">
+                    <button class="btn-dropdown-mock" onclick="selectMonth()">Month</button>
+                    <button class="btn-dropdown-mock" onclick="selectQuarter()">Quarter</button>
+                    <button class="btn-dropdown-mock" onclick="selectYear()">Year</button>
+                </div>
+            <div class="popup-options ${report}">
+            </div> 
+                <button type="submit" form="hello" class="btn-generate-report">
+                        Generate Report
+                </button>
             </div>
-            <div class="popup-subheader">
-                <div class="dashed-line"></div>
-                <div class="popup-text-one">Date range</div>
-                <div class="dashed-line"></div>
-            </div>
-            <div class="popup-options date_range">
-                <button class="btn-dropdown-mock" onclick="selectMonth()">Month</button>
-                <button class="btn-dropdown-mock" onclick="selectQuarter()">Quarter</button>
-                <button class="btn-dropdown-mock" onclick="selectYear()">Year</button>
-            </div>
-           <div class="popup-options ${report}">
-           </div> 
-            <div class="btn-generate-report">
-                    <a href="/${report}">Generate report</a>
-            </div>
-        </div>
+        </form>
         `;        
         $('.popup').append(popup);
         getOptionsBasedOnReport(report);
         $(".overlay-holder").fadeIn('fast', 'swing');
     });
+
+    $('.btn-generate-report').click( function(){
+        try{
+
+        }catch{
+            console.log();
+        }
+    });
 });
+
+
 
 function getOptionsBasedOnReport(reportname){
     switch(reportname){
         case "IQPM": 
             alert(reportname);
             $('.IQPM').append(`
-                <select class="btn-dropdown-mock dropdown-selection">
-                        <option value="default">(Item)</option>
-                        <option value="eon">EON</option>
-                        <option value="gx">GX</option>
-                        <option value="csl">CSL</option>
+                <select id="category1" class="btn-dropdown-mock dropdown-selection">
+                    <option value="default">(Category)</option>
+                    <option value="speaker">Speakers</option>
+                    <option value="mic">Microphones</option>
+                    <option value="amp">Amplifier</option>
                 </select>
             `);
         break;
