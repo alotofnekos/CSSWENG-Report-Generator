@@ -79,8 +79,9 @@ const repairController = {
                     distinctArray = clearDuplicates(technician);
                     console.log("distinct array = " + distinctArray);
 
-                    //Find all repairs associated with each unique repair technician
-                    await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gt: dateFrom, $lt: dateTo}}).then(repair => {
+                    //Find all repairs associated with each unique repair technician with repairDate greater than dateFrom and 
+                    //repairDate less than dateTo parameters
+                    await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
                         var repair = repair;
                         var tempInt = 0;
                         // console.log(repair);
@@ -93,8 +94,9 @@ const repairController = {
                             tempInt = 0;
                             //Iterate over the array of repairs associated with each unique repair technician
                             for(j = 0; j < repair.length; j++) {
-                                //If repair technician in array of unique repair technicians == repair technician in array of repairs
-                                //associated with each unique repair technician, add its repair quantity value to temporary int
+                                //If repair technician in array of unique repair technicians == repair technician in array of 
+                                //repairs associated with each unique repair technician, add its repair quantity value to 
+                                //temporary int
                                 if((distinctArray[i] == repair[j].repairTechnician1) || (distinctArray[i] == repair[j].repairTechnician2)) {
                                     console.log("hatdog");
                                     tempInt += repair[j].repairQuantity;
@@ -112,7 +114,9 @@ const repairController = {
                 res.render('whatever hbs template to be used', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else {
-            await repairModel.find({repairTechnician1: technician, repairTechnician2: technician}).then(repair => {
+            //Find all repairs associated with the technician parameter with repairDate greater than dateFrom and repairDate 
+            //less than dateTo parameters
+            await repairModel.find({repairTechnician1: technician, repairTechnician2: technician, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
                 var repairTalliedQuantities;
 
                 //Iterate over the array of repairs associated with each unique repair technician
@@ -143,7 +147,8 @@ const repairController = {
         var itemModel = req.params.itemModel;
         var technician = req.params.technician;
 
-        //Find all repairs associated with the required inputs taken from the request parameters
+        //Find all repairs associated with the required inputs taken from the request parameters with repairDate greater than 
+        //dateFrom and repairDate less than dateTo parameters
         await repairModel.find({ $or:[ {repairTechnician1: technician}, {repairTechnician2: technician}], repairItemModel: itemModel, repairStatus: status, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
             // console.log(repair);
             var repairTalliedQuantities = [];
@@ -200,8 +205,9 @@ const repairController = {
                     distinctArray = clearDuplicates(technician);
                     console.log("distinct array = " + distinctArray);
                 
-                    //Find all repairs associated with each unique repair technician
-                    await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gt: dateFrom, $lt: dateTo}}).then(repair => {
+                    //Find all repairs associated with each unique repair technician with repairDate greater than dateFrom and 
+                    //repairDate less than dateTo parameters
+                    await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
                         var repair = repair;
                         var tempInt1 = 0;
                         var tempInt2 = 0;
@@ -217,8 +223,9 @@ const repairController = {
                             tempInt2 = 0;
                             //Iterate over the array of repairs associated with each unique repair technician
                             for(j = 0; j < repair.length; j++) {
-                                //If repair technician in array of unique repair technicians == repair technician in array of repairs
-                                //associated with each unique repair technician, add its repair quantity value to temporary int
+                                //If repair technician in array of unique repair technicians == repair technician in array of 
+                                //repairs associated with each unique repair technician, add its repair quantity value to 
+                                //temporary int
                                 if((distinctArray[i] == repair[j].repairTechnician1) || (distinctArray[i] == repair[j].repairTechnician2)) {
                                     // console.log(repair[j].repairDateStarted);
                                     // console.log(repair[j].repairDateFinished);
@@ -243,7 +250,9 @@ const repairController = {
                 res.render('whatever hbs template to be used', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairAverageWorkingDays: repairAverageWorkingDays});
             });
         } else {
-            await repairModel.find({repairTechnician1: technician, repairTechnician2: technician}).then(repair => {
+            //Find all repairs associated with each unique repair technician with repairDate greater than dateFrom and 
+            //repairDate less than dateTo parameters
+            await repairModel.find({repairTechnician1: technician, repairTechnician2: technician, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
                 var repairAverageWorkingDays = [];
                 var tempInt1 = 0;
                 var tempInt2 = 0;
@@ -277,136 +286,271 @@ const repairController = {
     getTotalItemQuantityPerItemModel: async function(req, res) {
         var dateFrom = req.params.dateFrom;
         var dateTo = req.params.dateTo;
-        
-        //Find all unique repair item models
-        await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
-            // console.log(repairItemModel);
-            var repairTalliedQuantities = [];
-            
-            //Find all repairs associated with each unique repair item model
-            await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gt: dateFrom, $lt: dateTo}}).then(repair => {
-                var repair = repair;
-                var tempInt = 0;
-                // console.log(repair);
-                // console.log("rep tech length = " + repairItemModel.length)
-                // console.log("rep length = " + repair.length)
-            
-                //Iterate over the array of unique repair item models
-                for(i = 0; i < repairItemModel.length; i++) {
-                    //Reset temporary int
-                    tempInt = 0;
+        var category1 = req.params.category1;
 
-                    //Iterate over the array of repairs associated with each unique repair item model
-                    for(j = 0; j < repair.length; j++) {
-                        //If repair item model in array of unique repair item models == repair technician in array of repairs
-                        //associated with each unique repair item model, add its repair quantity value to temporary int
-                        if(repairItemModel[i] == repair[j].repairItemModel) {
-                            console.log("hatdog");
-                            tempInt += repair[j].repairQuantity;
-                        };
-                    };
-                    //Store temporary int to repairTalliedQuantities
-                    repairTalliedQuantities[i] = tempInt;
-                };
-            });
-            console.log("tallied = " + repairTalliedQuantities);
-            //Send to hbs template used
-            res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
-        });
-    },
-
-    getTopDefectsPerItemModel: async function(req, res) {
-        var dateFrom = req.params.dateFrom;
-        var dateTo = req.params.dateTo;
-        var status = req.params.status;
-        
-        //Find all unique repair item models
-        await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
-            // console.log(repairItemModel);
-            var repairTalliedQuantities = [];
-
-            //Find all unique repair defects
-            await repairModel.find({}).distinct('repairDefect').then(async repairDefect => {
-                console.log(repairDefect)
-                //Find all repairs associated with each unique repair item model and each unique repair defect
-                await repairModel.find({repairItemModel: repairItemModel, repairDefect: repairDefect, repairDate: {$gt: dateFrom, $lt: dateTo}, repairStatus: status}).then(repair => {
+        if(category1 == null) {
+            //Find all unique repair item models
+            await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
+                // console.log(repairItemModel);
+                var repairTalliedQuantities = [];
+                
+                //Find all repairs associated with each unique repair item model with repairDate greater than dateFrom and 
+                //repairDate less than dateTo parameters
+                await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
+                    var repair = repair;
                     var tempInt = 0;
-                    var jLoopCounter = 0;
                     // console.log(repair);
                     // console.log("rep tech length = " + repairItemModel.length)
                     // console.log("rep length = " + repair.length)
                 
                     //Iterate over the array of unique repair item models
                     for(i = 0; i < repairItemModel.length; i++) {
-                        //Iterate over the array of unique repair defects
-                        for(j = 0; j < repairDefect.length; j++) {
-                            //Reset temporary array
-                            tempArray = [];
-                            //Reset temporary int
-                            tempInt = 0;
-                            //Iterate over the array of repairs associated with each unique repair item model and each unique
-                            //repair defect
-                            for(k = 0; k < repair.length; k++) {
-                                //If repair item model in array of unique repair item models == repair item model in array of 
-                                //repairs associated with each unique repair item model and repair defect in array of unique
-                                //repair defects == repair defect in array of repairs associated with each unique repair
-                                //defect, increment the temporary int to count its occurence
-                                if(repairItemModel[i] == repair[k].repairItemModel && repairDefect[j] == repair[k].repairDefect) {
-                                    // console.log("repair defect =" + repair[k].repairDefect);
-                                    tempInt++;
-                                };
+                        //Reset temporary int
+                        tempInt = 0;
+
+                        //Iterate over the array of repairs associated with each unique repair item model
+                        for(j = 0; j < repair.length; j++) {
+                            //If repair item model in array of unique repair item models == repair technician in array of repairs
+                            //associated with each unique repair item model, add its repair quantity value to temporary int
+                            if(repairItemModel[i] == repair[j].repairItemModel) {
+                                console.log("hatdog");
+                                tempInt += repair[j].repairQuantity;
                             };
-    
-                            //Store accumulated defect numbers to tempArray
-                            tempArray[0] = tempInt;
-                            //Store temporary array to repairTalliedQuantities
-                            repairTalliedQuantities[jLoopCounter] = tempArray;
-                            
-                            //Increment loopCounter
-                            jLoopCounter++;
                         };
+                        //Store temporary int to repairTalliedQuantities
+                        repairTalliedQuantities[i] = tempInt;
                     };
-                }); 
-            })
-            //Sort repairTalliedQuantities in descending order
-            repairTalliedQuantities = repairTalliedQuantities.sort(compareNumbers);
-            console.log("tallied = " + repairTalliedQuantities);
-            //Send to hbs template used
-            res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: repairTalliedQuantities});
-        });
+                });
+                console.log("tallied = " + repairTalliedQuantities);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
+            });
+        } else {
+            //Find all unique repair item models
+            await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
+                // console.log(repairItemModel);
+                var repairTalliedQuantities = [];
+                
+                //Find all repairs associated with each unique repair item model and the category1 parameter with repairDate 
+                //greater than dateFrom and repairDate less than dateTo parameters
+                await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gte: dateFrom, $lte: dateTo}, repairCategory1: category1}).then(repair => {
+                    var repair = repair;
+                    var tempInt = 0;
+                    // console.log(repair);
+                    // console.log("rep tech length = " + repairItemModel.length)
+                    // console.log("rep length = " + repair.length)
+                
+                    //Iterate over the array of unique repair item models
+                    for(i = 0; i < repairItemModel.length; i++) {
+                        //Reset temporary int
+                        tempInt = 0;
+
+                        //Iterate over the array of repairs associated with each unique repair item model
+                        for(j = 0; j < repair.length; j++) {
+                            //If repair item model in array of unique repair item models == repair technician in array of repairs
+                            //associated with each unique repair item model, add its repair quantity value to temporary int
+                            if(repairItemModel[i] == repair[j].repairItemModel) {
+                                console.log("hatdog");
+                                tempInt += repair[j].repairQuantity;
+                            };
+                        };
+                        //Store temporary int to repairTalliedQuantities
+                        repairTalliedQuantities[i] = tempInt;
+                    };
+                });
+                console.log("tallied = " + repairTalliedQuantities);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
+            });
+        };
+    },
+
+    getTopDefectsPerItemModel: async function(req, res) {
+        var dateFrom = req.params.dateFrom;
+        var dateTo = req.params.dateTo;
+        var status = req.params.status;
+        var itemModel = req.params.itemModel;
+        var category1 = req.params.category1;
+        
+        if(itemModel == null) {
+            //Find all unique repair item models
+            await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
+                // console.log(repairItemModel);
+                var repairTalliedQuantities = [];
+
+                //Find all unique repair defects
+                await repairModel.find({}).distinct('repairDefect').then(async repairDefect => {
+                    console.log(repairDefect)
+                    //Find all repairs associated with each unique repair item model, each unique repair defect and the 
+                    //category1 parameter with repairDate greater than dateFrom and repairDate less than dateTo parameters
+                    await repairModel.find({repairItemModel: repairItemModel, repairDefect: repairDefect, repairDate: {$gte: dateFrom, $lte: dateTo}, repairStatus: status, repairCategory1: category1}).then(repair => {
+                        var tempInt = 0;
+                        var jLoopCounter = 0;
+                        // console.log(repair);
+                        // console.log("rep tech length = " + repairItemModel.length)
+                        // console.log("rep length = " + repair.length)
+                    
+                        //Iterate over the array of unique repair item models
+                        for(i = 0; i < repairItemModel.length; i++) {
+                            //Iterate over the array of unique repair defects
+                            for(j = 0; j < repairDefect.length; j++) {
+                                //Reset temporary array
+                                tempArray = [];
+                                //Reset temporary int
+                                tempInt = 0;
+                                //Iterate over the array of repairs associated with each unique repair item model and each unique
+                                //repair defect
+                                for(k = 0; k < repair.length; k++) {
+                                    //If repair item model in array of unique repair item models == repair item model in array of 
+                                    //repairs associated with each unique repair item model and repair defect in array of unique
+                                    //repair defects == repair defect in array of repairs associated with each unique repair
+                                    //defect, increment the temporary int to count its occurence
+                                    if(repairItemModel[i] == repair[k].repairItemModel && repairDefect[j] == repair[k].repairDefect) {
+                                        // console.log("repair defect =" + repair[k].repairDefect);
+                                        tempInt++;
+                                    };
+                                };
+        
+                                //Store accumulated defect numbers to tempArray
+                                tempArray[0] = tempInt;
+                                //Store temporary array to repairTalliedQuantities
+                                repairTalliedQuantities[jLoopCounter] = tempArray;
+                                
+                                //Increment loopCounter
+                                jLoopCounter++;
+                            };
+                        };
+                    }); 
+                })
+                //Sort repairTalliedQuantities in descending order
+                repairTalliedQuantities = repairTalliedQuantities.sort(compareNumbers);
+                console.log("tallied = " + repairTalliedQuantities);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: repairTalliedQuantities});
+            });
+        } else if(category1 == null) {
+            //Find all unique repair item models
+            await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
+                // console.log(repairItemModel);
+                var repairTalliedQuantities = [];
+
+                //Find all unique repair defects
+                await repairModel.find({}).distinct('repairDefect').then(async repairDefect => {
+                    console.log(repairDefect)
+                    //Find all repairs associated with the itemModel parameter and each unique repair defect with repairDate 
+                    //greater than dateFrom and repairDate less than dateTo parameters
+                    await repairModel.find({repairItemModel: itemModel, repairDefect: repairDefect, repairDate: {$gte: dateFrom, $lte: dateTo}, repairStatus: status}).then(repair => {
+                        var tempInt = 0;
+                        var jLoopCounter = 0;
+                        // console.log(repair);
+                        // console.log("rep tech length = " + repairItemModel.length)
+                        // console.log("rep length = " + repair.length)
+                    
+                        //Iterate over the array of unique repair item models
+                        for(i = 0; i < repairItemModel.length; i++) {
+                            //Iterate over the array of unique repair defects
+                            for(j = 0; j < repairDefect.length; j++) {
+                                //Reset temporary array
+                                tempArray = [];
+                                //Reset temporary int
+                                tempInt = 0;
+                                //Iterate over the array of repairs associated with each unique repair item model and each unique
+                                //repair defect
+                                for(k = 0; k < repair.length; k++) {
+                                    //If repair item model in array of unique repair item models == repair item model in array of 
+                                    //repairs associated with each unique repair item model and repair defect in array of unique
+                                    //repair defects == repair defect in array of repairs associated with each unique repair
+                                    //defect, increment the temporary int to count its occurence
+                                    if(repairItemModel[i] == repair[k].repairItemModel && repairDefect[j] == repair[k].repairDefect) {
+                                        // console.log("repair defect =" + repair[k].repairDefect);
+                                        tempInt++;
+                                    };
+                                };
+        
+                                //Store accumulated defect numbers to tempArray
+                                tempArray[0] = tempInt;
+                                //Store temporary array to repairTalliedQuantities
+                                repairTalliedQuantities[jLoopCounter] = tempArray;
+                                
+                                //Increment loopCounter
+                                jLoopCounter++;
+                            };
+                        };
+                    }); 
+                })
+                //Sort repairTalliedQuantities in descending order
+                repairTalliedQuantities = repairTalliedQuantities.sort(compareNumbers);
+                console.log("tallied = " + repairTalliedQuantities);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: repairTalliedQuantities});
+            });
+        };
     },
 
     getPendingStatusPerItemModel: async function(req, res) {
         var dateFrom = req.params.dateFrom;
         var dateTo = req.params.dateTo;
         var status = req.params.status;
+        var itemModel = req.params.itemModel;
+        var category1 = req.params.category1;
         
-        //Find all unique repair item models
-        await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
-            // console.log(repairItemModel);
-            var repairTalliedQuantities = [];
-            
-            //Find all repairs associated with each unique repair item model
-            await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gt: dateFrom, $lt: dateTo}, repairStatus: status}).then(repair => {
-                var repair = repair;
-                // console.log(repair);
-                // console.log("rep tech length = " + repairItemModel.length)
-                // console.log("rep length = " + repair.length)
-            
-                //Iterate over the array of repairs associated with each unique repair item model
-                for(i = 0; i < repair.length; i++) {
-                    //Store repair item model and its status to tempArray
-                    tempArray = [];
-                    tempArray[0] = repair[i].repairItemModel;
-                    tempArray[1] = repair[i].repairItemStatus;
-                    //Store temporary array to repairTalliedQuantities
-                    repairTalliedQuantities[i] = tempArray;
-                };
+        if(itemModel == null) {
+            //Find all unique repair item models
+            await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
+                // console.log(repairItemModel);
+                var repairTalliedQuantities = [];
+                
+                //Find all repairs associated with each unique repair item model and the category1 parameter with repairDate 
+                //greater than dateFrom and repairDate less than dateTo parameters
+                await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gte: dateFrom, $lte: dateTo}, repairStatus: status, repairCategory1: category1}).then(repair => {
+                    var repair = repair;
+                    // console.log(repair);
+                    // console.log("rep tech length = " + repairItemModel.length)
+                    // console.log("rep length = " + repair.length)
+                
+                    //Iterate over the array of repairs associated with each unique repair item model
+                    for(i = 0; i < repair.length; i++) {
+                        //Store repair item model and its status to tempArray
+                        tempArray = [];
+                        tempArray[0] = repair[i].repairItemModel;
+                        tempArray[1] = repair[i].repairItemStatus;
+                        //Store temporary array to repairTalliedQuantities
+                        repairTalliedQuantities[i] = tempArray;
+                    };
+                });
+                console.log("tallied = " + repairTalliedQuantities);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
             });
-            console.log("tallied = " + repairTalliedQuantities);
-            //Send to hbs template used
-            res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
-        });
+        } else if(category1 == null) {
+            //Find all unique repair item models
+            await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
+                // console.log(repairItemModel);
+                var repairTalliedQuantities = [];
+                
+                //Find all repairs associated with the itemModel parameter with repairDate greater than dateFrom and repairDate 
+                //less than dateTo parameters
+                await repairModel.find({repairItemModel: itemModel, repairDate: {$gte: dateFrom, $lte: dateTo}, repairStatus: status}).then(repair => {
+                    var repair = repair;
+                    // console.log(repair);
+                    // console.log("rep tech length = " + repairItemModel.length)
+                    // console.log("rep length = " + repair.length)
+                
+                    //Iterate over the array of repairs associated with each unique repair item model
+                    for(i = 0; i < repair.length; i++) {
+                        //Store repair item model and its status to tempArray
+                        tempArray = [];
+                        tempArray[0] = repair[i].repairItemModel;
+                        tempArray[1] = repair[i].repairItemStatus;
+                        //Store temporary array to repairTalliedQuantities
+                        repairTalliedQuantities[i] = tempArray;
+                    };
+                });
+                console.log("tallied = " + repairTalliedQuantities);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
+            });
+        };
     }, 
 };
 
