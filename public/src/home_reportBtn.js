@@ -4,9 +4,8 @@ $(document).ready(function () {
         var report = $(this).data('report'); //Get report abbreviation from data attribute in .btn-report-holder
         var reportname= $(this).find('.report-name').text();
         // alert(report);
-
         var popup=`
-        <form name="hello" action="/post" method="post">
+        <form name ="hello" action="/${reportname}post" method="post">
             <div class="popup-body">
                 <div class="popup-header">
                     <div class="popup-text">${reportname}</div>
@@ -30,6 +29,7 @@ $(document).ready(function () {
             </div>
         </form>
         `;        
+
         $('.popup').append(popup);
         getOptionsBasedOnReport(report);
         $(".overlay-holder").fadeIn('fast', 'swing');
@@ -37,7 +37,7 @@ $(document).ready(function () {
 
     $('.btn-generate-report').click( function(){
         try{
-
+            
         }catch{
             console.log();
         }
@@ -47,24 +47,100 @@ $(document).ready(function () {
 
 
 function getOptionsBasedOnReport(reportname){
+    let appendStr
     switch(reportname){
         case "IQPM": 
-            alert(reportname);
-            $('.IQPM').append(`
+            appendStr=`
+            <div class="popup-subheader">
+                <div class="dashed-line"></div>
+                <div class="popup-text-one">Item Category</div>
+                <div class="dashed-line"></div>
+            </div>
+            <br>
+            <div class="centered">
                 <select class="btn-dropdown-mock dropdown-selection" name="category1">
                     <option value="default">(Category)</option>
                     <option value="speaker">Speakers</option>
                     <option value="mic">Microphones</option>
                     <option value="amp">Amplifier</option>
                 </select>
-            `);
+            </div>
+            `
         break;
-        // case "TDPM":
-        // case "PTPM":
-        // case "TIQPT":
+        case "TDPM": case "PTPM":
+            appendStr= `
+            <div class="popup-subheader">
+                <div class="dashed-line"></div>
+                <div class="popup-text-one">Task type</div>
+                <div class="dashed-line"></div>
+            </div>
+            <div class="popup-options taskType" name="status">
+                <label class="btn-dropdown-mock taskOption">
+                    <input type="radio" class="radioCheck" name="taskType" value="repair">
+                    <span>Repair</span>
+                </label>
+                <label class="btn-dropdown-mock taskOption" >
+                    <input type="radio" class="radioCheck" name="taskType" value="replace">
+                    <span>Replace</span>
+                </label>
+                <label class="btn-dropdown-mock taskOption">
+                    <input type="radio" class="radioCheck" name="taskType" value="return">
+                    <span>Return</span>
+                </label>
+                <label class="btn-dropdown-mock taskOption">
+                    <input type="radio" class="radioCheck" name="taskType" value="QA">
+                    <span>QA</span>
+                </label>
+            </div>
+            <div class="popup-subheader">
+                <div class="popup-subheader">
+
+                    <div class="popup-text-one">Item
+                    </div>
+                    <div class="dashed-line"></div>
+                    <div class="popup-text-one">or</div>
+                    <div class="dashed-line"></div>
+                    <div class="popup-text-one">Category</div>
+
+                </div>
+            </div>
+            <div class="popup-options">
+                <select class="btn-dropdown-mock dropdown-selection" name="category1">
+                    <option value="default">(Item)</option>
+                    <option value="eon">EON</option>
+                    <option value="gx">GX</option>
+                    <option value="csl">CSL</option>
+                </select>
+                <select class="btn-dropdown-mock dropdown-selection" name="category1">
+                    <option value="default">(Category)</option>
+                    <option value="speaker">Speakers</option>
+                    <option value="mic">Microphones</option>
+                    <option value="amp">Amplifier</option>
+                </select>
+            </div>
+            `
+        break;
+        case "TIQPT": case "AWDPT":
+            appendStr= `
+            <div class="popup-subheader">
+                <div class="dashed-line"></div>
+                <div class="popup-text-one">Technician</div>
+                <div class="dashed-line"></div>
+            </div>
+            <br>
+            <div class="centered">
+                <select class="btn-dropdown-mock dropdown-selection" name="technician">
+                    <option value="default">(Technician)</option>
+                    <option value="tech1">tech1</option>
+                    <option value="tech2">tech2</option>
+                    <option value="tech3">tech3</option>
+                </select>
+            </div>
+            `
+        break;
         // case "TIQPMPT":
-        // case "AWDPT":
     }
+    $('.report-specifics-holder').append(appendStr);
 }
 
 function hidePopup(){
@@ -80,18 +156,10 @@ function selectMonth(){
     $('.date_range').append(`
         <div class="date-options">
             <div class="selection">
-                <select class="btn-dropdown-mock dropdown-selection">
-                    <option value="default">(Month)</option>
-                    <option value="jan">January</option>
-                    <option value="feb">February</option>
-                    <option value="mar">March</option>
-                </select>
-                <select class="btn-dropdown-mock dropdown-selection">
-                    <option value="default">(Year)</option>
-                    <option value="24">2024</option>
-                    <option value="23">2023</option>
-                    <option value="22">2022</option>
-                </select>
+                <label for="date from">date from: (month)</label>
+                <input type="month" id="dateFrom" name="dateFrom">
+                <label for="date to">date to:</label>
+                <input type="date" id="dateTo" name="dateTo">
             </div>
             <button class="btn-option-close" onclick="closeOptions()"><img src="/images/close.svg" alt="close popup"></button>
         </div>

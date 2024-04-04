@@ -66,6 +66,7 @@
 .popup-subheader{
     width: 96%;
     display: flex;
+    margin-bottom: 1.5vh;
 }
 .popup-subheader .popup-text-one{
     width: 70%;
@@ -99,13 +100,22 @@
     width: 96%;
     display: flex;
     margin-bottom: 3vh;
-    justify-content: space-between;
-    background-color: var(--primary);
-    
+    justify-content: space-between;    
+}
+
+.centered{
+    width: 96%;
+    display: flex;
+    justify-content: center;
 }
 
 .popup-options button{
     border: none;
+}
+
+.popup .report-specifics-holder{
+    width: 96%;
+    height: 45%;
 }
 
 .date-options{

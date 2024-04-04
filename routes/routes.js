@@ -6,11 +6,20 @@ const repairController = require('../controllers/repairController.js');
 
 //Open Home
 app.get('/', mainController.getMain);
-//Open IQPM
-app.post('/post', repairController.getTotalItemQuantityPerItemModel);
-//IQPT
-// app.post('/name of action or url', repairController.getTotalItemQuantityPerTechnician);
+//Item Quantity Per Model
+app.post('/IQPMpost', repairController.getTotalItemQuantityPerItemModel);
+//Top Defects per Model
+app.post('/TDPMpost', repairController.getTopDefectsPerItemModel);
+//Pending Tasks per Model
+app.post('/PTPMpost', repairController.getPendingStatusPerItemModel);
+//Total Item Quantity Per Technician
+app.post('/TIQPTpost', repairController.getTotalItemQuantityPerTechnician);
+//Total item quantity per model per technician
+app.post('/TIQPMPTpost', repairController.getTotalItemQuantityPerItemModelPerTechnician);
+//Average working days per technician 
+app.post('/AWDPTpost', repairController.getAverageWorkingDaysPerTechnician);
 
+// app.post('/name of action or url', repairController.getTotalItemQuantityPerTechnician);
 // app.post('/name of action or url', repairController.getTotalItemQuantityPerItemModelPerTechnician);
 // app.post('/name of action or url', repairController.getAverageWorkingDaysPerTechnician);
 // app.post('/name of action or url', repairController.getTotalItemQuantityPerItemModel);
