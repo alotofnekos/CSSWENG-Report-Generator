@@ -8,10 +8,14 @@ const repairController = require('../controllers/repairController.js');
 app.get('/', mainController.getMain);
 //Open IQPM
 app.post('/post', repairController.getTotalItemQuantityPerItemModel);
-//Open PTPM
-app.get('/PTPM', mainController.getPendingTasksPerModel);
-//Open TDPM
-app.get('/TDPM', mainController.getTopDefectsPerModel);
+//IQPT
+// app.post('/name of action or url', repairController.getTotalItemQuantityPerTechnician);
+
+// app.post('/name of action or url', repairController.getTotalItemQuantityPerItemModelPerTechnician);
+// app.post('/name of action or url', repairController.getAverageWorkingDaysPerTechnician);
+// app.post('/name of action or url', repairController.getTotalItemQuantityPerItemModel);
+// app.post('/name of action or url', repairController.getTopDefectsPerItemModel);
+// app.post('/name of action or url', repairController.getPendingStatusPerItemModel);
 //Import file and insert into DB
 app.post('/importFile', importController.importFile);
 // app.get('/insertRepair/:excelValues', repairController.insertRepair);
@@ -20,11 +24,6 @@ app.get('/table', repairController.getAllRepairs);
 app.get('/import', mainController.getImport);
 
 // app.get('/IQPM', mainController.generateIQPM(reportParameters));
-// app.get('/name of action or url', repairController.getTotalItemQuantityPerTechnician);
-// app.get('/name of action or url', repairController.getTotalItemQuantityPerItemModelPerTechnician);
-// app.get('/name of action or url', repairController.getAverageWorkingDaysPerTechnician);
-// app.get('/name of action or url', repairController.getTotalItemQuantityPerItemModel);
-// app.get('/name of action or url', repairController.getTopDefectsPerItemModel);
-// app.get('/name of action or url', repairController.getPendingStatusPerItemModel);
+
 
 module.exports = app;
