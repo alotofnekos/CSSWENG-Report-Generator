@@ -50,9 +50,9 @@ const repairController = {
 
     //Get Total Item Quantity Per Technician
     getTotalItemQuantityPerTechnician: async function(req, res) {
-        var dateFrom = req.params.dateFrom;
-        var dateTo = req.params.dateTo;
-        var technician = req.params.technician
+        var dateFrom = req.body.dateFrom;
+        var dateTo = req.body.dateTo;
+        var technician = req.body.technician
 
         if(technician == null) {
             //Find all unique repair technicians
@@ -141,11 +141,11 @@ const repairController = {
 
     //Get Total Item Quantity Per Item Model Per Technician
     getTotalItemQuantityPerItemModelPerTechnician: async function(req, res) {
-        var dateFrom = req.params.dateFrom;
-        var dateTo = req.params.dateTo;
-        var status = req.params.status;
-        var itemModel = req.params.itemModel;
-        var technician = req.params.technician;
+        var dateFrom = req.body.dateFrom;
+        var dateTo = req.body.dateTo;
+        var status = req.body.status;
+        var itemModel = req.body.itemModel;
+        var technician = req.body.technician;
 
         //Find all repairs associated with the required inputs taken from the request parameters with repairDate greater than 
         //dateFrom and repairDate less than dateTo parameters
@@ -175,9 +175,9 @@ const repairController = {
 
     //Get Average Working Days Per Technician
     getAverageWorkingDaysPerTechnician: async function(req, res) {
-        var dateFrom = req.params.dateFrom;
-        var dateTo = req.params.dateTo;
-        var technician = req.params.technician
+        var dateFrom = req.body.dateFrom;
+        var dateTo = req.body.dateTo;
+        var technician = req.body.technician;
 
         if(technician == null) {
             //Find all unique repair technicians
@@ -284,16 +284,17 @@ const repairController = {
     },
 
     getTotalItemQuantityPerItemModel: async function(req, res) {
-        var dateFrom = req.params.dateFrom;
-        var dateTo = req.params.dateTo;
-        var category1 = req.params.category1;
-        
+        var dateFrom = req.body.dateFrom;
+        var dateTo = req.body.dateTo;
+        var category1 = req.body.category1;
+        console.log(req.body.sean);
+        console.log(req.body);
         console.log(dateFrom +" "+ dateTo +" "+category1);
 
         if(category1 == null) {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
-                // console.log(repairItemModel);
+                console.log(repairItemModel);
                 var repairTalliedQuantities = [];
                 
                 //Find all repairs associated with each unique repair item model with repairDate greater than dateFrom and 
@@ -368,11 +369,11 @@ const repairController = {
     },
 
     getTopDefectsPerItemModel: async function(req, res) {
-        var dateFrom = req.params.dateFrom;
-        var dateTo = req.params.dateTo;
-        var status = req.params.status;
-        var itemModel = req.params.itemModel;
-        var category1 = req.params.category1;
+        var dateFrom = req.body.dateFrom;
+        var dateTo = req.body.dateTo;
+        var status = req.body.status;
+        var itemModel = req.body.itemModel;
+        var category1 = req.body.category1;
         
         if(itemModel == null) {
             //Find all unique repair item models
@@ -479,7 +480,7 @@ const repairController = {
                             };
                         };
                     }); 
-                })
+                });
                 //Sort repairTalliedQuantities in descending order
                 repairTalliedQuantities = repairTalliedQuantities.sort(compareNumbers);
                 console.log("tallied = " + repairTalliedQuantities);
@@ -490,11 +491,11 @@ const repairController = {
     },
 
     getPendingStatusPerItemModel: async function(req, res) {
-        var dateFrom = req.params.dateFrom;
-        var dateTo = req.params.dateTo;
-        var status = req.params.status;
-        var itemModel = req.params.itemModel;
-        var category1 = req.params.category1;
+        var dateFrom = req.body.dateFrom;
+        var dateTo = req.body.dateTo;
+        var status = req.body.status;
+        var itemModel = req.body.itemModel;
+        var category1 = req.body.category1;
         
         if(itemModel == null) {
             //Find all unique repair item models

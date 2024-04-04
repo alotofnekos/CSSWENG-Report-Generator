@@ -3,11 +3,10 @@ $(document).ready(function () {
     $('.btn-report-holder').click(function(){
         var report = $(this).data('report'); //Get report abbreviation from data attribute in .btn-report-holder
         var reportname= $(this).find('.report-name').text();
-
         // alert(report);
 
         var popup=`
-        <form id ="hello" action="/post" method="post">
+        <form name="hello" action="/post" method="post">
             <div class="popup-body">
                 <div class="popup-header">
                     <div class="popup-text">${reportname}</div>
@@ -23,10 +22,10 @@ $(document).ready(function () {
                     <button class="btn-dropdown-mock" onclick="selectQuarter()">Quarter</button>
                     <button class="btn-dropdown-mock" onclick="selectYear()">Year</button>
                 </div>
-            <div class="popup-options ${report}">
-            </div> 
-                <button type="submit" form="hello" class="btn-generate-report">
-                        Generate Report
+                <div class="report-specifics-holder ${report}">
+                </div>
+                <button type="submit" class="btn-generate-report">
+                    Generate Report
                 </button>
             </div>
         </form>
@@ -52,7 +51,7 @@ function getOptionsBasedOnReport(reportname){
         case "IQPM": 
             alert(reportname);
             $('.IQPM').append(`
-                <select id="category1" class="btn-dropdown-mock dropdown-selection">
+                <select class="btn-dropdown-mock dropdown-selection" name="category1">
                     <option value="default">(Category)</option>
                     <option value="speaker">Speakers</option>
                     <option value="mic">Microphones</option>

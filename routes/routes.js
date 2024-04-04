@@ -7,7 +7,7 @@ const repairController = require('../controllers/repairController.js');
 //Open Home
 app.get('/', mainController.getMain);
 //Open IQPM
-app.get('/post', repairController.getTotalItemQuantityPerItemModel);
+app.post('/post', repairController.getTotalItemQuantityPerItemModel);
 //Open PTPM
 app.get('/PTPM', mainController.getPendingTasksPerModel);
 //Open TDPM
