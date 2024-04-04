@@ -21,72 +21,49 @@ $(document).ready(function () {
                 <button class="btn-dropdown-mock" onclick="selectQuarter()">Quarter</button>
                 <button class="btn-dropdown-mock" onclick="selectYear()">Year</button>
             </div>
-            <div class="popup-subheader">
-                <div class="dashed-line"></div>
-                <div class="popup-text-one">Task type</div>
-                <div class="dashed-line"></div>
-            </div>
-            <div class="popup-options taskType">
-                <label class="btn-dropdown-mock taskOption">
-                    <input type="radio" class="radioCheck" name="taskType" value="repair">
-                    <span>Repair</span>
-                </label>
-                <label class="btn-dropdown-mock taskOption" >
-                    <input type="radio" class="radioCheck" name="taskType" value="replace">
-                    <span>Replace</span>
-                </label>
-                <label class="btn-dropdown-mock taskOption">
-                    <input type="radio" class="radioCheck" name="taskType" value="return">
-                    <span>Return</span>
-                </label>
-            </div>
-            <div class="popup-subheader">
-                <div class="popup-subheader">
-
-                    <div class="popup-text-one">Item
-                    </div>
-                    <div class="dashed-line"></div>
-                    <div class="popup-text-one">or</div>
-                    <div class="dashed-line"></div>
-                    <div class="popup-text-one">Category</div>
-
-                </div>
-            </div>
-            <div class="popup-options">
-                <select class="btn-dropdown-mock dropdown-selection">
-                    <option value="default">(Item)</option>
-                    <option value="eon">EON</option>
-                    <option value="gx">GX</option>
-                    <option value="csl">CSL</option>
-                </select>
-                <select class="btn-dropdown-mock dropdown-selection">
-                    <option value="default">(Category)</option>
-                    <option value="speaker">Speakers</option>
-                    <option value="mic">Microphones</option>
-                    <option value="amp">Amplifier</option>
-                </select>
-            </div>
+           <div class="popup-options ${report}">
+           </div> 
             <div class="btn-generate-report">
                     <a href="/${report}">Generate report</a>
             </div>
         </div>
         `;        
         $('.popup').append(popup);
-
+        getOptionsBasedOnReport(report);
         $(".overlay-holder").fadeIn('fast', 'swing');
     });
 });
 
+function getOptionsBasedOnReport(reportname){
+    switch(reportname){
+        case "IQPM": 
+            alert(reportname);
+            $('.IQPM').append(`
+                <select class="btn-dropdown-mock dropdown-selection">
+                        <option value="default">(Item)</option>
+                        <option value="eon">EON</option>
+                        <option value="gx">GX</option>
+                        <option value="csl">CSL</option>
+                </select>
+            `);
+        break;
+        // case "TDPM":
+        // case "PTPM":
+        // case "TIQPT":
+        // case "TIQPMPT":
+        // case "AWDPT":
+    }
+}
+
 function hidePopup(){
-    alert("help me");
-    
+    // alert("help me");
     //$(".dark-overlay").fadeOut('fast', 'swing');
     $(".overlay-holder").fadeOut('fast', 'swing');
     $(".popup-body").remove();
 }
 
 function selectMonth(){
-    alert("hello world");
+    // alert("hello world");
 
     $('.date_range').append(`
         <div class="date-options">
@@ -110,7 +87,7 @@ function selectMonth(){
 }
 
 function selectQuarter(){
-    alert("hello world 2");
+    // alert("hello world 2");
 
     $('.date_range').append(`
         <div class="date-options">
