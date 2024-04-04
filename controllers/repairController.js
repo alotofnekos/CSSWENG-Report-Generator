@@ -50,226 +50,241 @@ const repairController = {
 
     //Get Total Item Quantity Per Technician
     getTotalItemQuantityPerTechnician: async function(req, res) {
-        var date = req.params.date;
+        var dateFrom = req.params.dateFrom;
+        var dateTo = req.params.dateTo;
+        var technician = req.params.technician
 
-        // await repairModel.find({repairDate: {$gt date}}).then(async repairDate => {
-
-        // })
-        var repairTechnician1 = getDistinctTechnician1();
-        //Find all unique repair technicians
-        await repairModel.find({}).distinct('repairTechnician1').then(async repairTechnician1 => {
-            // console.log(repairTechnician1);
-            var repairTalliedQuantities = [];
-            var technician = [];
-            var technicianCount = 0;
-            //Add repairTechnician1 to technician array
-            for(i = 0; i < repairTechnician1.length; i++) {
-                technician[technicianCount] = repairTechnician1[i];
-                technicianCount++;
-            }
-          
-            await repairModel.find({}).distinct('repairTechnician2').then(async repairTechnician2 => {
-                // console.log(repairTechnician2);
-                //Add repairTechnician2 to technician array
-                for(i = 0; i < repairTechnician2.length; i++) {
-                    technician[technicianCount] = repairTechnician2[i];
+        if(technician == null) {
+            //Find all unique repair technicians
+            await repairModel.find({}).distinct('repairTechnician1').then(async repairTechnician1 => {
+                // console.log(repairTechnician1);
+                var repairTalliedQuantities = [];
+                var technician = [];
+                var technicianCount = 0;
+                //Add repairTechnician1 to technician array
+                for(i = 0; i < repairTechnician1.length; i++) {
+                    technician[technicianCount] = repairTechnician1[i];
                     technicianCount++;
                 }
-
-                //Clear all duplicate entries in technician array
-                distinctArray = clearDuplicates(technician);
-                console.log("distinct array = " + distinctArray);
-
-                //Find all repairs associated with each unique repair technician
-                await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2}).then(repair => {
-                    var repair = repair;
-                    var tempInt = 0;
-                    // console.log(repair);
-                    // console.log("rep tech length = " + repairTechnician.length)
-                    // console.log("rep length = " + repair.length)
             
-                    //Iterate over the array of unique repair technicians
-                    for(i = 0; i < distinctArray.length; i++) {
-                        //Reset temporary int
-                        tempInt = 0;
-                        //Iterate over the array of repairs associated with each unique repair technician
-                        for(j = 0; j < repair.length; j++) {
-                            //If repair technician in array of unique repair technicians == repair technician in array of repairs
-                            //associated with each unique repair technician, add its repair quantity value to temporary int
-                            if((distinctArray[i] == repair[j].repairTechnician1) || (distinctArray[i] == repair[j].repairTechnician2)) {
-                                console.log("hatdog");
-                                tempInt += repair[j].repairQuantity;
+                await repairModel.find({}).distinct('repairTechnician2').then(async repairTechnician2 => {
+                    // console.log(repairTechnician2);
+                    //Add repairTechnician2 to technician array
+                    for(i = 0; i < repairTechnician2.length; i++) {
+                        technician[technicianCount] = repairTechnician2[i];
+                        technicianCount++;
+                    }
+
+                    //Clear all duplicate entries in technician array
+                    distinctArray = clearDuplicates(technician);
+                    console.log("distinct array = " + distinctArray);
+
+                    //Find all repairs associated with each unique repair technician
+                    await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gt: dateFrom, $lt: dateTo}}).then(repair => {
+                        var repair = repair;
+                        var tempInt = 0;
+                        // console.log(repair);
+                        // console.log("rep tech length = " + repairTechnician.length)
+                        // console.log("rep length = " + repair.length)
+                
+                        //Iterate over the array of unique repair technicians
+                        for(i = 0; i < distinctArray.length; i++) {
+                            //Reset temporary int
+                            tempInt = 0;
+                            //Iterate over the array of repairs associated with each unique repair technician
+                            for(j = 0; j < repair.length; j++) {
+                                //If repair technician in array of unique repair technicians == repair technician in array of repairs
+                                //associated with each unique repair technician, add its repair quantity value to temporary int
+                                if((distinctArray[i] == repair[j].repairTechnician1) || (distinctArray[i] == repair[j].repairTechnician2)) {
+                                    console.log("hatdog");
+                                    tempInt += repair[j].repairQuantity;
+                                };
                             };
+                            
+                            //Store temporary int to repairTalliedQuantities
+                            repairTalliedQuantities[i] = tempInt;
                         };
-                        
-                        //Store temporary int to repairTalliedQuantities
-                        repairTalliedQuantities[i] = tempInt;
-                    };
+                    });
                 });
+                
+                console.log("tallied = " + repairTalliedQuantities);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
             });
-            
-            console.log("tallied = " + repairTalliedQuantities);
-            //Send to hbs template used
-            res.render('whatever hbs template to be used', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
-        });
+        } else {
+            await repairModel.find({repairTechnician1: technician, repairTechnician2: technician}).then(repair => {
+                var repairTalliedQuantities;
+
+                //Iterate over the array of repairs associated with each unique repair technician
+                for(i = 0; i < repair.length; i++) {
+                    //If repair technician in array of unique repair technicians == repair technician in array of repairs
+                    //associated with each unique repair technician, add its repair quantity value to temporary int
+                    if((technician == repair[i].repairTechnician1) || (technician == repair[i].repairTechnician2)) {
+                        console.log("hatdog");
+                        tempInt += repair[i].repairQuantity;
+                    };
+                };
+
+                //Store temporary int to repairTalliedQuantities
+                repairTalliedQuantities = tempInt;
+
+                console.log("tallied = " + repairTalliedQuantities);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairTechnician: technician, repairTalliedQuantities: repairTalliedQuantities});
+            });
+        };
     },
 
     //Get Total Item Quantity Per Item Model Per Technician
     getTotalItemQuantityPerItemModelPerTechnician: async function(req, res) {
-        //Find all unique repair technicians
-        await repairModel.find({}).distinct('repairTechnician1').then(async repairTechnician1 => {
-            // console.log(repairTechnician1);
+        var dateFrom = req.params.dateFrom;
+        var dateTo = req.params.dateTo;
+        var status = req.params.status;
+        var itemModel = req.params.itemModel;
+        var technician = req.params.technician;
+
+        //Find all repairs associated with the required inputs taken from the request parameters
+        await repairModel.find({ $or:[ {repairTechnician1: technician}, {repairTechnician2: technician}], repairItemModel: itemModel, repairStatus: status, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
+            // console.log(repair);
             var repairTalliedQuantities = [];
-            var technician = [];
-            var technicianCount = 0;
-            //Add repairTechnician1 to technician array
-            for(i = 0; i < repairTechnician1.length; i++) {
-                technician[technicianCount] = repairTechnician1[i];
-                technicianCount++;
-            }
+            var tempInt = 0;
             
-            await repairModel.find({}).distinct('repairTechnician2').then(async repairTechnician2 => {
-                // console.log(repairTechnician2);
-                //Add repairTechnician2 to technician array
-                for(i = 0; i < repairTechnician2.length; i++) {
-                    technician[technicianCount] = repairTechnician2[i];
+            //Iterate over the array of repairs associated with the required inputs taken from the request parameters
+            for(i = 0; i < repair.length; i++) {
+                //If technician parameter == repair technician in array of repairs associated with the required inputs taken from
+                //the request parameters and itemModel parameter == repair item model in array of repairs associated with the
+                //required inputs taken from the request parameters, add its repair quantity value to temporary int
+                if((technician == repair[i].repairTechnician1 && itemModel == repair[i].repairItemModel) ||
+                technician == repair[i].repairTechnician2 && itemModel == repair[i].repairItemModel) {
+                    // console.log("repair quantity =" + repair[i].repairQuantity);
+                    tempInt += repair[i].repairQuantity;
+                };
+            };
+            //Store temporary integer to repairTalliedQuantities
+            repairTalliedQuantities[0] = tempInt;
+            console.log("tallied = " + repairTalliedQuantities);
+            //Send to hbs template used
+            res.render('whatever hbs template to be used', {repairTechnician: technician, repairItemModel: itemModel, repairTalliedQuantities: repairTalliedQuantities});
+        }); 
+    },
+
+    //Get Average Working Days Per Technician
+    getAverageWorkingDaysPerTechnician: async function(req, res) {
+        var dateFrom = req.params.dateFrom;
+        var dateTo = req.params.dateTo;
+        var technician = req.params.technician
+
+        if(technician == null) {
+            //Find all unique repair technicians
+            await repairModel.find({}).distinct('repairTechnician1').then(async repairTechnician1 => {
+                // console.log(repairTechnician1);
+                var repairAverageWorkingDays = [];
+                var technician = [];
+                var technicianCount = 0;
+
+                //Add repairTechnician1 to technician array
+                for(i = 0; i < repairTechnician1.length; i++) {
+                    technician[technicianCount] = repairTechnician1[i];
                     technicianCount++;
                 }
-          
-                //Clear all duplicate entries in technician array
-                distinctArray = clearDuplicates(technician);
-                console.log("distinct array = " + distinctArray);
-          
-                //Find all unique repair item models
-                await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2}).distinct('repairItemModel').then(async repairItemModel => {
-                    //Find all repairs associated with each unique repair technician and each unique repair item model
-                    await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairItemModel: repairItemModel}).then(repair => {
-                        var loopCounter = 0;
-                        var tempInt = 0;
-                        // console.log("repair technicians =" + repairTechnician);
-                        // console.log("repair item models =" + repairItemModel);
-                        // console.log("repair = " + repair);
+                
+                await repairModel.find({}).distinct('repairTechnician2').then(async repairTechnician2 => {
+                    // console.log(repairTechnician2);
+                    //Add repairTechnician2 to technician array
+                    for(i = 0; i < repairTechnician2.length; i++) {
+                        technician[technicianCount] = repairTechnician2[i];
+                        technicianCount++;
+                    }
+                
+                    //Clear all duplicate entries in technician array
+                    distinctArray = clearDuplicates(technician);
+                    console.log("distinct array = " + distinctArray);
+                
+                    //Find all repairs associated with each unique repair technician
+                    await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gt: dateFrom, $lt: dateTo}}).then(repair => {
+                        var repair = repair;
+                        var tempInt1 = 0;
+                        var tempInt2 = 0;
+                        var averageWorkingDays = 0;
+                        // console.log(repair);
                         // console.log("rep tech length = " + repairTechnician.length)
                         // console.log("rep length = " + repair.length)
 
                         //Iterate over the array of unique repair technicians
                         for(i = 0; i < distinctArray.length; i++) {
-                            //Reset temporary array
-                            tempArray = [];
-                            //Iterate over the array of unique repair item models
-                            for(j = 0; j < repairItemModel.length; j++) {
-                                //Reset temporary int
-                                tempInt = 0;
-                                //Iterate over the array of repairs associated with each unique repair technician and each unique
-                                //repair item model
-                                for(k = 0; k < repair.length; k++) {
-          
-                                    //If repair technician in array of unique repair technicians == repair technician in array of 
-                                    //repairs associated with each unique repair technician and repair item model in array of unique
-                                    //repair item models == repair item model in array of repairs associated with each unique repair
-                                    //item model, add its repair quantity value to temporary int
-                                    if((distinctArray[i] == repair[k].repairTechnician1 && repairItemModel[j] == repair[k].repairItemModel) ||
-                                    distinctArray[i] == repair[k].repairTechnician2 && repairItemModel[j] == repair[k].repairItemModel) {
-                                        // console.log("repair quantity =" + repair[k].repairQuantity);
-                                        tempInt += repair[k].repairQuantity;
-                                    };
+                            //Reset temporary int
+                            tempInt1 = 0;
+                            tempInt2 = 0;
+                            //Iterate over the array of repairs associated with each unique repair technician
+                            for(j = 0; j < repair.length; j++) {
+                                //If repair technician in array of unique repair technicians == repair technician in array of repairs
+                                //associated with each unique repair technician, add its repair quantity value to temporary int
+                                if((distinctArray[i] == repair[j].repairTechnician1) || (distinctArray[i] == repair[j].repairTechnician2)) {
+                                    // console.log(repair[j].repairDateStarted);
+                                    // console.log(repair[j].repairDateFinished);
+                                    tempInt1 += parseInt(repair[j].repairDateStarted);
+                                    tempInt2 += parseInt(repair[j].repairDateFinished);
                                 };
-                                //Store temporary int to tempArray
-                                tempArray[j] = tempInt;
-                                // console.log(tempArray);
                             };
-          
-                            //Store temporary array to repairTalliedQuantities
-                            repairTalliedQuantities[i] = tempArray;
+                            
+                            // console.log("tempint 1 = " + tempInt1);
+                            // console.log("tempint 2 = " + tempInt2);
+                            //Average working days = summation of date finished - summation of date started
+                            averageWorkingDays = tempInt2 - tempInt1;
+                
+                            //Store averageWorkingDays to repairAverageWorkingDays
+                            repairAverageWorkingDays[i] = averageWorkingDays;
                         };
-                    }); 
+                    });
                 });
+                
+                console.log("tallied = " + repairAverageWorkingDays);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairAverageWorkingDays: repairAverageWorkingDays});
             });
-            // console.log("tallied = " + repairTalliedQuantities);
-            //Send to hbs template used
-            res.render('whatever hbs template to be used', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
-        });
-    },
+        } else {
+            await repairModel.find({repairTechnician1: technician, repairTechnician2: technician}).then(repair => {
+                var repairAverageWorkingDays = [];
+                var tempInt1 = 0;
+                var tempInt2 = 0;
+                var averageWorkingDays = 0;
 
-    //Get Average Working Days Per Technician
-    getAverageWorkingDaysPerTechnician: async function(req, res) {
-        await //Find all unique repair technicians
-        repairModel.find({}).distinct('repairTechnician1').then(async repairTechnician1 => {
-            // console.log(repairTechnician1);
-            var repairTalliedQuantities = [];
-            var technician = [];
-            var technicianCount = 0;
-
-            //Add repairTechnician1 to technician array
-            for(i = 0; i < repairTechnician1.length; i++) {
-                technician[technicianCount] = repairTechnician1[i];
-                technicianCount++;
-            }
-            
-            await repairModel.find({}).distinct('repairTechnician2').then(async repairTechnician2 => {
-                // console.log(repairTechnician2);
-                //Add repairTechnician2 to technician array
-                for(i = 0; i < repairTechnician2.length; i++) {
-                    technician[technicianCount] = repairTechnician2[i];
-                    technicianCount++;
-                }
-            
-                //Clear all duplicate entries in technician array
-                distinctArray = clearDuplicates(technician);
-                console.log("distinct array = " + distinctArray);
-            
-                //Find all repairs associated with each unique repair technician
-                await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2}).then(repair => {
-                    var repair = repair;
-                    var tempInt1 = 0;
-                    var tempInt2 = 0;
-                    var averageWorkingDays = 0;
-                    // console.log(repair);
-                    // console.log("rep tech length = " + repairTechnician.length)
-                    // console.log("rep length = " + repair.length)
-
-                    //Iterate over the array of unique repair technicians
-                    for(i = 0; i < distinctArray.length; i++) {
-                        //Reset temporary int
-                        tempInt1 = 0;
-                        tempInt2 = 0;
-                        //Iterate over the array of repairs associated with each unique repair technician
-                        for(j = 0; j < repair.length; j++) {
-                            //If repair technician in array of unique repair technicians == repair technician in array of repairs
-                            //associated with each unique repair technician, add its repair quantity value to temporary int
-                            if((distinctArray[i] == repair[j].repairTechnician1) || (distinctArray[i] == repair[j].repairTechnician2)) {
-                                // console.log(repair[j].repairDateStarted);
-                                // console.log(repair[j].repairDateFinished);
-                                tempInt1 += parseInt(repair[j].repairDateStarted);
-                                tempInt2 += parseInt(repair[j].repairDateFinished);
-                            };
-                        };
-                        
-                        // console.log("tempint 1 = " + tempInt1);
-                        // console.log("tempint 2 = " + tempInt2);
-                        //Average working days = summation of date finished - summation of date started
-                        averageWorkingDays = tempInt2 - tempInt1;
-            
-                        //Store averageWorkingDays to repairTalliedQuantities
-                        repairTalliedQuantities[i] = averageWorkingDays;
+                //Iterate over the array of repairs associated with each unique repair technician
+                for(i = 0; i < repair.length; i++) {
+                    //If repair technician in array of unique repair technicians == repair technician in array of repairs
+                    //associated with each unique repair technician, add its repair quantity value to temporary int
+                    if((technician == repair[i].repairTechnician1) || (technician == repair[i].repairTechnician2)) {
+                        // console.log(repair[j].repairDateStarted);
+                        // console.log(repair[j].repairDateFinished);
+                        tempInt1 += parseInt(repair[i].repairDateStarted);
+                        tempInt2 += parseInt(repair[i].repairDateFinished);
                     };
-                });
+                };
+
+                //Average working days = summation of date finished - summation of date started
+                averageWorkingDays = tempInt2 - tempInt1;
+
+                //Store averageWorkingDays to repairAverageWorkingDays
+                repairAverageWorkingDays = averageWorkingDays;
+
+                console.log("tallied = " + repairAverageWorkingDays);
+                //Send to hbs template used
+                res.render('whatever hbs template to be used', {repairTechnician: technician, repairAverageWorkingDays: repairAverageWorkingDays});
             });
-            
-            console.log("tallied = " + repairTalliedQuantities);
-            //Send to hbs template used
-            res.render('whatever hbs template to be used', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
-        });
+        };
     },
 
     getTotalItemQuantityPerItemModel: async function(req, res) {
+        var dateFrom = req.params.dateFrom;
+        var dateTo = req.params.dateTo;
+        
         //Find all unique repair item models
         await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
             // console.log(repairItemModel);
             var repairTalliedQuantities = [];
             
             //Find all repairs associated with each unique repair item model
-            await repairModel.find({repairItemModel: repairItemModel}).then(repair => {
+            await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gt: dateFrom, $lt: dateTo}}).then(repair => {
                 var repair = repair;
                 var tempInt = 0;
                 // console.log(repair);
@@ -301,6 +316,10 @@ const repairController = {
     },
 
     getTopDefectsPerItemModel: async function(req, res) {
+        var dateFrom = req.params.dateFrom;
+        var dateTo = req.params.dateTo;
+        var status = req.params.status;
+        
         //Find all unique repair item models
         await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
             // console.log(repairItemModel);
@@ -310,7 +329,7 @@ const repairController = {
             await repairModel.find({}).distinct('repairDefect').then(async repairDefect => {
                 console.log(repairDefect)
                 //Find all repairs associated with each unique repair item model and each unique repair defect
-                await repairModel.find({repairItemModel: repairItemModel, repairDefect: repairDefect}).then(repair => {
+                await repairModel.find({repairItemModel: repairItemModel, repairDefect: repairDefect, repairDate: {$gt: dateFrom, $lt: dateTo}, repairStatus: status}).then(repair => {
                     var tempInt = 0;
                     var jLoopCounter = 0;
                     // console.log(repair);
@@ -358,13 +377,17 @@ const repairController = {
     },
 
     getPendingStatusPerItemModel: async function(req, res) {
+        var dateFrom = req.params.dateFrom;
+        var dateTo = req.params.dateTo;
+        var status = req.params.status;
+        
         //Find all unique repair item models
         await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
             // console.log(repairItemModel);
             var repairTalliedQuantities = [];
             
             //Find all repairs associated with each unique repair item model
-            await repairModel.find({repairItemModel: repairItemModel}).then(repair => {
+            await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gt: dateFrom, $lt: dateTo}, repairStatus: status}).then(repair => {
                 var repair = repair;
                 // console.log(repair);
                 // console.log("rep tech length = " + repairItemModel.length)
