@@ -106,7 +106,7 @@ const repairController = {
         var dateTo = req.body.dateTo;
         var technician = req.body.technician
 
-        if(technician == null) {
+        if(technician == "default") {
             //Find all unique repair technicians
             await repairModel.find({}).distinct('repairTechnician1').then(async repairTechnician1 => {
                 // console.log(repairTechnician1);
@@ -231,7 +231,7 @@ const repairController = {
         var dateTo = req.body.dateTo;
         var technician = req.body.technician;
 
-        if(technician == null) {
+        if(technician == "default") {
             //Find all unique repair technicians
             await repairModel.find({}).distinct('repairTechnician1').then(async repairTechnician1 => {
                 // console.log(repairTechnician1);
@@ -344,7 +344,7 @@ const repairController = {
         console.log(dateFrom +" "+ dateTo +" "+category1);
         
 
-        if(category1 == null) {
+        if(category1 == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 console.log(repairItemModel);
@@ -379,7 +379,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('IQPM', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else {
             //Find all unique repair item models
@@ -428,7 +428,7 @@ const repairController = {
         var itemModel = req.body.itemModel;
         var category1 = req.body.category1;
         
-        if(itemModel == null) {
+        if(itemModel == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
@@ -484,7 +484,7 @@ const repairController = {
                 //Send to hbs template used
                 res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: repairTalliedQuantities});
             });
-        } else if(category1 == null) {
+        } else if(category1 == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
@@ -550,7 +550,7 @@ const repairController = {
         var itemModel = req.body.itemModel;
         var category1 = req.body.category1;
         
-        if(itemModel == null) {
+        if(itemModel == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
@@ -578,7 +578,7 @@ const repairController = {
                 //Send to hbs template used
                 res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
             });
-        } else if(category1 == null) {
+        } else if(category1 == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
