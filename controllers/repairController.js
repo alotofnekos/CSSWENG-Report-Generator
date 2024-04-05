@@ -174,7 +174,7 @@ const repairController = {
             
         console.log(req.body);
 
-        if(technician == null) {
+        if(technician == "default") {
             //Find all unique repair technicians
             await repairModel.find({}).distinct('repairTechnician1').then(async repairTechnician1 => {
                 // console.log(repairTechnician1);
@@ -317,7 +317,7 @@ const repairController = {
 
         var technician = req.body.technician;
 
-        if(technician == null) {
+        if(technician == "default") {
             //Find all unique repair technicians
             await repairModel.find({}).distinct('repairTechnician1').then(async repairTechnician1 => {
                 // console.log(repairTechnician1);
@@ -598,6 +598,7 @@ const repairController = {
                 res.render('TDPM', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else if(category1 == "default") {
+        } else if(category1 == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
@@ -679,7 +680,7 @@ const repairController = {
         var itemModel = req.body.itemModel;
         var category1 = req.body.category1;
         
-        if(itemModel == null) {
+        if(itemModel == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
@@ -707,7 +708,7 @@ const repairController = {
                 //Send to hbs template used
                 res.render('PTPM', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
             });
-        } else if(category1 == null) {
+        } else if(category1 == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
