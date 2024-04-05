@@ -132,6 +132,7 @@
     justify-content: space-evenly;
     background-color: var(--box-bg);
     width: 100%;
+    height: 5vh;
 }
 
 select{
@@ -143,7 +144,7 @@ select{
     background-image: url(/images/dropdownArrow.svg);
     background-repeat: no-repeat;
     background-position: right 0.7rem top 50%;
-    background-size: 3vh;
+    background-size: 2.5vh;
 }
 
 .date-options .btn-option-close{

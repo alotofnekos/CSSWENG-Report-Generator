@@ -38,7 +38,7 @@ function clearDuplicates(technician) {
 //workinghere
 //From date to integer
 //Used in frontend -> backend
-function dateToInteger(givenDate, fromOrTo) {
+function dateToInteger(givenDate, fromOrTo, dateRange, quarterVal) {
     var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     var parts = givenDate.split('-');
     var year = parseInt(parts[0]);
@@ -75,13 +75,66 @@ function dateToInteger(givenDate, fromOrTo) {
     daysPassed += day;
     console.log("days passed: "+daysPassed)
 
-    if(fromOrTo === "to"){
-        if(isLeapYear){
-            if(month === 2)
-                daysPassed+= 29;
+    //Calculate END date depending on dateRange
+    if(fromOrTo === "to" ){
+        switch (dateRange){
+            case "month":
+                if(isLeapYear){
+                    if(month === 2)
+                        daysPassed+= 29;
+                }
+                daysPassed+= monthDays[month-1];
+            break;
+            case "quarter":
+                switch(quarterVal){
+                    case "first":
+                        daysPassed += 89; //days from jan-march (90)
+                    break;
+                    case "second":
+                        daysPassed += 180; //days from jan-june (91)
+                    break; 
+                    case "third":
+                        daysPassed += 272; //days from jan-sept (92)
+                    break;
+                    case "fourth":
+                        daysPassed += 364; //days from jan-dec (92)
+                    break;
+                    }
+                if(isLeapYear)
+                    daysPassed += 1;
+            break;
+            case "year": 
+                daysPassed += 365;
+                if(isLeapYear)
+                    daysPassed += 1;
+            break; 
         }
-        daysPassed+= monthDays[month-1];
     }
+
+    //Calculate for START date depending on dateRange 
+    if(fromOrTo === "from"){
+        switch (dateRange){
+            case "quarter": 
+            switch(quarterVal){
+                case "first":
+                    daysPassed += 0; //days from jan (90)
+                break;
+                case "second":
+                    daysPassed += 90; //days from jan-june (91)
+                break; 
+                case "third":
+                    daysPassed += 181; //days from jan-sept (92)
+                break;
+                case "fourth":
+                    daysPassed += 273; //days from jan-dec (92)
+                break;
+                }
+                if(isLeapYear)
+                    daysPassed += 1;
+            break;
+        }
+    }
+    
     return daysPassed;
 }
 
@@ -100,11 +153,26 @@ const repairController = {
         });
     },
 
-    //Get Total Item Quantity Per Technician
+    //Get Total Item Quantity Per Technician TIQPT
     getTotalItemQuantityPerTechnician: async function(req, res) {
-        var dateFrom = req.body.dateFrom;
-        var dateTo = req.body.dateTo;
+        var dateRange= req.body.dateRange;
+        var quarterVal= "";
+        if(dateRange === "quarter"){
+            quarterVal= req.body.quarterNum;
+        }
+
+        var dateFrom = dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal);
+        var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
+
+        var category1 = req.body.category1;
+
+        var dateFromString = new Date(Math.round((dateFrom - 25569)*86400*1000));
+        var dateToString = new Date(Math.round((dateTo - 25569)*86400*1000));
+        console.log("date from: " + dateFromString);
+        console.log("date to: "+ dateToString);
         var technician = req.body.technician
+            
+        console.log(req.body);
 
         if(technician == null) {
             //Find all unique repair technicians
@@ -163,7 +231,7 @@ const repairController = {
                 
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('TIQPT', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else {
             //Find all repairs associated with the technician parameter with repairDate greater than dateFrom and repairDate 
@@ -186,18 +254,30 @@ const repairController = {
 
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairTechnician: technician, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('TIQPT', {repairTechnician: technician, repairTalliedQuantities: repairTalliedQuantities});
             });
         };
     },
 
-    //Get Total Item Quantity Per Item Model Per Technician
+    //Get Total Item Quantity Per Item Model Per Technician TIQPMPT
     getTotalItemQuantityPerItemModelPerTechnician: async function(req, res) {
-        var dateFrom = req.body.dateFrom;
-        var dateTo = req.body.dateTo;
+        var dateRange= req.body.dateRange;
+        var quarterVal= "";
+        if(dateRange === "quarter"){
+            quarterVal= req.body.quarterNum;
+        }
+        var dateFrom = dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal);
+        var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
+
+        var dateFromString = new Date(Math.round((dateFrom - 25569)*86400*1000));
+        var dateToString = new Date(Math.round((dateTo - 25569)*86400*1000));
+        console.log("date from: " + dateFromString);
+        console.log("date to: "+ dateToString);
+    
         var status = req.body.status;
-        var itemModel = req.body.itemModel;
+        var itemModel = req.body.category1;
         var technician = req.body.technician;
+        console.log(req.body);
 
         //Find all repairs associated with the required inputs taken from the request parameters with repairDate greater than 
         //dateFrom and repairDate less than dateTo parameters
@@ -221,14 +301,20 @@ const repairController = {
             repairTalliedQuantities[0] = tempInt;
             console.log("tallied = " + repairTalliedQuantities);
             //Send to hbs template used
-            res.render('whatever hbs template to be used', {repairTechnician: technician, repairItemModel: itemModel, repairTalliedQuantities: repairTalliedQuantities});
+            res.render('TIQPMPT', {repairTechnician: technician, repairItemModel: itemModel, repairTalliedQuantities: repairTalliedQuantities});
         }); 
     },
 
-    //Get Average Working Days Per Technician
+    //Get Average Working Days Per Technician AWDPT
     getAverageWorkingDaysPerTechnician: async function(req, res) {
-        var dateFrom = req.body.dateFrom;
-        var dateTo = req.body.dateTo;
+        var dateRange= req.body.dateRange;
+        var quarterVal= "";
+        if(dateRange === "quarter"){
+            quarterVal= req.body.quarterNum;
+        }
+        var dateFrom = dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal);
+        var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
+
         var technician = req.body.technician;
 
         if(technician == null) {
@@ -299,7 +385,7 @@ const repairController = {
                 
                 console.log("tallied = " + repairAverageWorkingDays);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairAverageWorkingDays: repairAverageWorkingDays});
+                res.render('AWDPT', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairAverageWorkingDays: repairAverageWorkingDays});
             });
         } else {
             //Find all repairs associated with each unique repair technician with repairDate greater than dateFrom and 
@@ -330,21 +416,32 @@ const repairController = {
 
                 console.log("tallied = " + repairAverageWorkingDays);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairTechnician: technician, repairAverageWorkingDays: repairAverageWorkingDays});
+                res.render('AWDPT', {repairTechnician: technician, repairAverageWorkingDays: repairAverageWorkingDays});
             });
         };
     },
 //workinghere
     getTotalItemQuantityPerItemModel: async function(req, res) {
-        var dateFrom = dateToInteger(req.body.dateFrom, "from");
-        var dateTo = dateToInteger(req.body.dateFrom, "to");
-        var category1 = req.body.category1;
-        console.log(req.body.sean);
-        console.log(req.body);
-        console.log(dateFrom +" "+ dateTo +" "+category1);
-        
+        var dateRange= req.body.dateRange;
+        var quarterVal= "";
+        if(dateRange === "quarter"){
+            quarterVal= req.body.quarterNum;
+        }
 
-        if(category1 == null) {
+        var dateFrom = dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal);
+        var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
+
+        var category1 = req.body.category1;
+
+        var dateFromString = new Date(Math.round((dateFrom - 25569)*86400*1000));
+        var dateToString = new Date(Math.round((dateTo - 25569)*86400*1000));
+        console.log("date from: " + dateFromString);
+        console.log("date to: "+ dateToString);
+    
+        console.log(req.body);
+        // console.log(dateFrom +" "+ dateTo +" "+category1);
+        
+        if(category1 == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 console.log(repairItemModel);
@@ -369,7 +466,7 @@ const repairController = {
                             //If repair item model in array of unique repair item models == repair technician in array of repairs
                             //associated with each unique repair item model, add its repair quantity value to temporary int
                             if(repairItemModel[i] == repair[j].repairItemModel) {
-                                console.log("hatdog");
+                                // console.log("hatdog");
                                 tempInt += repair[j].repairQuantity;
                             };
                         };
@@ -379,7 +476,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('IQPM', {date: req.body.dateFrom, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else {
             //Find all unique repair item models
@@ -406,7 +503,7 @@ const repairController = {
                             //If repair item model in array of unique repair item models == repair technician in array of repairs
                             //associated with each unique repair item model, add its repair quantity value to temporary int
                             if(repairItemModel[i] == repair[j].repairItemModel) {
-                                console.log("hatdog");
+                                // console.log("hatdog");
                                 tempInt += repair[j].repairQuantity;
                             };
                         };
@@ -416,19 +513,35 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('IQPM', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('IQPM', {date: req.body.dateFrom, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
             });
         };
     },
 
     getTopDefectsPerItemModel: async function(req, res) {
-        var dateFrom = req.body.dateFrom;
-        var dateTo = req.body.dateTo;
+        var dateRange= req.body.dateRange;
+        var quarterVal= "";
+        if(dateRange === "quarter"){
+            quarterVal= req.body.quarterNum;
+        }
+
+        var dateFrom = dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal);
+        var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
+
+        var category1 = req.body.category1;
+
+        var dateFromString = new Date(Math.round((dateFrom - 25569)*86400*1000));
+        var dateToString = new Date(Math.round((dateTo - 25569)*86400*1000));
+        console.log("date from: " + dateFromString);
+        console.log("date to: "+ dateToString);
+    
         var status = req.body.status;
         var itemModel = req.body.itemModel;
         var category1 = req.body.category1;
-        
-        if(itemModel == null) {
+
+        console.log(req.body);
+
+        if(itemModel == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
@@ -482,9 +595,9 @@ const repairController = {
                 repairTalliedQuantities = repairTalliedQuantities.sort(compareNumbers);
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('TDPM', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: repairTalliedQuantities});
             });
-        } else if(category1 == null) {
+        } else if(category1 == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
@@ -538,14 +651,30 @@ const repairController = {
                 repairTalliedQuantities = repairTalliedQuantities.sort(compareNumbers);
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('TDPM', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: repairTalliedQuantities});
             });
         };
     },
 
-    getPendingStatusPerItemModel: async function(req, res) {
-        var dateFrom = req.body.dateFrom;
-        var dateTo = req.body.dateTo;
+    getPendingStatusPerItemModel: async function(req, res) { //PTPM
+        var dateRange= req.body.dateRange;
+        var quarterVal= "";
+        if(dateRange === "quarter"){
+            quarterVal= req.body.quarterNum;
+        }
+
+        var dateFrom = dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal);
+        var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
+
+        var category1 = req.body.category1;
+
+        var dateFromString = new Date(Math.round((dateFrom - 25569)*86400*1000));
+        var dateToString = new Date(Math.round((dateTo - 25569)*86400*1000));
+        console.log("date from: " + dateFromString);
+        console.log("date to: "+ dateToString);
+    
+        console.log(req.body);
+
         var status = req.body.status;
         var itemModel = req.body.itemModel;
         var category1 = req.body.category1;
@@ -576,7 +705,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('PTPM', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else if(category1 == null) {
             //Find all unique repair item models
@@ -604,7 +733,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('PTPM', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
             });
         };
     }, 

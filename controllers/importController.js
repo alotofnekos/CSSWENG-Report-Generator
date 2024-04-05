@@ -65,8 +65,8 @@ async function insertRepair(excelValues) {
             // console.log("pl no = " + excelValues[i+1]);
             // console.log(parseInt(excelValues[i+1]));
             // console.log(typeof parseInt(excelValues[i+1]));
-            // var repairDate = new Date(Math.round((45358 - 25569)*86400*1000));
-            console.log("help me" + repairDate);
+            // var repairDate = new Date(Math.round((dbNum - 25569)*86400*1000));
+            // console.log("help me" + repairDate);
             //Create new repair model
             const newRepair = new repairModel({
                 repairId: repairId,
