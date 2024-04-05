@@ -35,6 +35,58 @@ function clearDuplicates(technician) {
     
     return distinctArray;
 };
+//workinghere
+//From date to integer
+//Used in frontend -> backend
+function dateToInteger(givenDate, fromOrTo) {
+    var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var parts = givenDate.split('-');
+    var year = parseInt(parts[0]);
+    var month = parseInt(parts[1]);
+    var isLeapYear = false;
+
+    var day= 1; 
+
+    if (parts.length == 3){
+        day = parseInt(parts[2]);
+    }
+
+    // Check for leap year
+    if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+        isLeapYear = true;
+    }
+
+    // Count the days passed in years
+    var daysPassed = (year - 1900) * 365;
+    // Adjust for leap years
+    daysPassed += Math.floor((year - 1900 - 1) / 4) + 1;
+
+    // Adjust for current year if leap year and past February
+    if (isLeapYear && month > 2) {
+        daysPassed += 1;
+    }
+
+    // Count the days passed in months
+    for (var i = 0; i < month - 1; i++) {
+        daysPassed += monthDays[i];
+    }
+
+    // Add the days passed in the current month
+    daysPassed += day;
+    console.log("days passed: "+daysPassed)
+
+    if(fromOrTo === "to"){
+        if(isLeapYear){
+            if(month === 2)
+                daysPassed+= 29;
+        }
+        daysPassed+= monthDays[month-1];
+    }
+    return daysPassed;
+}
+
+
+
 
 const repairController = {
     //Get all repairs and display
@@ -282,14 +334,15 @@ const repairController = {
             });
         };
     },
-
+//workinghere
     getTotalItemQuantityPerItemModel: async function(req, res) {
-        var dateFrom = req.body.dateFrom;
-        var dateTo = req.body.dateTo;
+        var dateFrom = dateToInteger(req.body.dateFrom, "from");
+        var dateTo = dateToInteger(req.body.dateFrom, "to");
         var category1 = req.body.category1;
         console.log(req.body.sean);
         console.log(req.body);
         console.log(dateFrom +" "+ dateTo +" "+category1);
+        
 
         if(category1 == null) {
             //Find all unique repair item models
@@ -363,7 +416,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('whatever hbs template to be used', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('IQPM', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
             });
         };
     },

@@ -60,9 +60,31 @@ function getOptionsBasedOnReport(reportname){
             <div class="centered">
                 <select class="btn-dropdown-mock dropdown-selection" name="category1">
                     <option value="default">(Category)</option>
-                    <option value="speaker">Speakers</option>
-                    <option value="mic">Microphones</option>
-                    <option value="amp">Amplifier</option>
+                    <option value="speaker">ACCESSORIES</option>
+                    <option value="mic">AGR/MIRACLE 8 ITEM</option>
+                    <option value="amp">CAR SPEAKER</option>
+                    <option value="speaker">CEILING SPEAKER</option>
+                    <option value="speaker">HORN SPEAKER</option>
+                    <option value="speaker">KARAOKE SPEAKERS</option>
+                    <option value="speaker">MOULDED SPEAKERS</option>
+                    <option value="speaker">PA & PRO SPEAKER SYSTEM</option>
+                    <option value="speaker">WALL MOUNT SPEAKERS</option>
+                    <option value="speaker">WOOFERS</option>
+                    <option value="system">CONFERENCE SYSTEM</option>
+                    <option value="item">FULL RANGE ITEMS</option>
+                    <option value="amp">KARAOKE & PA AMPLIFIERS</option>
+                    <option value="array">LINE ARRAY</option>
+                    <option value="mic">MIC & WIRELESS MICROPHONE</option>
+                    <option value="mixer">MIXER</option>
+                    <option value="item">PHASED OUT</option>
+                    <option value="lectern">PODIUM LECTERN</option>
+                    <option value="amp">POWER AMPLIFIERS</option>
+                    <option value="woofer">PRO WOOFERS</option>
+                    <option value="processor">PROCESSORS</option>
+                    <option value="charge">REPAIR CHARGES</option>
+                    <option value="item">SOUND DIMENSION ITEMS</option>
+                    <option value="parts">SPAREPARTS</option>
+                    <option value="tweeter">TWEETERS</option>
                 </select>
             </div>
             `
@@ -105,17 +127,76 @@ function getOptionsBasedOnReport(reportname){
                 </div>
             </div>
             <div class="popup-options">
-                <select class="btn-dropdown-mock dropdown-selection" name="category1">
+               <select class="btn-dropdown-mock dropdown-selection" name="category1">
                     <option value="default">(Item)</option>
-                    <option value="eon">EON</option>
-                    <option value="gx">GX</option>
-                    <option value="csl">CSL</option>
+                    <option value="eon">FRAME EZ-112A</option>
+                    <option value="eon">FRAME EZ-206A</option>
+                    <option value="eon">FRAME EZ-406A</option>
+                    <option value="gx">FRAME HLT12X</option>
+                    <option value="gx">FRAME K-10A</option>
+                    <option value="gx">FRAME K3</option>
+                    <option value="gx">FRAME KIRA 288</option>
+                    <option value="gx">FRAME LC-12N</option>
+                    <option value="gx">FRAME LX-18</option>
+                    <option value="gx">FRAME LX-212A</option>
+                    <option value="gx">FRAME LXD-7000</option>
+                    <option value="gx">FRAME V12A</option>
+                    <option value="gx">FRAME VPX COMBI</option>
+                    <option value="gx">FRAME VPX-310</option>
+                    <option value="gx">FRAME VPX-312 (TOP)</option>
+                    <option value="gx">FRAME VRX932A</option>
+                    <option value="gx">FRAME VTX-12</option>
+                    <option value="gx">FRAME VTX-935</option>
+                    <option value="csl">HF-203 TRANSFORMER</option>
+                    <option value="csl">HORN H3002</option>
+                    <option value="csl">HORN H310</option>
+                    <option value="csl">HORN H315</option>
+                    <option value="csl">HORN H7003</option>
+                    <option value="csl">MC-02SP BLACK (100M)</option>
+                    <option value="csl">MC-02SP D.BLUE (100M)</option>
+                    <option value="csl">MS-3</option>
+                    <option value="csl">NB-908</option>
+                    <option value="csl">PL CONNECTOR (MONO)</option>
+                    <option value="csl">RJ-45 CONNECTOR</option>
+                    <option value="csl">SP-1</option>
+                    <option value="csl">SP-2</option>
+                    <option value="csl">SPEAKON</option>
+                    <option value="csl">SPW14</option>
+                    <option value="csl">SS-5 SPEAKER STAND</option>
+                    <option value="csl">SS-8 SPEAKER STAND</option>
+                    <option value="csl">THX-12</option>
+                    <option value="csl">VC-100</option>
+                    <option value="csl">XLR (F)</option>
+                    <option value="csl">XLR (M)</option>
                 </select>
+        
                 <select class="btn-dropdown-mock dropdown-selection" name="category1">
                     <option value="default">(Category)</option>
-                    <option value="speaker">Speakers</option>
-                    <option value="mic">Microphones</option>
-                    <option value="amp">Amplifier</option>
+                    <option value="speaker">ACCESSORIES</option>
+                    <option value="mic">AGR/MIRACLE 8 ITEM</option>
+                    <option value="amp">CAR SPEAKER</option>
+                    <option value="speaker">CEILING SPEAKER</option>
+                    <option value="speaker">HORN SPEAKER</option>
+                    <option value="speaker">KARAOKE SPEAKERS</option>
+                    <option value="speaker">MOULDED SPEAKERS</option>
+                    <option value="speaker">PA & PRO SPEAKER SYSTEM</option>
+                    <option value="speaker">WALL MOUNT SPEAKERS</option>
+                    <option value="speaker">WOOFERS</option>
+                    <option value="system">CONFERENCE SYSTEM</option>
+                    <option value="item">FULL RANGE ITEMS</option>
+                    <option value="amp">KARAOKE & PA AMPLIFIERS</option>
+                    <option value="array">LINE ARRAY</option>
+                    <option value="mic">MIC & WIRELESS MICROPHONE</option>
+                    <option value="mixer">MIXER</option>
+                    <option value="item">PHASED OUT</option>
+                    <option value="lectern">PODIUM LECTERN</option>
+                    <option value="amp">POWER AMPLIFIERS</option>
+                    <option value="woofer">PRO WOOFERS</option>
+                    <option value="processor">PROCESSORS</option>
+                    <option value="charge">REPAIR CHARGES</option>
+                    <option value="item">SOUND DIMENSION ITEMS</option>
+                    <option value="parts">SPAREPARTS</option>
+                    <option value="tweeter">TWEETERS</option>
                 </select>
             </div>
             `
@@ -131,9 +212,12 @@ function getOptionsBasedOnReport(reportname){
             <div class="centered">
                 <select class="btn-dropdown-mock dropdown-selection" name="technician">
                     <option value="default">(Technician)</option>
-                    <option value="tech1">tech1</option>
-                    <option value="tech2">tech2</option>
-                    <option value="tech3">tech3</option>
+                    <option value="CHRISTIAN">CHRISTIAN</option>
+                    <option value="DANIEL">DANIEL</option>
+                    <option value="DREX">DREX</option>
+                    <option value="MJ">MJ</option>
+                    <option value="NEIL">NEIL</option>
+                    <option value="OMER">OMER</option>
                 </select>
             </div>
             `
@@ -158,8 +242,6 @@ function selectMonth(){
             <div class="selection">
                 <label for="date from">date from: (month)</label>
                 <input type="month" id="dateFrom" name="dateFrom">
-                <label for="date to">date to:</label>
-                <input type="date" id="dateTo" name="dateTo">
             </div>
             <button class="btn-option-close" onclick="closeOptions()"><img src="/images/close.svg" alt="close popup"></button>
         </div>
