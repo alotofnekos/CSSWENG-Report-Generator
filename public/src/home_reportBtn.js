@@ -5,7 +5,7 @@ $(document).ready(function () {
         var reportname= $(this).find('.report-name').text();
         // alert(report);
         var popup=`
-        <form name ="hello" action="/${reportname}post" method="post">
+        <form name ="hello" action="/${report}post" method="post">
             <div class="popup-body">
                 <div class="popup-header">
                     <div class="popup-text">${reportname}</div>
