@@ -17,9 +17,9 @@ $(document).ready(function () {
                     <div class="dashed-line"></div>
                 </div>
                 <div class="popup-options date_range">
-                    <button class="btn-dropdown-mock" onclick="selectMonth()">Month</button>
-                    <button class="btn-dropdown-mock" onclick="selectQuarter()">Quarter</button>
-                    <button class="btn-dropdown-mock" onclick="selectYear()">Year</button>
+                    <button type="button" class="btn-dropdown-mock" onclick="selectMonth()">Month</button>
+                    <button type="button"  class="btn-dropdown-mock" onclick="selectQuarter()">Quarter</button>
+                    <button type="button"  class="btn-dropdown-mock" onclick="selectYear()">Year</button>
                 </div>
                 <div class="report-specifics-holder ${report}">
                 </div>
@@ -35,7 +35,7 @@ $(document).ready(function () {
         $(".overlay-holder").fadeIn('fast', 'swing');
     });
 
-    $('.btn-generate-report').click( function(){
+    $('.btn-generate-report').click(function(){
         try{
             
         }catch{
