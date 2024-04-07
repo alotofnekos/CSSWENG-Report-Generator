@@ -22,7 +22,7 @@
 	<hr class="line1">
 	<hr class="line2">
 	<div class="ReportBody">
-		<h3>Accessories' Item Quantity for {{date}}</h3>
+		<h3><span id="categoryChange"></span>Item Quantity for <span id="dateChange"></span></h3>
 		<div class="chart">
 			<canvas id="iqpmChart"></canvas>
 		</div>
@@ -30,12 +30,20 @@
 	<footer>
 		<a href="/">Generate Another Report</a>
 	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 	<script>
 		const repairItemModel = "{{repairItemModel}}".split(",");
 		const repairTalliedQuantities = [{{repairTalliedQuantities}}];
 		console.log("itemModels = " + repairItemModel[0])
 		const iqpmchart = document.querySelector('#iqpmChart').getContext("2d");
+
+		const dateFormat = new Date("{{date}}");
+		const categoryName = "{{category}}";
+
+		const changedDate = moment(dateFormat).format('MMMM YYYY')
+		console.log("date = " + changedDate)
 
 		const labels = repairItemModel;
 		const data = {
@@ -60,5 +68,15 @@
 		
 		const chart = new Chart(iqpmchart, config);
 
+		$(document).ready(function(){
+  			$('#dateChange').text(changedDate);
+			if(categoryName != ""){
+				console.log(categoryName)
+				$('#categoryChange').text(categoryName + " ");
+			} else {
+				
+			}
+		});
+			
 	</script>
 </body>

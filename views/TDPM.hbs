@@ -22,7 +22,7 @@
 	<hr class="line1">
 	<hr class="line2">
 	<div class="ReportBody">
-		<h3>Top defects for &#40model name&#41 for &#40month year/quarter year/year&#41</h3>
+		<h3>Top defects <span id="categoryChange"></span><span id="dateChange"></span></h3>
 		<div class="chart">
 			<canvas id="tdpmChart"></canvas>
 		</div>
@@ -30,6 +30,56 @@
 	<footer>
 		<a href="/">Generate Another Report</a>
 	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-	<script src="../src/TDPM.js"></script>
+
+	<script>
+		const repairItemModel = "{{repairItemModel}}".split(",");
+		const repairDefect = "{{repairDefect}}".split(",");
+		const repairTalliedQuantities = [{{repairTalliedQuantities}}];
+		console.log("itemModels = " + repairItemModel[0])
+		const tdpmchart = document.querySelector('#tdpmChart').getContext("2d");
+
+		const dateFormat = new Date("{{date}}");
+		const categoryName = "{{category}}";
+		const itemName = "{{item}}"
+
+		const changedDate = moment(dateFormat).format('MMMM YYYY');
+		console.log("date = " + changedDate);
+
+		const labels = repairItemModel;
+		const data = {
+			labels,
+			datasets: [
+				{
+					data: repairTalliedQuantities,
+					label: "PC/S",
+					fill: true,
+					backgroundColor: "#FFD26F"
+				},
+			],
+		};
+
+		const config = {
+			type: "bar",
+			data: data,
+			options: {
+				responsive: true,
+			},
+		};
+
+		const chart = new Chart(tdpmchart, config);
+
+		$(document).ready(function(){
+  			$('#dateChange').text("for " + changedDate);
+			if(categoryName != ""){
+				console.log(categoryName)
+				$('#categoryChange').text("for " + categoryName + " ");
+			}else{
+				console.log(categoryName)
+				$('#categoryChange').text("for " + itemName + " ");
+			}
+		});
+	</script>
 </body>
