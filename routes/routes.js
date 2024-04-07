@@ -4,8 +4,10 @@ const importController = require('../controllers/importController.js');
 const mainController = require('../controllers/mainController.js');
 const repairController = require('../controllers/repairController.js');
 
+//Open Login
+app.get('/', mainController.login);
 //Open Home
-app.get('/', mainController.getMain);
+app.post('/login', mainController.getMain);
 //Item Quantity Per Model
 app.post('/IQPMpost', repairController.getTotalItemQuantityPerItemModel);
 //Top Defects per Model
