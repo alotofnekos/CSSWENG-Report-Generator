@@ -107,15 +107,15 @@ function getOptionsBasedOnReport(reportname){
             </div>
             <div class="popup-options taskType" name="status">
                 <label class="btn-dropdown-mock taskOption">
-                    <input type="radio" class="radioCheck" name="taskType" value="repair">
+                    <input type="radio" class="radioCheck" name="taskType" value="Repair">
                     <span>Repair</span>
                 </label>
                 <label class="btn-dropdown-mock taskOption" >
-                    <input type="radio" class="radioCheck" name="taskType" value="replace">
+                    <input type="radio" class="radioCheck" name="taskType" value="Replace">
                     <span>Replace</span>
                 </label>
                 <label class="btn-dropdown-mock taskOption">
-                    <input type="radio" class="radioCheck" name="taskType" value="return">
+                    <input type="radio" class="radioCheck" name="taskType" value="Return">
                     <span>Return</span>
                 </label>
                 <label class="btn-dropdown-mock taskOption">

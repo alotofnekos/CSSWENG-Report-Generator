@@ -80,10 +80,14 @@ header .right .Profile:hover{
 	display: flex;
 	flex-direction: column;
 }
-.ReportBody h3{
+.ReportBody h3, span{
 	font-size: 4vh;
 	color: #6C6C6C;
 	margin: 1vh;
+}
+
+#categoryChange{
+	text-transform: capitalize;
 }
 
 footer{
