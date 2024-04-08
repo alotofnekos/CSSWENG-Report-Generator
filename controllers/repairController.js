@@ -554,7 +554,6 @@ const repairController = {
                         var tempArray = {};
                         var tempArray2 = [];
                         var tempInt = 0;
-                        var jLoopCounter = 0;
                         console.log(repair);
                         // console.log("rep tech length = " + repairItemModel.length)
                         // console.log("rep length = " + repair.length)
@@ -588,23 +587,21 @@ const repairController = {
                                 tempArray.repairDefectQuantity = tempInt;
                                 // console.log(tempArray)
                                 //Store temporary array to temporary array 2
-                                tempArray2[jLoopCounter] = tempArray;
+                                tempArray2[j] = tempArray;
                                 // console.log(tempArray2)
-                                //Increment loopCounter
-                                jLoopCounter++;
                             };
                             //Store temporary array 2 to repairTalliedQuantities
                             repairTalliedQuantities[i] = tempArray2
                         };
                     }); 
-                })
                 //Iterate over the repair item models and Sort repairTalliedQuantities in descending order
                 for(i = 0; i < repairItemModel.length; i++) { 
-                  repairTalliedQuantities[i] = repairTalliedQuantities[i].sort(compareNumbers);
-                }
+                    repairTalliedQuantities[i] = repairTalliedQuantities[i].sort(compareNumbers);
+                  }
                 console.log("tallied = " + JSON.stringify(repairTalliedQuantities));
-                //Send to hbs template used
+                  //Send to hbs template used
                 res.render('TDPM', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: JSON.stringify(repairTalliedQuantities)});
+                });
             });
         } else if(category1 == "default") {
             //Find all unique repair item models
@@ -659,12 +656,12 @@ const repairController = {
                             };
                         };
                     }); 
-                });
                 //Sort repairTalliedQuantities in descending order
                 repairTalliedQuantities = repairTalliedQuantities.sort(compareNumbers);
                 console.log("tallied = " + JSON.stringify(repairTalliedQuantities));
                 //Send to hbs template used
                 res.render('TDPM', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: JSON.stringity(repairTalliedQuantities)});
+                });
             });
         };
     },
