@@ -513,7 +513,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('IQPM', {date: req.body.dateFrom, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('IQPM', {category: category1, date: req.body.dateFrom, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
             });
         };
     },
@@ -528,14 +528,12 @@ const repairController = {
         var dateFrom = dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal);
         var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
 
-        var category1 = req.body.category1;
-
         var dateFromString = new Date(Math.round((dateFrom - 25569)*86400*1000));
         var dateToString = new Date(Math.round((dateTo - 25569)*86400*1000));
         console.log("date from: " + dateFromString);
         console.log("date to: "+ dateToString);
     
-        var status = req.body.status;
+        var status = req.body.taskType;
         var itemModel = req.body.itemModel;
         var category1 = req.body.category1;
 
@@ -543,7 +541,7 @@ const repairController = {
 
         if(itemModel == "default") {
             //Find all unique repair item models
-            repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
+            await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 console.log(repairItemModel);
                 var repairTalliedQuantities = [];
         
@@ -610,7 +608,7 @@ const repairController = {
             });
         } else if(category1 == "default") {
             //Find all unique repair item models
-            repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
+            await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
                 var repairTalliedQuantities = [];
         
