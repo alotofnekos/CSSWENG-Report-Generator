@@ -186,6 +186,12 @@ appExp.use(`/`, routes);
 //     });
 // };
 
+// const repairTalliedQuantities = "{{repairTalliedQuantities}}".split("],[");
+// 		const cleaned = repairTalliedQuantities[0].replace(/&quot;/g,"");
+// 		const cleaned2 = cleaned.replace(/[\[\]]/g,"")
+//     	console.log(repairTalliedQuantities);
+// 		console.log(cleaned);
+// 		console.log(cleaned2);
 
 //Run on Local Host and connect to Mongo DB
 appExp.listen(process.env.SERVER_PORT, async function(){

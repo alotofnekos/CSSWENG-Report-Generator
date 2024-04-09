@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const dbController = require('../controllers/dbController.js');
 const importController = require('../controllers/importController.js');
 const mainController = require('../controllers/mainController.js');
 const repairController = require('../controllers/repairController.js');
@@ -20,13 +21,10 @@ app.post('/TIQPTpost', repairController.getTotalItemQuantityPerTechnician);
 app.post('/TIQPMPTpost', repairController.getTotalItemQuantityPerItemModelPerTechnician);
 //Average working days per technician 
 app.post('/AWDPTpost', repairController.getAverageWorkingDaysPerTechnician);
-
-// app.post('/name of action or url', repairController.getTotalItemQuantityPerTechnician);
-// app.post('/name of action or url', repairController.getTotalItemQuantityPerItemModelPerTechnician);
-// app.post('/name of action or url', repairController.getAverageWorkingDaysPerTechnician);
-// app.post('/name of action or url', repairController.getTotalItemQuantityPerItemModel);
-// app.post('/name of action or url', repairController.getTopDefectsPerItemModel);
-// app.post('/name of action or url', repairController.getPendingStatusPerItemModel);
+//Update from db
+app.post('/update', dbController.update);
+//Delete from db
+app.post('/delete', dbController.delete);
 //Import file and insert into DB
 app.post('/importFile', importController.importFile);
 // app.get('/insertRepair/:excelValues', repairController.insertRepair);

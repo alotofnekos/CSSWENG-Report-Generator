@@ -95,75 +95,12 @@ async function insertRepair(excelValues) {
                 repairDateReturned: parseInt(excelValues[i+21]),
                 repairStatus: excelValues[i+22],
                 repairDefect: excelValues[i+23]
-
-                // repairId: repairId,
-                // repairDate: excelValues[i],
-                // repairPLNumber: parseInt(excelValues[i+1]) ,//parseInt(excelValues[i+1]) 
-                // repairCustomer: excelValues[i+2],
-                // repairItemModel: excelValues[i+3],
-                // repairDescription: excelValues[i+4],
-                // repairQuantity: parseInt(excelValues[i+5]),//parseInt(excelValues[i+5])
-                // repairUOM: excelValues[i+6],
-                // repairPullOutBy: excelValues[i+7],
-                // repairCategory: excelValues[i+8],
-                // repairSerialNumber: parseInt(excelValues[i+9]), //commented out because can't be null entries
-                // repairJobOrderNumber: parseInt(excelValues[i+10]), //commented out because can't be null entries
-                // repairDateStarted: excelValues[i+11],
-                // repairDateFinished: excelValues[i+12],
-                // repairTechnician: excelValues[i+13],
-                // repairDifficulty: excelValues[i+14],
-                // repairMerit: excelValues[i+15],
-                // repairItemStatus: excelValues[i+16],
-                // repairDeliveryStatus: excelValues[i+17],
-                // repairRemarks: excelValues[i+18],
-                // repairCost: parseInt(excelValues[i+19]), //commented out because can't be null entries
-                // repairReturnFormNumber: parseInt(excelValues[i+20]), //commented out because can't be null entries
-                // // repairDateReturned: excelValues[i+21],
-                // repairDefect: excelValues[i+21]
             });
             //Insert new rapir model into DB
             await newRepair.save();
         };
     };
 }
-
-//Decode string with base 64
-// function base64_decode(base64str, file) {
-//     // console.log(base64str)
-//     // console.log(file)
-//     // var hatdog = "hatdog"
-//     // var string = hatdog.toString('base64')
-//     base64str = base64str.toString('base64')
-//     var bitmap = new Buffer.from(base64str, 'base64');
-//     // var length = base64str.length;
-    
-//     // console.log(bitmap);
-//     var view = new Uint8Array(bitmap);
-    
-//     for (var i=0; i!=base64str.length; ++i)
-//     {
-//       view[i] = base64str.charCodeAt(i) & 0xFF;
-//     }
-//     // console.log(view);
-//     // return buf;
-//     // const base64Data = bitmap.toString('base64');
-
-//     // Create a JSON object with the Base64-encoded data
-//     const json = { data: base64str };
-
-//     // Convert the JSON object to a string
-//     const jsonString = JSON.stringify(json);
-//     // try {
-//     //     fs.writeFileSync(file.toString('base64'), bitmap);
-//     //     //file written successfully
-//     // } catch (err) {
-//     //     console.error(err)
-//     // }
-
-//     // console.log("this is jsonString:", jsonString);
-//     // console.log("this is bitmap:", bitmap);
-//     // console.log('******** File created from base64 encoded string ********');
-// };
 
 const importController = {
     //Get file from import.html and send it.
@@ -184,49 +121,8 @@ const importController = {
             //Parse passed JSON object
             var excelValues = JSON.parse(fields.excelValues);
             insertRepair(excelValues);
-            // res.redirect('/insertRepair/' + excelValues);
-            
-
-        //   var oldpath = files.filetoupload.path;
-        //   var newpath = __dirname + "/" + files.filetoupload.name;
-        //   fs.rename(oldpath, newpath, function (err) {
-        //     if (err) throw err;
-        //     res.write('File uploaded and moved!');
-        //     res.end();
-        //   });
          });
-    },
-
-    // uploadUserData: async function(req, res) {
-    //     try {
-    //         const options = {
-    //                 formData : {
-    //                     'upload': String(req.file.buffer)
-    //                 },
-    //                 headers: {
-    //                     authorization: req.token,
-    //                     'Content-type': 'multipart/form-data'
-    //                 },
-    //                 json: true
-    //         };
-    //         const response = await this.http.post.exec(
-    //                 '/somePostUrl/',
-    //                 options
-    //         );
-    //         return res.status(200).json(response.body);
-    //     }catch (error) {
-    //         return (error);
-    //     }
-    //     console.log(String(req.file.buffer))
-    // },
-
-    // createSchema: function(req, res) {
-    //     const file = req.params.file;
-    //     console.log("2 this file is:", file);
-        
-    //     var obj = xlsx.parse(file); // parses a file
-    //     console.log("data = ", obj);
-    // },
+    }
 };
 
 //Export importController to be used
