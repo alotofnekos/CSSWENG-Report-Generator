@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<footer>
-		<a href="/">Generate Another Report</a>
+		<a href="/home">Generate Another Report</a>
 	</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
@@ -37,23 +37,80 @@
 	<script>
 		const repairItemModel = "{{repairItemModel}}".split(",");
 		const repairDefect = "{{repairDefect}}".split(",");
-		const repairTalliedQuantities = [{{repairTalliedQuantities}}];
+
+		const cleaned = "{{repairTalliedQuantities}}".split("],[");
+		const cleaned2 = cleaned[0].replace(/&quot;/g,"\"");
+		const cleaned3 = cleaned2.replace(/[\[\]]/g,"");
+		const cleaned4 = cleaned3.replaceAll("},","}+");
+		const cleaned5 = cleaned4.split("+");
+
+		//const test = [];
+		const start = 0;
+		const repairTalliedQuantities = [];
+		for(i=0; i<cleaned5.length; i++){
+			repairTalliedQuantities[i] = JSON.parse(cleaned5[i]);
+			//console.log(repairTalliedQuantities[i].repairDefect);
+		}
+
+		//const test2 = test.join("")
+
+		//console.log(JSON.parse(test2));
+		//console.log();
+		//console.log(test[0].repairDefect);
+
 		console.log("itemModels = " + repairItemModel[0])
 		const tdpmchart = document.querySelector('#tdpmChart').getContext("2d");
 
 		const dateFormat = new Date("{{date}}");
 		const categoryName = "{{category}}";
-		const itemName = "{{item}}"
+		const itemName = "{{item}}";
+
+		const itemArrLength = repairItemModel.length;
+		const defectArrLength = repairDefect.length;
 
 		const changedDate = moment(dateFormat).format('MMMM YYYY');
 		console.log("date = " + changedDate);
 
-		const labels = repairItemModel;
+		let labelList=[];
+		let valueList=[];
+		
+		let found = false;
+		let count = 0;
+
+		for(i=0; i<repairTalliedQuantities.length;i++){
+			for(j=0; j<labelList.length; j++){
+				if(repairTalliedQuantities[i].repairDefect == labelList[j]){
+					found = true;
+				}
+			}
+			count++;
+			if(count==1 && found == false){
+				labelList[i]=repairTalliedQuantities[i].repairDefect;
+			}
+
+			found=false;
+			count=0;
+		}
+
+		console.log(labelList);
+
+		for(i=0; i<labelList.length;i++){
+			valueList[i]=0;
+			for(j=0; j<repairTalliedQuantities.length; j++){
+				if(labelList[i]==repairTalliedQuantities[j].repairDefect){
+					valueList[i]=valueList[i]+repairTalliedQuantities[j].repairDefectQuantity;
+				}
+			}
+		}
+
+		console.log(valueList);
+
+		const labels = labelList;
 		const data = {
 			labels,
 			datasets: [
 				{
-					data: repairTalliedQuantities,
+					data: valueList,
 					label: "PC/S",
 					fill: true,
 					backgroundColor: "#FFD26F"

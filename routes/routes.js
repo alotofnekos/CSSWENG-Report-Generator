@@ -32,6 +32,8 @@ app.get('/table', repairController.getAllRepairs);
 
 app.get('/import', mainController.getImport);
 
+app.get('/home', mainController.getHome);
+
 // app.get('/IQPM', mainController.generateIQPM(reportParameters));
 
 
