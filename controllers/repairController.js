@@ -693,7 +693,7 @@ const repairController = {
         if(itemModel == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
-                // console.log(repairItemModel);
+                 console.log("hi0: "+repairItemModel);
                 var repairTalliedQuantities = [];
                 
                 //Find all repairs associated with each unique repair item model and the category1 parameter with repairDate 
@@ -701,9 +701,10 @@ const repairController = {
                 await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gte: dateFrom, $lte: dateTo}, repairStatus: status, repairCategory1: category1}).then(repair => {
                     var repair = repair;
                     // console.log(repair);
-                    // console.log("rep tech length = " + repairItemModel.length)
-                    // console.log("rep length = " + repair.length)
-                
+                    console.log("rep tech = " + repairItemModel)
+                    console.log("rep tech length = " + repairItemModel.length)
+                    console.log("rep length = " + repair.length)
+                    console.log("hi1: "+ repair);
                     //Iterate over the array of repairs associated with each unique repair item model
                     for(i = 0; i < repair.length; i++) {
                         //Store repair item model and its status to tempArray
@@ -712,6 +713,7 @@ const repairController = {
                         tempArray[1] = repair[i].repairItemStatus;
                         //Store temporary array to repairTalliedQuantities
                         repairTalliedQuantities[i] = tempArray;
+                        console.log("hi2: "+ i);
                     };
                 });
                 console.log("tallied = " + repairTalliedQuantities);
