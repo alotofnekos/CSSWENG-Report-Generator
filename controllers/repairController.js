@@ -133,7 +133,7 @@ function dateToInteger(givenDate, fromOrTo, dateRange, quarterVal) {
                     daysPassed += 273; //days from jan-dec (92)
                 break;
                 }
-                if(isLeapYear)
+                if(isLeapYear && quarterVal !== "first")
                     daysPassed += 1;
             break;
         }
@@ -172,7 +172,7 @@ const repairController = {
 
         var dateFromString = new Date(Math.round((dateFrom - 25569)*86400*1000));
         var dateToString = new Date(Math.round((dateTo - 25569)*86400*1000));
-        console.log("date from: " + dateFromString);
+        console.log("date from: " + dateFromString );
         console.log("date to: "+ dateToString);
         var technician = req.body.technician
             
@@ -447,10 +447,13 @@ const repairController = {
         var quarterVal= "";
         if(dateRange === "quarter"){
             quarterVal= req.body.quarterNum;
+            console.log("quarter: "+quarterVal);
         }
 
         var dateFrom = dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal);
+        console.log(dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal));
         var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
+        console.log(dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal));
 
         var category1 = req.body.category1;
 
