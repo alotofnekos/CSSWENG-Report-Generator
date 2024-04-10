@@ -237,7 +237,7 @@ const repairController = {
             //less than dateTo parameters
             var repairTalliedQuantities;
             var tempInt = 0;
-            await repairModel.find({repairTechnician1: technician, repairTechnician2: technician, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
+            await repairModel.find({ $or:[ {repairTechnician1: technician}, {repairTechnician2: technician}], repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
                 tempInt = 0;
 
                 //Iterate over the array of repairs associated with each unique repair technician
@@ -275,9 +275,10 @@ const repairController = {
         console.log("date from: " + dateFromString);
         console.log("date to: "+ dateToString);
     
-        var status = req.body.status;
+        var status = req.body.taskType;
         var itemModel = req.body.category1;
         var technician = req.body.technician;
+        console.log(dateFrom + " " + dateTo + " " + status + " " + itemModel + " " + technician)
         console.log(req.body);
 
         //Find all repairs associated with the required inputs taken from the request parameters with repairDate greater than 
