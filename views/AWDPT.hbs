@@ -22,7 +22,7 @@
 	<hr class="line1">
 	<hr class="line2">
 	<div class="ReportBody">
-		<h3><span id="categoryChange"></span>Average Working Days of <span id="dateChange"></span></h3>
+		<h3>Average Working Days <span id="technicianChange"></span><span id="dateChange"></span></h3>
 		<div class="chart">
 			<canvas id="awdptChart"></canvas>
 		</div>
@@ -35,21 +35,16 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 	<script>
 		const repairTechnician = "{{repairTechnician}}".split(",");
-		const repairTechnician1 = "{{repairTechnician1}}".split(",");
-        const repairTechnician2 = "{{repairTechnician2}}".split(",");
-		const repairAverageWorkingDays = {{repairAverageWorkingDays}};
+		//const repairTechnician1 = "{{repairTechnician1}}".split(",");
+        //const repairTechnician2 = "{{repairTechnician2}}".split(",");
+		const repairAverageWorkingDays = [{{repairAverageWorkingDays}}];
 		//console.log("itemModels = " + repairItemModel[0])
 		const iqpmchart = document.querySelector('#awdptChart').getContext("2d");
 
-		const dateFormat = new Date("{{date}}");
-
-		const changedDate = moment(dateFormat).format('MMMM YYYY')
-		console.log("date = " + changedDate)
+		const dateFormat = "{{date}}";
 
 		console.log(repairTechnician)
-		console.log(repairTechnician1);
-		console.log(repairTechnician2);
-
+		
 		const labels = repairTechnician;
 		const data = {
 			labels,
@@ -74,7 +69,10 @@
 		const chart = new Chart(awdptChart, config);
 
 		$(document).ready(function(){
-  			$('#dateChange').text(repairTechnician);
+  			$('#dateChange').text("for " + dateFormat);
+			if(repairTechnician.length==1){
+				$('#technicianChange').text("of " + repairTechnician + " ");
+			}
 		});
 			
 	</script>
