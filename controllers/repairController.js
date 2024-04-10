@@ -237,7 +237,7 @@ const repairController = {
             //less than dateTo parameters
             var repairTalliedQuantities;
             var tempInt = 0;
-            await repairModel.find({ $or:[ {repairTechnician1: technician}, {repairTechnician2: technician}], repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
+            await repairModel.find({ $or:[{repairTechnician1: technician}, {repairTechnician2: technician}], repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
                 tempInt = 0;
 
                 //Iterate over the array of repairs associated with each unique repair technician
@@ -283,7 +283,7 @@ const repairController = {
 
         //Find all repairs associated with the required inputs taken from the request parameters with repairDate greater than 
         //dateFrom and repairDate less than dateTo parameters
-        await repairModel.find({ $or:[ {repairTechnician1: technician}, {repairTechnician2: technician}], repairItemModel: itemModel, repairStatus: status, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
+        await repairModel.find({ $or:[{repairTechnician1: technician}, {repairTechnician2: technician}], repairItemModel: itemModel, repairStatus: status, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
             // console.log(repair);
             var repairTalliedQuantities = [];
             var tempInt = 0;
@@ -326,7 +326,8 @@ const repairController = {
                 var repairAverageWorkingDays = [];
                 var technician = [];
                 var technicianCount = 0;
-
+                var distinctArray = [];
+                
                 //Add repairTechnician1 to technician array
                 for(i = 0; i < repairTechnician1.length; i++) {
                     technician[technicianCount] = repairTechnician1[i];
@@ -347,7 +348,7 @@ const repairController = {
                 
                     //Find all repairs associated with each unique repair technician with repairDate greater than dateFrom and 
                     //repairDate less than dateTo parameters
-                    await repairModel.find({date: req.body.dateFrom, repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
+                    await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
                         var repair = repair;
                         var tempInt1 = 0;
                         var tempInt2 = 0;
@@ -369,8 +370,14 @@ const repairController = {
                                 if((distinctArray[i] == repair[j].repairTechnician1) || (distinctArray[i] == repair[j].repairTechnician2)) {
                                     // console.log(repair[j].repairDateStarted);
                                     // console.log(repair[j].repairDateFinished);
-                                    tempInt1 += parseInt(repair[j].repairDateStarted);
-                                    tempInt2 += parseInt(repair[j].repairDateFinished);
+                                    if(repair[j].repairDateFinished == 'NaN') {
+
+                                    } else {
+                                        tempInt1 += parseInt(repair[j].repairDateStarted);
+                                        tempInt2 += parseInt(repair[j].repairDateFinished);
+                                    };
+                                    // console.log(tempInt1);
+                                    // console.log(tempInt2);
                                 };
                             };
                             
@@ -387,12 +394,13 @@ const repairController = {
                 
                 console.log("tallied = " + repairAverageWorkingDays);
                 //Send to hbs template used
-                res.render('AWDPT', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairAverageWorkingDays: repairAverageWorkingDays});
+                res.render('AWDPT', {repairTechnician: distinctArray, repairAverageWorkingDays: repairAverageWorkingDays});
             });
         } else {
             //Find all repairs associated with each unique repair technician with repairDate greater than dateFrom and 
             //repairDate less than dateTo parameters
-            await repairModel.find({repairTechnician1: technician, repairTechnician2: technician, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
+            await repairModel.find({ $or:[{repairTechnician1: technician}, {repairTechnician2: technician}], repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
+                // console.log(repair)
                 var repairAverageWorkingDays = [];
                 var tempInt1 = 0;
                 var tempInt2 = 0;
@@ -403,15 +411,22 @@ const repairController = {
                     //If repair technician in array of unique repair technicians == repair technician in array of repairs
                     //associated with each unique repair technician, add its repair quantity value to temporary int
                     if((technician == repair[i].repairTechnician1) || (technician == repair[i].repairTechnician2)) {
-                        // console.log(repair[j].repairDateStarted);
-                        // console.log(repair[j].repairDateFinished);
-                        tempInt1 += parseInt(repair[i].repairDateStarted);
-                        tempInt2 += parseInt(repair[i].repairDateFinished);
+                        // console.log(repair[i].repairDateStarted);
+                        // console.log(repair[i].repairDateFinished);
+                        if(repair[i].repairDateFinished == 'NaN') {
+
+                        } else {
+                            tempInt1 += parseInt(repair[i].repairDateStarted);
+                            tempInt2 += parseInt(repair[i].repairDateFinished);
+                        };
+                        // console.log(tempInt1);
+                        // console.log(tempInt2);
                     };
                 };
 
                 //Average working days = summation of date finished - summation of date started
                 averageWorkingDays = tempInt2 - tempInt1;
+                // console.log(averageWorkingDays);
 
                 //Store averageWorkingDays to repairAverageWorkingDays
                 repairAverageWorkingDays = averageWorkingDays;
