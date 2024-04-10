@@ -346,7 +346,7 @@ const repairController = {
                 
                     //Find all repairs associated with each unique repair technician with repairDate greater than dateFrom and 
                     //repairDate less than dateTo parameters
-                    await repairModel.find({repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
+                    await repairModel.find({date: req.body.dateFrom, repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
                         var repair = repair;
                         var tempInt1 = 0;
                         var tempInt2 = 0;
@@ -417,7 +417,7 @@ const repairController = {
 
                 console.log("tallied = " + repairAverageWorkingDays);
                 //Send to hbs template used
-                res.render('AWDPT', {repairTechnician: technician, repairAverageWorkingDays: repairAverageWorkingDays});
+                res.render('AWDPT', {date: req.body.dateFrom, repairTechnician: technician, repairAverageWorkingDays: repairAverageWorkingDays});
             });
         };
     },
@@ -686,7 +686,7 @@ const repairController = {
     
         console.log(req.body);
 
-        var status = req.body.status;
+        var status = req.body.taskType;
         var itemModel = req.body.itemModel;
         var category1 = req.body.category1;
         
@@ -716,7 +716,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('PTPM', {category: category1, repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('PTPM', {category: category1, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else if(category1 == "default") {
             //Find all unique repair item models

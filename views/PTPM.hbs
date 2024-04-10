@@ -22,123 +22,30 @@
     <hr class="line1">
     <hr class="line2">
     <div class="ReportBody">
-        <h3>Pending tasks for &#40model name&#41 for &#40month year/quarter year/year&#41</h3>
+        <h3>Pending tasks for <span id="categoryChange"></span> for <span id="dateChange"></span></h3>
         <div class="table">
-            <table>
+            <table id="statusList">
                 <tr id="tableHead">
-                    <th>DATE</th>
-                    <th>PL#</th>
-                    <th>CUSTOMER</th>
                     <th>ITEM/MODEL</th>
-                    <th>QTY</th>
-                    <th>UOM</th>
-                    <th>DEFECT</th>
-                    <th>DESCRIPTION</th>
+                    <th>Status</th>
                 </tr>
                 <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
+                    <td>hi</td>
+                    <td>hello</td>
                 </tr>
             </table>
         </div>
     </div>
     <footer>
-        <a href="/">Generate Another Report</a>
+        <a href="/home">Generate Another Report</a>
     </footer>
+    <script>
+        const repairItemModel = "{{repairItemModel}}".split(",");
+        const repairTalliedQuantities = [{{repairTalliedQuantities}}];
+        console.log(repairItemModel);
+        console.log(repairTalliedQuantities);
+
+        let table = document.getElementById("statusList");
+        
+    </script>
 </body>

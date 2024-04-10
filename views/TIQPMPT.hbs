@@ -1,0 +1,84 @@
+<head>
+	<title>Total Item Quantity Per Model Per Technician</title>
+	<link rel="stylesheet" type="text/css" href="/css/global.css">
+	<link rel="stylesheet" type="text/css" href="/css/Report.css">
+</head>
+<body>
+	<header>
+		<div class="left">
+			<div id="CompanyLogo">
+				<img src="/images/Btn_Logo.png">
+			</div>
+			<div id="ReportLogo">
+				<img src="/images/IQPM.svg">
+			</div>
+			<h2>Report:</h2>
+			<h3>TOTAL ITEM QUANTITY PER MODEL PER TECHNICIAN</h3>
+		</div>
+		<div class="right">
+			<div class="Profile"></div>
+		</div>
+	</header>
+	<hr class="line1">
+	<hr class="line2">
+	<div class="ReportBody">
+		<h3><span id="categoryChange"></span>Total Item Quantity for <span id="dateChange"></span></h3>
+		<div class="chart">
+			<canvas id="tiqpmptChart"></canvas>
+		</div>
+	</div>
+	<footer>
+		<a href="/home">Generate Another Report</a>
+	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+	<script>
+		const repairTechnician = "{{repairTechnician}}".split(",");
+        const repairItemModel = "{{repairItemModel}}".split(",");
+		const repairTalliedQuantities = [{{repairTalliedQuantities}}];
+		console.log("itemModels = " + repairItemModel[0])
+		const iqpmchart = document.querySelector('#tiqpmptChart').getContext("2d");
+
+		//const dateFormat = new Date("{{date}}");
+		//const categoryName = "{{category}}";
+
+		//const changedDate = moment(dateFormat).format('MMMM YYYY')
+		//console.log("date = " + changedDate)
+
+		const labels = repairTechnician;
+		const data = {
+			labels,
+			datasets: [
+				{
+					data: repairTalliedQuantities,
+					label: repairItemModel,
+					fill: true,
+					backgroundColor: "#FFD26F"
+				},
+			],
+		};
+		
+		const config = {
+			type: "bar",
+			data: data,
+			options: {
+				responsive: true,
+			},
+		};
+		
+		const chart = new Chart(tiqpmptChart, config);
+
+		/*
+		$(document).ready(function(){
+  			$('#dateChange').text(changedDate);
+			if(categoryName != ""){
+				console.log(categoryName)
+				$('#categoryChange').text(categoryName + " ");
+			} else {
+				
+			}
+		});
+		*/
+	</script>
+</body>
