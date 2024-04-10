@@ -29,10 +29,6 @@
                     <th>ITEM/MODEL</th>
                     <th>Status</th>
                 </tr>
-                <tr>
-                    <td>hi</td>
-                    <td>hello</td>
-                </tr>
             </table>
         </div>
     </div>
@@ -40,12 +36,22 @@
         <a href="/home">Generate Another Report</a>
     </footer>
     <script>
-        const repairItemModel = "{{repairItemModel}}".split(",");
-        const repairTalliedQuantities = [{{repairTalliedQuantities}}];
-        console.log(repairItemModel);
+        //const repairItemModel = "{{repairItemModel}}".split(",");
+        const repairTalliedQuantities = "{{repairTalliedQuantities}}".split(",");
+        //console.log(repairItemModel);
         console.log(repairTalliedQuantities);
 
         let table = document.getElementById("statusList");
-        
+
+        var rowCount=0;
+        const rowNo = repairTalliedQuantities.length / 2;
+        for(i=0; i<rowNo; i++){
+            let newRow = table.insertRow(table.rows.length);
+
+            for(j=0; j<2; j++){
+                newRow.insertCell(j).innerHTML = repairTalliedQuantities[rowCount];
+                rowCount++;
+            }
+        }
     </script>
 </body>
