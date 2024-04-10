@@ -589,7 +589,7 @@ const repairController = {
                                 // console.log(tempArray)
                                 //Store temporary array to temporary array 2
                                 tempArray2[j] = tempArray;
-                                // console.log(tempArray2)
+                                //console.log(tempArray2)
                             };
                             //Store temporary array 2 to repairTalliedQuantities
                             repairTalliedQuantities[i] = tempArray2
@@ -601,7 +601,7 @@ const repairController = {
                   }
                 console.log("tallied = " + JSON.stringify(repairTalliedQuantities));
                   //Send to hbs template used
-                res.render('TDPM', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: JSON.stringify(repairTalliedQuantities)});
+                res.render('TDPM', {category: category1, date: req.body.dateFrom, repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: JSON.stringify(repairTalliedQuantities)});
                 });
             });
         } else if(category1 == "default") {
@@ -648,7 +648,7 @@ const repairController = {
                                 tempArray.repairDefect = repairDefect[j];
                                 //Store accumulated quantity to repairDefectQuantity key
                                 tempArray.repairDefectQuantity = tempInt;
-                                // console.log(tempArray)
+                                //console.log(tempArray)
         
                                 //Store temporary array to repairTalliedQuantities
                                 repairTalliedQuantities[jLoopCounter] = tempArray;
@@ -661,7 +661,7 @@ const repairController = {
                 repairTalliedQuantities = repairTalliedQuantities.sort(compareNumbers);
                 console.log("tallied = " + JSON.stringify(repairTalliedQuantities));
                 //Send to hbs template used
-                res.render('TDPM', {repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: JSON.stringity(repairTalliedQuantities)});
+                res.render('TDPM', {item: itemModel, date: req.body.dateFrom, repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: JSON.stringify(repairTalliedQuantities)});
                 });
             });
         };
@@ -716,7 +716,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('PTPM', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('PTPM', {category: category1, repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else if(category1 == "default") {
             //Find all unique repair item models

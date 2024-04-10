@@ -39,6 +39,10 @@ const mainController = {
 
     getImport: async function(req, res) {
         res.render('import');
+    },
+
+    getHome: async function(req, res) {
+        res.render('home');
     }
 
 };

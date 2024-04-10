@@ -13,7 +13,7 @@ $(document).ready(function () {
                 </button>
     
                 <button class="navBtn Btn-generateReport">
-                    <a href="/"><img src="/images/Btn_generateReport.svg" alt="Generate Report"></a>
+                    <a href="/home"><img src="/images/Btn_generateReport.svg" alt="Generate Report"></a>
                 </button>
             </nav>
             `
