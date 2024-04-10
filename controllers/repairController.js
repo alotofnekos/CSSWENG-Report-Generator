@@ -42,11 +42,15 @@ function dateToInteger(givenDate, fromOrTo, dateRange, quarterVal) {
     var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     var parts = givenDate.split('-');
     var year = parseInt(parts[0]);
-    var month = parseInt(parts[1]);
+    var month;
     var isLeapYear = false;
 
     var day= 1; 
 
+    if (parts.length == 2){
+        month = parseInt(parts[1]);
+    }
+    
     if (parts.length == 3){
         day = parseInt(parts[2]);
     }
