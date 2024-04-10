@@ -34,9 +34,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 	<script>
-		const repairTechnician = "{{repairTechnician}}";
-		const repairTechnician1 = "{{repairTechnician1}}";
-        const repairTechnician2 = "{{repairTechnician2}}";
+		const repairTechnician = "{{repairTechnician}}".split(",");
+		const repairTechnician1 = "{{repairTechnician1}}".split(",");
+        const repairTechnician2 = "{{repairTechnician2}}".split(",");
 		const repairAverageWorkingDays = {{repairAverageWorkingDays}};
 		//console.log("itemModels = " + repairItemModel[0])
 		const iqpmchart = document.querySelector('#awdptChart').getContext("2d");
