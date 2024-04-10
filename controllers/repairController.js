@@ -226,18 +226,19 @@ const repairController = {
                             //Store temporary int to repairTalliedQuantities
                             repairTalliedQuantities[i] = tempInt;
                         };
-                    });
+                    });             
+                    console.log("tallied = " + repairTalliedQuantities);
+                    //Send to hbs template used
+                    res.render('TIQPT', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
                 });
-                
-                console.log("tallied = " + repairTalliedQuantities);
-                //Send to hbs template used
-                res.render('TIQPT', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else {
             //Find all repairs associated with the technician parameter with repairDate greater than dateFrom and repairDate 
             //less than dateTo parameters
+            var repairTalliedQuantities;
+            var tempInt = 0;
             await repairModel.find({repairTechnician1: technician, repairTechnician2: technician, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
-                var repairTalliedQuantities;
+                tempInt = 0;
 
                 //Iterate over the array of repairs associated with each unique repair technician
                 for(i = 0; i < repair.length; i++) {
@@ -743,7 +744,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('PTPM', {repairItemModel: repairItemModel, repairItemStatus: repairItemStatus, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('PTPM', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
             });
         };
     }, 
