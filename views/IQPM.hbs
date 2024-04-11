@@ -39,11 +39,10 @@
 		console.log("itemModels = " + repairItemModel[0])
 		const iqpmchart = document.querySelector('#iqpmChart').getContext("2d");
 
-		const dateFormat = new Date("{{date}}");
+		const dateFormat = "{{date}}";
 		const categoryName = "{{category}}";
-
-		const changedDate = moment(dateFormat).format('MMMM YYYY')
-		console.log("date = " + changedDate)
+		
+		console.log("date = " + dateFormat);
 
 		const labels = repairItemModel;
 		const data = {
@@ -69,7 +68,8 @@
 		const chart = new Chart(iqpmchart, config);
 
 		$(document).ready(function(){
-  			$('#dateChange').text(changedDate);
+			//$('#dateChange').text(changedDate);
+  			$('#dateChange').text(dateFormat);
 			if(categoryName != ""){
 				console.log(categoryName)
 				$('#categoryChange').text(categoryName + " ");

@@ -22,7 +22,7 @@
 	<hr class="line1">
 	<hr class="line2">
 	<div class="ReportBody">
-		<h3><span id="categoryChange"></span>Total Item Quantity for <span id="dateChange"></span></h3>
+		<h3>Total Item Quantity<span id="technicianChange"></span><span id="dateChange"></span></h3>
 		<div class="chart">
 			<canvas id="tiqptChart"></canvas>
 		</div>
@@ -35,17 +35,53 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 	<script>
 		const repairTechnician = "{{repairTechnician}}".split(",");
+		const repairTechnician1 = "{{repairTechnician1}}".split(",");
+		const repairTechnician2 = "{{repairTechnician2}}".split(",");
 		const repairTalliedQuantities = [{{repairTalliedQuantities}}];
 		//console.log("itemModels = " + repairItemModel[0])
-		const iqpmchart = document.querySelector('#tiqptChart').getContext("2d");
+		const tiqptChart = document.querySelector('#tiqptChart').getContext("2d");
 
-		//const dateFormat = new Date("{{date}}");
+		const dateFormat = "{{date}}";
 		//const categoryName = "{{category}}";
 
-		const changedDate = moment(dateFormat).format('MMMM YYYY')
-		console.log("date = " + changedDate)
+		//const changedDate = moment(dateFormat).format('MMMM YYYY')
+		console.log("date = " + dateFormat)
 
-		const labels = repairTechnician;
+		console.log(repairTechnician);
+		console.log(repairTechnician1);
+
+		var technicianList = repairTechnician1.concat(repairTechnician2);
+
+		let list=[];
+		
+		let found = false;
+		let count = 0;
+
+		var labels;
+
+		if(repairTechnician == ""){
+			for(i=0; i<technicianList.length;i++){
+				for(j=0; j<list.length; j++){
+					if(technicianList[i] == list[j]){
+						found = true;
+					}
+				}
+				count++;
+				if(count==1 && found == false){
+					list[i]=technicianList[i];
+				}
+
+				found=false;
+				count=0;
+			}
+
+			console.log(list);
+
+			labels = list;
+		}else{
+			labels = repairTechnician;
+		}
+	
 		const data = {
 			labels,
 			datasets: [
@@ -68,13 +104,12 @@
 		
 		const chart = new Chart(tiqptChart, config);
 
+		
 		$(document).ready(function(){
-  			$('#dateChange').text(changedDate);
-			if(categoryName != ""){
-				console.log(categoryName)
-				$('#categoryChange').text(categoryName + " ");
-			} else {
-				
+  			$('#dateChange').text("for " + dateFormat);
+			if(repairTechnician != ""){
+				console.log(repairTechnician)
+				$('#technicianChange').text("of " + repairTechnician + " ");
 			}
 		});
 			
