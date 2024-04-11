@@ -22,7 +22,7 @@
 	<hr class="line1">
 	<hr class="line2">
 	<div class="ReportBody">
-		<h3><span id="categoryChange"></span>Total Item Quantity for <span id="dateChange"></span></h3>
+		<h3></span>Total Item Quantity of <span id="technicianChange"></span> for <span id="categoryChange"></span>for <span id="dateChange"></span></h3>
 		<div class="chart">
 			<canvas id="tiqpmptChart"></canvas>
 		</div>
@@ -39,10 +39,9 @@
 		const repairTalliedQuantities = [{{repairTalliedQuantities}}];
 		console.log("itemModels = " + repairItemModel[0])
 		console.log({{repairTalliedQuantities}})
-		const iqpmchart = document.querySelector('#tiqpmptChart').getContext("2d");
+		const tiqpmptChart = document.querySelector('#tiqpmptChart').getContext("2d");
 
-		//const dateFormat = new Date("{{date}}");
-		//const categoryName = "{{category}}";
+		const dateFormat = "{{date}}";
 
 		//const changedDate = moment(dateFormat).format('MMMM YYYY')
 		//console.log("date = " + changedDate)
@@ -70,16 +69,10 @@
 		
 		const chart = new Chart(tiqpmptChart, config);
 
-		/*
 		$(document).ready(function(){
-  			$('#dateChange').text(changedDate);
-			if(categoryName != ""){
-				console.log(categoryName)
-				$('#categoryChange').text(categoryName + " ");
-			} else {
-				
-			}
+  			$('#dateChange').text(dateFormat);
+			$('#categoryChange').text(repairItemModel);
+			$('#technicianChange').text(repairTechnician);
 		});
-		*/
 	</script>
 </body>
