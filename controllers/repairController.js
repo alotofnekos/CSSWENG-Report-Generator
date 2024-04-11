@@ -138,9 +138,6 @@ function dateToInteger(givenDate, fromOrTo, dateRange, quarterVal) {
     return daysPassed;
 }
 
-
-
-
 const repairController = {
     //Get all repairs and display
     getAllRepairs: async function(req, res) {
