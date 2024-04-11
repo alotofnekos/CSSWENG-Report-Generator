@@ -18,7 +18,7 @@ $(document).ready(function () {
                 </div>
                 <div class="popup-options date_range taskType" name="dateRange">
                 <label class="btn-dropdown-mock taskOption">
-                    <input type="radio" class="radioCheck" name="dateRange" value="month" onclick="selectMonth()">
+                    <input type="radio" class="radioCheck" name="dateRange" value="month" onclick="selectMonth()" required>
                     <span>Month</span>
                 </label>
                 <label class="btn-dropdown-mock taskOption" >
@@ -43,17 +43,7 @@ $(document).ready(function () {
         getOptionsBasedOnReport(report);
         $(".overlay-holder").fadeIn('fast', 'swing');
     });
-
-    $('.btn-generate-report').click(function(){
-        try{
-            
-        }catch{
-            console.log();
-        }
-    });
 });
-
-
 
 function getOptionsBasedOnReport(reportname){
     let appendStr
@@ -107,7 +97,7 @@ function getOptionsBasedOnReport(reportname){
             </div>
             <div class="popup-options taskType" name="status">
                 <label class="btn-dropdown-mock taskOption">
-                    <input type="radio" class="radioCheck" name="taskType" value="Repair">
+                    <input type="radio" class="radioCheck" name="taskType" value="Repair" required>
                     <span>Repair</span>
                 </label>
                 <label class="btn-dropdown-mock taskOption" >
@@ -240,7 +230,7 @@ function getOptionsBasedOnReport(reportname){
             </div>
             <div class="popup-options taskType" name="status">
                 <label class="btn-dropdown-mock taskOption">
-                    <input type="radio" class="radioCheck" name="taskType" value="Repair">
+                    <input type="radio" class="radioCheck" name="taskType" value="Repair" required>
                     <span>Repair</span>
                 </label>
                 <label class="btn-dropdown-mock taskOption" >
@@ -269,8 +259,8 @@ function getOptionsBasedOnReport(reportname){
                 </div>
             </div>
             <div class="popup-options">
-            <select class="btn-dropdown-mock dropdown-selection" name="category1">
-                <option value="default">(Item)</option>
+            <select class="btn-dropdown-mock dropdown-selection" name="category1" required>
+                <option value="">(Item)</option>
                 <option value="FRAME EZ-112A">FRAME EZ-112A</option>
                 <option value="FRAME EZ-206A">FRAME EZ-206A</option>
                 <option value="FRAME EZ-406A">FRAME EZ-406A</option>
@@ -312,8 +302,8 @@ function getOptionsBasedOnReport(reportname){
                 <option value="XLR (M)">XLR (M)</option>
             </select>
 
-                <select class="btn-dropdown-mock dropdown-selection" name="technician">
-                    <option value="default">(Technician)</option>
+                <select class="btn-dropdown-mock dropdown-selection" name="technician" required>
+                    <option value="">(Technician)</option>
                     <option value="CHRISTIAN">CHRISTIAN</option>
                     <option value="DANIEL">DANIEL</option>
                     <option value="DREX">DREX</option>
@@ -339,9 +329,9 @@ function selectMonth(){
 
     $('.date_range').append(`
         <div class="date-options">
-            <div class="selection">
-                <label for="date from">date from: (month)</label>
-                <input type="month" id="dateFrom" name="dateFrom">
+            <div class="selection selectMonth">
+                <label for="dateFrom">date from: (month)</label>
+                <input type="month" id="dateFrom" name="dateFrom" required>
             </div>
             <button class="btn-option-close" onclick="closeOptions()"><img src="/images/close.svg" alt="close popup"></button>
         </div>
@@ -353,15 +343,15 @@ function selectQuarter(){
 
     $('.date_range').append(`
         <div class="date-options">
-            <div class="selection">
-                <select class="btn-dropdown-mock dropdown-selection" name="quarterNum">
+            <div class="selection selectQuarter">
+                <select class="btn-dropdown-mock dropdown-selection" name="quarterNum" required>
                     <option value="default">(Quarter)</option>
                     <option value="first">1st Quarter</option>
                     <option value="second">2nd Quarter</option>
                     <option value="third">3rd Quarter</option>
                     <option value="fourth">4th Quarter</option>
                 </select>
-                <select class="btn-dropdown-mock dropdown-selection" name="dateFrom">
+                <select class="btn-dropdown-mock dropdown-selection" name="dateFrom" required>
                     <option value="default">(Year)</option>
                     <option value="2024">2024</option>
                     <option value="2023">2023</option>
@@ -381,7 +371,7 @@ function selectYear(){
     $('.date_range').append(`
         <div class="date-options selectYear">
             <div class="selection">
-                <select class="btn-dropdown-mock dropdown-selection" name="dateFrom">
+                <select class="btn-dropdown-mock dropdown-selection" name="dateFrom" required>
                     <option value="default">(Year)</option>
                     <option value="2024">2024</option>
                     <option value="2023">2023</option>

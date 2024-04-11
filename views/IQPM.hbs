@@ -40,6 +40,7 @@
 		const iqpmchart = document.querySelector('#iqpmChart').getContext("2d");
 
 		const dateFormat = "{{date}}";
+		const quart = "{{quart}}";
 		const categoryName = "{{category}}";
 		
 		console.log("date = " + dateFormat);
@@ -69,12 +70,14 @@
 
 		$(document).ready(function(){
 			//$('#dateChange').text(changedDate);
-  			$('#dateChange').text(dateFormat);
+			if(quart != ""){
+				$('#dateChange').text(quart + " Quarter of " + dateFormat);
+			}else{
+				$('#dateChange').text(dateFormat);
+			}
 			if(categoryName != ""){
 				console.log(categoryName)
 				$('#categoryChange').text(categoryName + " ");
-			} else {
-				
 			}
 		});
 			

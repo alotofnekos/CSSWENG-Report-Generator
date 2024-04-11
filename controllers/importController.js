@@ -121,7 +121,7 @@ const importController = {
             //Parse passed JSON object
             var excelValues = JSON.parse(fields.excelValues);
             insertRepair(excelValues);
-         });
+        });
     }
 };
 

@@ -8,3 +8,12 @@ input{
     border: none;
     border-radius: 2vh;
 }
+
+#submit:hover {
+    background-color: var(--muted-primary);
+}
+
+#alert{
+    font-size: 4vh;
+    text-align: center;
+}

@@ -42,6 +42,7 @@
 		const tiqptChart = document.querySelector('#tiqptChart').getContext("2d");
 
 		const dateFormat = "{{date}}";
+		const quart = "{{quart}}";
 		//const categoryName = "{{category}}";
 
 		//const changedDate = moment(dateFormat).format('MMMM YYYY')
@@ -106,7 +107,11 @@
 
 		
 		$(document).ready(function(){
-  			$('#dateChange').text("for " + dateFormat);
+  			if(quart != ""){
+				$('#dateChange').text("for " + quart + " Quarter of " + dateFormat);
+			}else{
+				$('#dateChange').text("for " + dateFormat);
+			}
 			if(repairTechnician != ""){
 				console.log(repairTechnician)
 				$('#technicianChange').text("of " + repairTechnician + " ");

@@ -54,7 +54,7 @@ const dbController = {
         console.log(repairStatus);
         console.log(repairDefect);
 
-        await reservationModel.findOneAndUpdate({repairId: repairId}, {
+        await repairModel.findOneAndUpdate({repairId: repairId}, {
             repairDate: repairDate,
             repairPLNumber: repairPLNumber,
             repairCustomer: repairCustomer,
@@ -85,7 +85,7 @@ const dbController = {
             console.log("update error: " + error);
         });
 
-        res.render(`table`);
+        res.redirect(`/table`);
     },
     
     //Import file into database
@@ -94,13 +94,13 @@ const dbController = {
 
         console.log(repairId);
 
-        await reservationModel.findOneAndRemove({repairId: repairId}).then(reservation => {
+        await repairModel.deleteOne({repairId: repairId}).then(reservation => {
             console.log(reservation)
         }).catch(error => {
             console.log("delete error: " + error);
         });
          
-        res.render(`table`);
+        res.redirect(`/table`);
     }
 };
 

@@ -62,6 +62,7 @@
 		const tdpmchart = document.querySelector('#tdpmChart').getContext("2d");
 
 		const dateFormat = "{{date}}";
+		const quart = "{{quart}}";
 		const categoryName = "{{category}}";
 		const itemName = "{{item}}";
 
@@ -128,7 +129,11 @@
 		const chart = new Chart(tdpmchart, config);
 
 		$(document).ready(function(){
-  			$('#dateChange').text("for " + dateFormat);
+			if(quart != ""){
+				$('#dateChange').text("for " + quart + " Quarter of " + dateFormat);
+			}else{
+				$('#dateChange').text("for " + dateFormat);
+			}
 			if(categoryName != ""){
 				console.log(categoryName)
 				$('#categoryChange').text("for " + categoryName + " ");

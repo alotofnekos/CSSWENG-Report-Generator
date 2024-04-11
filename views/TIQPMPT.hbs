@@ -42,6 +42,7 @@
 		const tiqpmptChart = document.querySelector('#tiqpmptChart').getContext("2d");
 
 		const dateFormat = "{{date}}";
+		const quart = "{{quart}}";
 
 		//const changedDate = moment(dateFormat).format('MMMM YYYY')
 		//console.log("date = " + changedDate)
@@ -70,7 +71,11 @@
 		const chart = new Chart(tiqpmptChart, config);
 
 		$(document).ready(function(){
-  			$('#dateChange').text(dateFormat);
+  			if(quart != ""){
+				$('#dateChange').text(quart + " Quarter of " + dateFormat);
+			}else{
+				$('#dateChange').text(dateFormat);
+			}
 			$('#categoryChange').text(repairItemModel);
 			$('#technicianChange').text(repairTechnician);
 		});

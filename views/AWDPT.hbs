@@ -22,7 +22,7 @@
 	<hr class="line1">
 	<hr class="line2">
 	<div class="ReportBody">
-		<h3>Average Working Days <span id="technicianChange"></span><span id="dateChange"></span></h3>
+		<h3>Average Working Days<span id="technicianChange"></span><span id="dateChange"></span></h3>
 		<div class="chart">
 			<canvas id="awdptChart"></canvas>
 		</div>
@@ -42,6 +42,7 @@
 		const iqpmchart = document.querySelector('#awdptChart').getContext("2d");
 
 		const dateFormat = "{{date}}";
+		const quart = "{{quart}}";
 
 		console.log(repairTechnician)
 		
@@ -69,7 +70,11 @@
 		const chart = new Chart(awdptChart, config);
 
 		$(document).ready(function(){
-  			$('#dateChange').text("for " + dateFormat);
+  			if(quart != ""){
+				$('#dateChange').text("for " + quart + " Quarter of " + dateFormat);
+			}else{
+				$('#dateChange').text("for " + dateFormat);
+			}
 			if(repairTechnician.length==1){
 				$('#technicianChange').text("of " + repairTechnician + " ");
 			}

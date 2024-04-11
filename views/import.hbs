@@ -36,10 +36,11 @@
 
     <div class="mainContent">
         <form id="form" action="/table" method="post" enctype="multipart/form-data">
-        <input type="file" name="filetoupload" id="filetoupload"><br>
-        <input type="submit" id="submit">
-    </form>
+            <input type="file" name="filetoupload" id="filetoupload"><br>
+            <input type="submit" id="submit">
+        </form>
     </div>
+    <p id="alert"></p>
 
     <script>
         function blob2file(blobData) {
@@ -102,6 +103,8 @@
                         contentType: false,
                         processData: false
                 });
+
+                $('#alert').text("File Submitted!");
             });
         });
     </script>
