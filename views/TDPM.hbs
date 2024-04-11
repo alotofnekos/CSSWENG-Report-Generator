@@ -61,14 +61,15 @@
 		console.log("itemModels = " + repairItemModel[0])
 		const tdpmchart = document.querySelector('#tdpmChart').getContext("2d");
 
-		const dateFormat = "{{date}}";
+		const dateFormat = new Date("{{date}}");
 		const categoryName = "{{category}}";
 		const itemName = "{{item}}";
 
 		const itemArrLength = repairItemModel.length;
 		const defectArrLength = repairDefect.length;
 
-		console.log("date = " + dateFormat);
+		const changedDate = moment(dateFormat).format('MMMM YYYY');
+		console.log("date = " + changedDate);
 
 		let labelList=[];
 		let valueList=[];
@@ -128,7 +129,7 @@
 		const chart = new Chart(tdpmchart, config);
 
 		$(document).ready(function(){
-  			$('#dateChange').text("for " + dateFormat);
+  			$('#dateChange').text("for " + changedDate);
 			if(categoryName != ""){
 				console.log(categoryName)
 				$('#categoryChange').text("for " + categoryName + " ");

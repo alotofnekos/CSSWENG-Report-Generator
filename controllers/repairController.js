@@ -42,15 +42,11 @@ function dateToInteger(givenDate, fromOrTo, dateRange, quarterVal) {
     var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     var parts = givenDate.split('-');
     var year = parseInt(parts[0]);
-    var month;
+    var month = parseInt(parts[1]);
     var isLeapYear = false;
 
     var day= 1; 
 
-    if (parts.length == 2){
-        month = parseInt(parts[1]);
-    }
-    
     if (parts.length == 3){
         day = parseInt(parts[2]);
     }
@@ -133,7 +129,7 @@ function dateToInteger(givenDate, fromOrTo, dateRange, quarterVal) {
                     daysPassed += 273; //days from jan-dec (92)
                 break;
                 }
-                if(isLeapYear && quarterVal !== "first")
+                if(isLeapYear)
                     daysPassed += 1;
             break;
         }
@@ -169,7 +165,7 @@ const repairController = {
 
         var dateFromString = new Date(Math.round((dateFrom - 25569)*86400*1000));
         var dateToString = new Date(Math.round((dateTo - 25569)*86400*1000));
-        console.log("date from: " + dateFromString );
+        console.log("date from: " + dateFromString);
         console.log("date to: "+ dateToString);
         var technician = req.body.technician
             
@@ -230,7 +226,7 @@ const repairController = {
                     });             
                     console.log("tallied = " + repairTalliedQuantities);
                     //Send to hbs template used
-                    res.render('TIQPT', {date: req.body.dateFrom, repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
+                    res.render('TIQPT', {repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
                 });
             });
         } else {
@@ -256,7 +252,7 @@ const repairController = {
 
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('TIQPT', {date: req.body.dateFrom, repairTechnician: technician, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('TIQPT', {repairTechnician: technician, repairTalliedQuantities: repairTalliedQuantities});
             });
         };
     },
@@ -304,7 +300,7 @@ const repairController = {
             repairTalliedQuantities[0] = tempInt;
             console.log("tallied = " + repairTalliedQuantities);
             //Send to hbs template used
-            res.render('TIQPMPT', {date: req.body.dateFrom, repairTechnician: technician, repairItemModel: itemModel, repairTalliedQuantities: repairTalliedQuantities});
+            res.render('TIQPMPT', {repairTechnician: technician, repairItemModel: itemModel, repairTalliedQuantities: repairTalliedQuantities});
         }); 
     },
 
@@ -395,7 +391,7 @@ const repairController = {
                 
                 console.log("tallied = " + repairAverageWorkingDays);
                 //Send to hbs template used
-                res.render('AWDPT', {date: req.body.dateFrom, repairTechnician: distinctArray, repairAverageWorkingDays: repairAverageWorkingDays});
+                res.render('AWDPT', {repairTechnician: distinctArray, repairAverageWorkingDays: repairAverageWorkingDays});
             });
         } else {
             //Find all repairs associated with each unique repair technician with repairDate greater than dateFrom and 
@@ -444,13 +440,10 @@ const repairController = {
         var quarterVal= "";
         if(dateRange === "quarter"){
             quarterVal= req.body.quarterNum;
-            console.log("quarter: "+quarterVal);
         }
 
         var dateFrom = dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal);
-        console.log(dateToInteger(req.body.dateFrom, "from", dateRange, quarterVal));
         var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
-        console.log(dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal));
 
         var category1 = req.body.category1;
 
@@ -738,7 +731,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('PTPM', {category: category1, date: req.body.dateFrom, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('PTPM', {category: category1, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
             });
         } else if(category1 == "default") {
             //Find all unique repair item models
@@ -766,7 +759,7 @@ const repairController = {
                 });
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('PTPM', {item: itemModel, date: req.body.dateFrom, repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('PTPM', {repairItemModel: repairItemModel, repairTalliedQuantities: repairTalliedQuantities});
             });
         };
     }, 

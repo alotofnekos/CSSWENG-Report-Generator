@@ -22,7 +22,7 @@
     <hr class="line1">
     <hr class="line2">
     <div class="ReportBody">
-        <h3>Pending tasks <span id="categoryChange"></span><span id="dateChange"></span></h3>
+        <h3>Pending tasks for <span id="categoryChange"></span> for <span id="dateChange"></span></h3>
         <div class="table">
             <table id="statusList">
                 <tr id="tableHead">
@@ -35,20 +35,13 @@
     <footer>
         <a href="/home">Generate Another Report</a>
     </footer>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script>
         //const repairItemModel = "{{repairItemModel}}".split(",");
         const repairTalliedQuantities = "{{repairTalliedQuantities}}".split(",");
         //console.log(repairItemModel);
         console.log(repairTalliedQuantities);
 
-        const dateFormat = "{{date}}";
-        const categoryName = "{{category}}";
-		const itemName = "{{item}}";
-
         let table = document.getElementById("statusList");
-
-        console.log("date = " + dateFormat);
 
         var rowCount=0;
         const rowNo = repairTalliedQuantities.length / 2;
@@ -60,19 +53,5 @@
                 rowCount++;
             }
         }
-
-        $(document).ready(function(){
-            if(dateFormat != ""){
-                $('#dateChange').text("for " + dateFormat);
-            }
-            
-			if(categoryName != ""){
-				console.log(categoryName)
-				$('#categoryChange').text("for " + categoryName + " ");
-			}else if(itemName != ""){
-				console.log(categoryName)
-				$('#categoryChange').text("for " + itemName + " ");
-			}
-		});
     </script>
 </body>

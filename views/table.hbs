@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-    <header>
+        <header>
         <div class="left">
             <div id="CompanyLogo">
                 <img src="/images/Btn_Logo.png">
@@ -24,19 +24,12 @@
             <div class="Profile"></div>
         </div>
     </header>
-
     <div class="navHolder"></div>
 
     <hr class="line1">
-    <hr class="line2">
-
-    <div class="overlay-holder">
-        <div class="editForm"></div>
-        <div class="dark-overlay"></div>
-    </div>
-
+    <hr class="line2">  
     <div class="table-holder">
-        <table class="dataTable">
+        <table>
             <tr class="row"> 
                 <th class="col">Id</th>
                 <th class="col">Date</th>
@@ -66,7 +59,7 @@
             </tr>
         {{#each repair}}
             <tr>
-                <td><div class="col repairId"><strong><button class="idNum">{{repairId}}</button></strong></div></td>
+                <td><div class="col repairId"><strong>{{repairId}}</strong></div></td>
                 <td><div class="col repairDate"><strong>{{repairDate}}</strong></div></td>
                 <td><div class="col repairPLNumber"><strong>{{repairPLNumber}}</strong></div></td>
                 <td><div class="col repairCustomer"><strong>{{repairCustomer}}</strong></div></td>
@@ -95,293 +88,4 @@
         {{/each}}
         </table>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script>
-        //let formButton = document.querySelectorAll('.idNum');
-
-        $(document).ready(function(){
-            $(".idNum").click(function() {
-                var rowData = $(this).closest("tr");
-
-                var repairId = rowData.find(".repairId").text();
-                var repairDate = rowData.find(".repairDate").text();
-                var repairPLNumber = rowData.find(".repairPLNumber").text();
-                var repairCustomer = rowData.find(".repairCustomer").text();
-                var repairItemModel = rowData.find(".repairItemModel").text();
-                var repairDescription = rowData.find(".repairDescription").text();
-                var repairQuantity = rowData.find(".repairQuantity").text();
-                var repairUOM = rowData.find(".repairUOM").text();
-                var repairPullOutBy = rowData.find(".repairPullOutBy").text();
-                var repairCategory1 = rowData.find(".repairCategory1").text();
-                var repairCategory2 = rowData.find(".repairCategory2").text();
-                var repairSerialNumber = rowData.find(".repairSerialNumber").text();
-                var repairJobOrderNumber = rowData.find(".repairJobOrderNumber").text();
-                var repairDateStarted = rowData.find(".repairDateStarted").text();
-                var repairDateFinished = rowData.find(".repairDateFinished").text();
-                var repairTechnician1 = rowData.find(".repairTechnician1").text();
-                var repairTechnician2 = rowData.find(".repairTechnician2").text();
-                var repairItemStatus = rowData.find(".repairItemStatus").text();
-                var repairDeliveryStatus = rowData.find(".repairDeliveryStatus").text();
-                var repairRemarks = rowData.find(".repairRemarks").text();
-                var repairCost = rowData.find(".repairCost").text();
-                var repairReturnFormNumber = rowData.find(".repairReturnFormNumber").text();
-                var repairDateReturned = rowData.find(".repairDateReturned").text();
-                var repairStatus = rowData.find(".repairStatus").text();
-                var repairDefect = rowData.find(".repairDefect").text();
-
-                console.log(repairId);
-
-                var popup=`
-                <form name="update" method="post">
-                    <div class="popup-body">
-                        <div class="popup-header">
-                            <button type="submit" formaction="/update" class="btn-edit">
-                                Update
-                            </button>
-                            <button type="submit" formaction="/delete" class="btn-edit">
-                                Delete
-                            </button>
-                            <button class="btn-close" onclick="hidePopup()"><img src="/images/close.svg" alt="close popup"></button>
-                        </div>
-                        <div class="rowDataEdit">
-                                <div class="editForm-part">
-                                    <label for="repairId">Repair ID:</label>
-                                    <input type="text" name="repairId" id="repairId" class="data" readonly>
-
-                                    <label for="repairDate">Date:</label>
-                                    <input type="text" name="repairDate" id="repairDate" class="data">
-
-                                    <label for="repairPLNumber">PL #:</label>
-                                    <input type="text" name="repairPLNumber" id="repairPLNumber" class="data">
-
-                                    <label for="repairCustomer">Customer:</label>
-                                    <input type="text" name="repairCustomer" id="repairCustomer" class="data">
-                                </div>
-
-                                <div class="editForm-part">
-                                    <label for="repairItemModel">Item Model:</label>
-                                    <select class="btn-dropdown-mock dropdown-selection data" id="repairItemModel" name="repairItemModel">
-                                        <option value="default">(Item)</option>
-                                        <option value="FRAME EZ-112A">FRAME EZ-112A</option>
-                                        <option value="FRAME EZ-206A">FRAME EZ-206A</option>
-                                        <option value="FRAME EZ-406A">FRAME EZ-406A</option>
-                                        <option value="FRAME HLT12X">FRAME HLT12X</option>
-                                        <option value="FRAME K-10A">FRAME K-10A</option>
-                                        <option value="FRAME K3">FRAME K3</option>
-                                        <option value="FRAME KIRA 288">FRAME KIRA 288</option>
-                                        <option value="FRAME LC-12N">FRAME LC-12N</option>
-                                        <option value="FRAME LX-18">FRAME LX-18</option>
-                                        <option value="FRAME LX-212A">FRAME LX-212A</option>
-                                        <option value="FRAME LXD-7000">FRAME LXD-7000</option>
-                                        <option value="FRAME V12A">FRAME V12A</option>
-                                        <option value="FRAME VPX COMBI">FRAME VPX COMBI</option>
-                                        <option value="FRAME VPX-310">FRAME VPX-310</option>
-                                        <option value="FRAME VPX-312 (TOP)">FRAME VPX-312 (TOP)</option>
-                                        <option value="FRAME VRX932A">FRAME VRX932A</option>
-                                        <option value="FRAME VTX-12">FRAME VTX-12</option>
-                                        <option value="FRAME VTX-935">FRAME VTX-935</option>
-                                        <option value="HF-203 TRANSFORMER">HF-203 TRANSFORMER</option>
-                                        <option value="HORN H3002">HORN H3002</option>
-                                        <option value="HORN H310">HORN H310</option>
-                                        <option value="HORN H315">HORN H315</option>
-                                        <option value="HORN H7003">HORN H7003</option>
-                                        <option value="MC-02SP BLACK (100M)">MC-02SP BLACK (100M)</option>
-                                        <option value="MC-02SP D.BLUE (100M)">MC-02SP D.BLUE (100M)</option>
-                                        <option value="MS-3">MS-3</option>
-                                        <option value="NB-908">NB-908</option>
-                                        <option value="PL CONNECTOR (MONO)">PL CONNECTOR (MONO)</option>
-                                        <option value="RJ-45 CONNECTOR">RJ-45 CONNECTOR</option>
-                                        <option value="SP-1">SP-1</option>
-                                        <option value="SP-2">SP-2</option>
-                                        <option value="SPEAKON">SPEAKON</option>
-                                        <option value="SPW14">SPW14</option>
-                                        <option value="SS-5 SPEAKER STAND">SS-5 SPEAKER STAND</option>
-                                        <option value="SS-8 SPEAKER STAND">SS-8 SPEAKER STAND</option>
-                                        <option value="THX-12">THX-12</option>
-                                        <option value="VC-100">VC-100</option>
-                                        <option value="XLR (F)">XLR (F)</option>
-                                        <option value="XLR (M)">XLR (M)</option>
-                                    </select>
-                                
-                                    <label for="repairCategory1">Category 1:</label>
-                                    <select class="btn-dropdown-mock dropdown-selection data" id="repairCategory1" name="repairCategory1">
-                                        <option value="default">(Category)</option>
-                                        <option value="ACCESSORIES">ACCESSORIES</option>
-                                        <option value="AGR/MIRACLE 8 ITEM">AGR/MIRACLE 8 ITEM</option>
-                                        <option value="CAR SPEAKER">CAR SPEAKER</option>
-                                        <option value="CEILING SPEAKER">CEILING SPEAKER</option>
-                                        <option value="HORN SPEAKER">HORN SPEAKER</option>
-                                        <option value="KARAOKE SPEAKERS">KARAOKE SPEAKERS</option>
-                                        <option value="MOULDED SPEAKERS">MOULDED SPEAKERS</option>
-                                        <option value="PA & PRO SPEAKER SYSTEM">PA & PRO SPEAKER SYSTEM</option>
-                                        <option value="WALL MOUNT SPEAKERS">WALL MOUNT SPEAKERS</option>
-                                        <option value="WOOFERS">WOOFERS</option>
-                                        <option value="CONFERENCE SYSTEM">CONFERENCE SYSTEM</option>
-                                        <option value="FULL RANGE ITEMS">FULL RANGE ITEMS</option>
-                                        <option value="KARAOKE & PA AMPLIFIERS">KARAOKE & PA AMPLIFIERS</option>
-                                        <option value="LINE ARRAY">LINE ARRAY</option>
-                                        <option value="MIC & WIRELESS MICROPHONE">MIC & WIRELESS MICROPHONE</option>
-                                        <option value="MIXER">MIXER</option>
-                                        <option value="PHASED OUT">PHASED OUT</option>
-                                        <option value="PODIUM LECTERN">PODIUM LECTERN</option>
-                                        <option value="POWER AMPLIFIERS">POWER AMPLIFIERS</option>
-                                        <option value="PRO WOOFERS">PRO WOOFERS</option>
-                                        <option value="PROCESSORS">PROCESSORS</option>
-                                        <option value="REPAIR CHARGES">REPAIR CHARGES</option>
-                                        <option value="SOUND DIMENSION ITEMS">SOUND DIMENSION ITEMS</option>
-                                        <option value="SPAREPARTS">SPAREPARTS</option>
-                                        <option value="TWEETERS">TWEETERS</option>
-                                    </select>
-                                
-                                </div>
-
-                                <div class="editForm-part">
-                                    <label for="repairCategory2">Category 2:</label>
-                                    <input type="text" name="repairCategory2" id="repairCategory2" class="data">
-
-                                    <label for="repairQuantity">Quantity:</label>
-                                    <input type="text" name="repairQuantity" id="repairQuantity" class="data">
-
-                                    <label for="repairUOM">UOM:</label>
-                                    <select class="btn-dropdown-mock dropdown-selection data" id="repairUOM" name="repairUOM">
-                                        <option value="pc">pc</option>
-                                        <option value="set">set</option>
-                                    </select>
-
-                                    <label for="repairPullOutBy">Pull Out By:</label>
-                                    <input type="text" name="repairPullOutBy" id="repairPullOutBy" class="data">
-                                </div>
-
-                                <div class="editForm-part">
-                                    <label for="repairDescription">Description:</label>
-                                    <input type="text" name="repairDescription" id="repairDescription" class="data">
-                                </div>
-                                
-                                <div class="editForm-part">
-                                    <label for="repairSerialNumber">Serial Number:</label>
-                                    <input type="text" name="repairSerialNumber" id="repairSerialNumber" class="data">
-
-                                    <label for="repairJobOrderNumber">Job Order Number:</label>
-                                    <input type="text" name="repairJobOrderNumber" id="repairJobOrderNumber" class="data">
-                                </div>
-
-                                <div class="editForm-part">
-                                    <label for="repairDateStarted">Date Started:</label>
-                                    <input type="text" name="repairDateStarted" id="repairDateStarted" class="data">
-
-                                    <label for="repairDateFinished">Date Finished:</label>
-                                    <input type="text" name="repairDateFinished" id="repairDateFinished" class="data">
-
-                                    <label for="repairCost">Cost:</label>
-                                    <input type="text" name="repairCost" id="repairCost" class="data">
-                                </div>
-
-                                <div class="editForm-part">
-                                    <label for="repairTechnician1">Technician 1:</label>
-                                    <select class="btn-dropdown-mock dropdown-selection data" id="repairTechnician1" name="repairTechnician1">
-                                        <option value="default">(Technician)</option>
-                                        <option value="CHRISTIAN">CHRISTIAN</option>
-                                        <option value="DANIEL">DANIEL</option>
-                                        <option value="DREX">DREX</option>
-                                        <option value="MJ">MJ</option>
-                                        <option value="NEIL">NEIL</option>
-                                        <option value="OMER">OMER</option>
-                                    </select>
-
-                                    <label for="repairTechnician2">Technician 2:</label>
-                                    <select class="btn-dropdown-mock dropdown-selection data" id="repairTechnician2" name="repairTechnician2">
-                                        <option value="default">(Technician)</option>
-                                        <option value="CHRISTIAN">CHRISTIAN</option>
-                                        <option value="DANIEL">DANIEL</option>
-                                        <option value="DREX">DREX</option>
-                                        <option value="MJ">MJ</option>
-                                        <option value="NEIL">NEIL</option>
-                                        <option value="OMER">OMER</option>
-                                    </select>
-                                </div>
-
-                                <div class="editForm-part">
-                                    <label for="repairItemStatus">Item Status:</label>
-                                    <select class="btn-dropdown-mock dropdown-selection data" id="repairItemStatus" name="repairItemStatus">
-                                        <option value="DONE">DONE</option>
-                                        <option value="OUT">OUT</option>
-                                    </select>
-                                    <label for="repairDeliveryStatus">Delivery Status:</label>
-                                    <select class="btn-dropdown-mock dropdown-selection data" id="repairDeliveryStatus" name="repairDeliveryStatus">
-                                        <option value="FORWARDED">FORWARDED</option>
-                                        <option value="DELIVERED">DELIVERED</option>
-                                    </select>
-                                </div>
-
-                                <div class="editForm-part">
-                                    <label for="repairRemarks">Remarks:</label>
-                                    <input type="text" name="repairRemarks" id="repairRemarks" class="data">
-                                </div>
-
-                                <div class="editForm-part">
-                                    <label for="repairReturnFormNumber">Return Form Number:</label>
-                                    <input type="text" name="repairReturnFormNumber" id="repairReturnFormNumber">
-
-                                    <label for="repairDateReturned">Date Returned:</label>
-                                    <input type="text" name="repairDateReturned" id="repairDateReturned" class="data">
-
-                                    
-                                </div>
-
-                                <div class="editForm-part">
-                                    <label for="repairStatus">Status:</label>
-                                    <select class="btn-dropdown-mock dropdown-selection data" id="repairStatus" name="repairStatus">
-                                        <option value="Repair">Repair</option>
-                                        <option value="Replace">Replace</option>
-                                        <option value="Return">Return</option>
-                                        <option value="QA">QA</option>
-                                    </select>
-
-                                    <label for="repairDefect">Defect:</label>
-                                    <select class="btn-dropdown-mock dropdown-selection data" id="repairDefect" name="repairDefect">
-                                        <option value="NO POWER">NO POWER</option>
-                                        <option value="NO SOUND / NO AUDIO">NO SOUND / NO AUDIO</option>
-                                        <option value="DISTORTED SOUND">DISTORTED SOUND</option>
-                                        <option value="NO USB DISPLAY">NO USB DISPLAY</option>
-                                        <option value="DAMAGED CABINET">DAMAGED CABINET</option>
-                                        <option value="FAN HEADERS NOT PLUGGED IN">FAN HEADERS NOT PLUGGED IN</option>
-                                        <option value="NO COMPLAINT WRITTEN">NO COMPLAINT WRITTEN</option>
-                                    </select>
-                                </div>
-                        </div>
-                    </div>
-                </form>
-                `;        
-
-                $('.editForm').append(popup);
-                $(".overlay-holder").fadeIn('fast', 'swing');
-
-                $("#repairId").val(repairId);
-                $("#repairDate").val(repairDate);
-                $("#repairPLNumber").val(repairPLNumber);
-                $("#repairCustomer").val(repairCustomer);
-                $("#repairItemModel").val(repairItemModel);
-                $("#repairDescription").val(repairDescription);
-                $("#repairQuantity").val(repairQuantity);
-                $("#repairUOM").val(repairUOM);
-                $("#repairPullOutBy").val(repairPullOutBy);
-                $("#repairCategory1").val(repairCategory1);
-                $("#repairCategory2").val(repairCategory2);
-                $("#repairSerialNumber").val(repairSerialNumber);
-                $("#repairJobOrderNumber").val(repairJobOrderNumber);
-                $("#repairDateStarted").val(repairDateStarted);
-                $("#repairDateFinished").val(repairDateFinished);
-                $("#repairTechnician1").val(repairTechnician1);
-                $("#repairTechnician2").val(repairTechnician2);
-                $("#repairItemStatus").val(repairItemStatus);
-                $("#repairDeliveryStatus").val(repairDeliveryStatus);
-                $("#repairRemarks").val(repairRemarks);
-                $("#repairCost").val(repairCost);
-                $("#repairReturnFormNumber").val(repairReturnFormNumber);
-                $("#repairDateReturned").val(repairDateReturned);
-                $("#repairStatus").val(repairStatus);
-                $("#repairDefect").val(repairDefect);
-            });
-	    });
-    </script>
 </body>

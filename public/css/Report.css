@@ -86,6 +86,10 @@ header .right .Profile:hover{
 	margin: 1vh;
 }
 
+#categoryChange{
+	text-transform: capitalize;
+}
+
 footer{
 	right: 0;
 	bottom: 0;
@@ -112,51 +116,4 @@ footer a:hover{
 .chart{
 	width: 130vh;
 	height: 40vh;
-}
-
-.table{
-	justify-content: center;
-	display: flex;
-	position: relative;
-}
-
-table, td{
-	margin: 3vh;
-	border: 1px solid var(--nested-box-bg);
-	font-size: 2.5vh;
-}
-
-table{
-	border-collapse: collapse;
-}
-
-th{
-    border: 1px solid var(--bg);
-    padding-top: 2vh;
-    padding-left: 2vh;
-    padding-right: 2vh;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: var(--primary);
-    color: var(--near-black);
-	font-size: 2.5vh;
-}
-
-tr:nth-child(odd){background-color: var(--nested-box-bg);}
-
-tr:hover {
-    background-color: var(--muted-primary);
-    border: 1px solid var(--primary);
-}
-
-.table-holder{
-    margin: 3vh;
-    overflow: scroll;
-}
-
-td{
-	padding-top: 1vh;
-    padding-left: 1vh;
-    padding-right: 1vh;
-    padding-bottom: 6px;
 }
