@@ -259,11 +259,6 @@ header .right .Profile:hover{
     transition-duration: 0.5s;
 }
 
-.navBtn img:hover{
-    filter: contrast(70%) brightness(200%) hue-rotate(-25deg) saturate(0%);
-    transition-duration: 0.3s;
-}
-
 .taskType .taskOption span{
     font-size: 3vh;
     width: 100%;

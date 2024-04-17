@@ -3,6 +3,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/global.css">
 	<link rel="stylesheet" type="text/css" href="/css/Report.css">
 	<link rel="stylesheet" type="text/css" href="/css/table.css">
+	<script src="/src/nav.js" defer></script>
 </head>
 <body>
 	<header>
@@ -20,10 +21,13 @@
 			<div class="Profile"></div>
 		</div>
 	</header>
+	
+    <div class="navHolder"></div>
+
 	<hr class="line1">
 	<hr class="line2">
 	<div class="ReportBody">
-		<h3><span id="categoryChange"></span>Item Quantity for <span id="dateChange"></span></h3>
+		<h3><span id="categoryChange"></span>Item Quantity for <span class="dateChange"></span></h3>
 		<div class="chart">
 			<canvas id="iqpmChart"></canvas>
 		</div>
@@ -31,32 +35,18 @@
 	<div>
 		<table class="dataTable">
             <tr class="row"> 
-                <th class="col">Id</th>
-                <th class="col">Date</th>
-                <th class="col">PL #</th>
-                <th class="col">Customer</th>
-                <th class="col">Item model</th>
-                <th class="col">Description</th>
-                <th class="col">Quantity</th>
-                <th class="col">UOM</th>
-                <th class="col">PullOutBy</th>
-                <th class="col">Category 1</th>
-                <th class="col">Category 2</th>
-                <th class="col">SerialNumber</th>
-                <th class="col">JobOrderNumber</th>
-                <th class="col">DateStarted</th>
-                <th class="col">DateFinished</th>
-                <th class="col">Technician 1</th>
-                <th class="col">Technician 2</th>
-                <th class="col">Item Status</th>
-                <th class="col">Delivery Status</th>
-                <th class="col">Remarks</th>
-                <th class="col">Cost</th>
-                <th class="col">Return Form Number</th>
-                <th class="col">Date Returned</th>
-                <th class="col">Status</th>
-                <th class="col">Defect</th>
+                <th class="col">Item Model</th>
+                <th class="col"> <span class="dateChange"></span></th>			
             </tr>
+			
+			{{#each repairItemModel as |itemModel index|}}
+					{{#if (lookup ../repairTalliedQuantities @index)}}
+						<tr>
+							<td>{{itemModel}}</td>
+							<td>{{lookup ../repairTalliedQuantities @index}}</td>
+						</tr>
+					{{/if}}
+			{{/each}}
 		</table>
 	</div>
 	<footer>
@@ -103,9 +93,9 @@
 		$(document).ready(function(){
 			//$('#dateChange').text(changedDate);
 			if(quart != ""){
-				$('#dateChange').text(quart + " Quarter of " + dateFormat);
+				$('.dateChange').text(quart + " Quarter of " + dateFormat);
 			}else{
-				$('#dateChange').text(dateFormat);
+				$('.dateChange').text(dateFormat);
 			}
 			if(categoryName != ""){
 				console.log(categoryName)

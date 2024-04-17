@@ -18,7 +18,7 @@
 
 body{
     min-height: 100vh;
-	overflow: scroll;
+	/* overflow: scroll; */
 }
 
 header{
@@ -107,6 +107,7 @@ header .right .Profile:hover{
   }
   nav {
 	/* border-top: 5vh solid var(--primary); */
+	z-index: 5;
 	width: 15vh;
 	height: 100%;
 	background-color: var(--primary);
@@ -136,6 +137,12 @@ nav button img{
 	width: 9vh;
 	height: 9vh;
 }
+
+.navBtn img:hover{
+    filter: contrast(70%) brightness(200%) hue-rotate(-25deg) saturate(0%);
+    transition-duration: 0.3s;
+}
+
 
 .horizTranslate {
 	-webkit-transition: 3s;

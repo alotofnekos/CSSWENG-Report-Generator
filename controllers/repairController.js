@@ -461,7 +461,7 @@ const repairController = {
     
         console.log(req.body);
         // console.log(dateFrom +" "+ dateTo +" "+category1);
-        
+        let repair;
         if(category1 == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
@@ -471,7 +471,7 @@ const repairController = {
                 //Find all repairs associated with each unique repair item model with repairDate greater than dateFrom and 
                 //repairDate less than dateTo parameters
                 await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gte: dateFrom, $lte: dateTo}}).then(repair => {
-                    var repair = repair;
+                    repair = repair;
                     var tempInt = 0;
                     // console.log(repair);
                     // console.log("rep tech length = " + repairItemModel.length)
@@ -508,7 +508,7 @@ const repairController = {
                 //Find all repairs associated with each unique repair item model and the category1 parameter with repairDate 
                 //greater than dateFrom and repairDate less than dateTo parameters
                 await repairModel.find({repairItemModel: repairItemModel, repairDate: {$gte: dateFrom, $lte: dateTo}, repairCategory1: category1}).then(repair => {
-                    var repair = repair;
+                    repair = repair;
                     var tempInt = 0;
                     // console.log(repair);
                     // console.log("rep tech length = " + repairItemModel.length)
@@ -551,31 +551,32 @@ const repairController = {
 
         var dateFromString = new Date(Math.round((dateFrom - 25569)*86400*1000));
         var dateToString = new Date(Math.round((dateTo - 25569)*86400*1000));
-        console.log("date from: " + dateFromString);
-        console.log("date to: "+ dateToString);
+        // console.log("date from: " + dateFromString);
+        // console.log("date to: "+ dateToString);
     
         var status = req.body.taskType;
         var itemModel = req.body.itemModel;
         var category1 = req.body.category1;
 
-        console.log(req.body);
+        // console.log(req.body);
+        let repairTalliedQuantities = [];
 
         if(itemModel == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
-                console.log(repairItemModel);
-                var repairTalliedQuantities = [];
+                // console.log(repairItemModel);
+                repairTalliedQuantities = [];
         
                 //Find all unique repair defects
                 await repairModel.find({}).distinct('repairDefect').then(async repairDefect => {
-                    console.log(repairDefect)
+                    // console.log(repairDefect)
                     //Find all repairs associated with each unique repair item model, each unique repair defect and the 
                     //category1 parameter with repairDate greater than dateFrom and repairDate less than dateTo parameters
                     await repairModel.find({repairItemModel: repairItemModel, repairDefect: repairDefect, repairDate: {$gte: dateFrom, $lte: dateTo}, repairStatus: status, repairCategory1: category1}).then(repair => {
                         var tempArray = {};
                         var tempArray2 = [];
                         var tempInt = 0;
-                        console.log(repair);
+                        // console.log(repair);
                         // console.log("rep tech length = " + repairItemModel.length)
                         // console.log("rep length = " + repair.length)
                     
@@ -609,26 +610,28 @@ const repairController = {
                                 // console.log(tempArray)
                                 //Store temporary array to temporary array 2
                                 tempArray2[j] = tempArray;
-                                //console.log(tempArray2)
+                                console.log(tempArray2)
                             };
                             //Store temporary array 2 to repairTalliedQuantities
                             repairTalliedQuantities[i] = tempArray2
+                            console.log("......................................................................");
+                            console.log(tempArray2);
                         };
                     }); 
                 //Iterate over the repair item models and Sort repairTalliedQuantities in descending order
                 for(i = 0; i < repairItemModel.length; i++) { 
                     repairTalliedQuantities[i] = repairTalliedQuantities[i].sort(compareNumbers);
                   }
-                console.log("tallied = " + JSON.stringify(repairTalliedQuantities));
+                // console.log("tallied = " + JSON.stringify(repairTalliedQuantities));
                   //Send to hbs template used
-                res.render('TDPM', {quart: quarterVal, category: category1, date: req.body.dateFrom, repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: JSON.stringify(repairTalliedQuantities)});
+                res.render('TDPM', {quart: quarterVal, category: category1, date: req.body.dateFrom, repairItemModel: repairItemModel, repairDefect: repairDefect, repairTalliedQuantities: JSON.stringify(repairTalliedQuantities), repairTalliedQuantitiesArray: repairTalliedQuantities});
                 });
             });
         } else if(category1 == "default") {
             //Find all unique repair item models
             await repairModel.find({}).distinct('repairItemModel').then(async repairItemModel => {
                 // console.log(repairItemModel);
-                var repairTalliedQuantities = [];
+                repairTalliedQuantities = [];
         
                 //Find all unique repair defects
                 await repairModel.find({}).distinct('repairDefect').then(async repairDefect => {

@@ -17,6 +17,7 @@ th{
     color: var(--near-black);
 }
 
+
 tr:nth-child(odd){background-color: var(--nested-box-bg);}
 
 tr:hover {

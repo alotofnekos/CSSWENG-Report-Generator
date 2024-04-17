@@ -26,6 +26,15 @@
 		<div class="chart">
 			<canvas id="tdpmChart"></canvas>
 		</div>
+	<div>
+		<table class="dataTable">
+			<tr class="row"> 
+				<th class="col">Item Model</th>
+				<th class="col"> <span class="dateChange"></span></th>			
+			</tr>
+
+		</table>
+	</div>
 	</div>
 	<footer>
 		<a href="/home">Generate Another Report</a>
@@ -91,7 +100,7 @@
 			found=false;
 			count=0;
 		}
-
+		console.log("aaa");
 		console.log(labelList);
 
 		for(i=0; i<labelList.length;i++){
@@ -141,6 +150,36 @@
 				console.log(categoryName)
 				$('#categoryChange').text("for " + itemName + " ");
 			}
+			$('.dataTable').append(`
+				<tr>
+					<td><div class="col"><strong>${labelList[0]}</strong></div></td>
+					<td><div class="col">${valueList[0]}</div></td>
+				</tr>
+				<tr>
+					<td><div class="col"><strong>${labelList[1]}</strong></div></td>
+					<td><div class="col">${valueList[1]}</div></td>
+				</tr>
+				<tr>
+					<td><div class="col"><strong>${labelList[2]}</strong></div></td>
+					<td><div class="col">${valueList[2]}</div></td>
+				</tr>
+				<tr>
+					<td><div class="col"><strong>${labelList[3]}</strong></div></td>
+					<td><div class="col">${valueList[3]}</div></td>
+				</tr>
+				<tr>
+					<td><div class="col"><strong>${labelList[4]}</strong></div></td>
+					<td><div class="col">${valueList[4]}</div></td>
+				</tr>
+				<tr>
+					<td><div class="col"><strong>${labelList[5]}</strong></div></td>
+					<td><div class="col">${valueList[5]}</div></td>
+				</tr>
+				<tr>
+					<td><div class="col"><strong>${labelList[6]}</strong></div></td>
+					<td><div class="col">${valueList[6]}</div></td>
+				</tr>
+			`);
 		});
 	</script>
 </body>

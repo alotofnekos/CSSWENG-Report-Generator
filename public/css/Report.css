@@ -83,7 +83,7 @@ header .right .Profile:hover{
 	height: 100%;
 }
 
-.ReportBody h3, span{
+.ReportBody h3, .ReportBody span{
 	font-size: 4vh;
 	color: #6C6C6C;
 	margin: 1vh;
