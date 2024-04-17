@@ -18,10 +18,12 @@
 
 body{
     min-height: 100vh;
+	overflow: scroll;
 }
 
 header{
 	top: 0;
+	z-index: 4;
 	position: relative;
 	display: flex;
 	align-items: center;

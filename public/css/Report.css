@@ -79,7 +79,10 @@ header .right .Profile:hover{
 .ReportBody{
 	display: flex;
 	flex-direction: column;
+	width: 95%;
+	height: 100%;
 }
+
 .ReportBody h3, span{
 	font-size: 4vh;
 	color: #6C6C6C;
@@ -110,14 +113,15 @@ footer a:hover{
 }
 
 .chart{
-	width: 130vh;
-	height: 40vh;
+	width: 95%;
+	height: 100%;
+	position: relative;
 }
 
 .table{
 	justify-content: center;
 	display: flex;
-	position: relative;
+	/* position: relative; */
 }
 
 table, td{
