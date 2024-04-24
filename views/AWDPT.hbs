@@ -26,11 +26,36 @@
 		<div class="chart">
 			<canvas id="awdptChart"></canvas>
 		</div>
+		<div>
+			<table class="dataTable">
+				<tr class="row"> 
+					<th class="col">Item Model</th>
+					<th class="col"> <span class="dateChange"></span></th>			
+				</tr>
+				{{#each repairTechnician as | qty index|}}
+						{{#if (lookup ../repairAverageWorkingDays @index)}}
+							<tr>
+								<td>{{qty}}</td>
+								<td>{{lookup ../repairAverageWorkingDays @index}}</td>
+							</tr>
+						{{/if}}
+				{{/each}}
+				{{#if notDefault}}
+					<tr>
+						<td>{{repairTechnician}}</td>
+						<td>{{repairAverageWorkingDays}}</td>
+					</tr>
+				{{/if}}
+			</table>
+		</div>
+		<div>
+			<footer>
+				<button onclick="window.print()">Export</button>
+				<a href="/home">Generate Another Report</a>
+			</footer>
+		</div>
 	</div>
-	<footer>
-		<button onclick="window.print()">Export</button>
-		<a href="/home">Generate Another Report</a>
-	</footer>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>

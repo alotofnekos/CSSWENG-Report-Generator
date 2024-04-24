@@ -174,6 +174,7 @@ const repairController = {
         var technician = req.body.technician
             
         console.log(req.body);
+        let distinctArray = [];
 
         if(technician == "default") {
             //Find all unique repair technicians
@@ -229,8 +230,11 @@ const repairController = {
                         };
                     });             
                     console.log("tallied = " + repairTalliedQuantities);
+                    console.log("repairTech1 = "  + repairTechnician1);
+                    console.log("repairTech2 = "  + repairTechnician2);
+                    console.log("unique technicains = " + distinctArray);
                     //Send to hbs template used
-                    res.render('TIQPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities});
+                    res.render('TIQPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities, distinctArray: distinctArray, notDefault: false});
                 });
             });
         } else {
@@ -256,7 +260,7 @@ const repairController = {
 
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
-                res.render('TIQPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician: technician, repairTalliedQuantities: repairTalliedQuantities});
+                res.render('TIQPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician: technician, repairTalliedQuantities: repairTalliedQuantities, notDefault: true});
             });
         };
     },
@@ -319,6 +323,7 @@ const repairController = {
         var dateTo = dateToInteger(req.body.dateFrom, "to", dateRange, quarterVal);
 
         var technician = req.body.technician;
+        let distinctArray= []; 
 
         if(technician == "default") {
             //Find all unique repair technicians
@@ -327,7 +332,6 @@ const repairController = {
                 var repairAverageWorkingDays = [];
                 var technician = [];
                 var technicianCount = 0;
-                var distinctArray = [];
                 
                 //Add repairTechnician1 to technician array
                 for(i = 0; i < repairTechnician1.length; i++) {
@@ -395,7 +399,7 @@ const repairController = {
                 
                 console.log("tallied = " + repairAverageWorkingDays);
                 //Send to hbs template used
-                res.render('AWDPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician: distinctArray, repairAverageWorkingDays: repairAverageWorkingDays});
+                res.render('AWDPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician: distinctArray, repairAverageWorkingDays: repairAverageWorkingDays, notDefault: false});
             });
         } else {
             //Find all repairs associated with each unique repair technician with repairDate greater than dateFrom and 
@@ -434,7 +438,7 @@ const repairController = {
 
                 console.log("tallied = " + repairAverageWorkingDays);
                 //Send to hbs template used
-                res.render('AWDPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician: technician, repairAverageWorkingDays: repairAverageWorkingDays});
+                res.render('AWDPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician: technician, repairAverageWorkingDays: repairAverageWorkingDays, notDefault: true});
             });
         };
     },
