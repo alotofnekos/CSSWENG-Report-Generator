@@ -19,7 +19,7 @@ app.post('/PTPMpost', repairController.getPendingStatusPerItemModel);
 app.post('/TIQPTpost', repairController.getTotalItemQuantityPerTechnician);
 //Total item quantity per model per technician
 app.post('/TIQPMPTpost', repairController.getTotalItemQuantityPerItemModelPerTechnician);
-//Average working days per technician 
+//Average working days per technician
 app.post('/AWDPTpost', repairController.getAverageWorkingDaysPerTechnician);
 //Update from db
 app.post('/update', dbController.update);
