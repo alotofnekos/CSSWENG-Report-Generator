@@ -431,12 +431,13 @@ const repairController = {
 
                 //Average working days = summation of date finished - summation of date started
                 averageWorkingDays = (tempInt2 - tempInt1) / repair.length;
-                // console.log(averageWorkingDays);
+                console.log(tempInt2 - tempInt1)
+                console.log(averageWorkingDays);
 
                 //Store averageWorkingDays to repairAverageWorkingDays
                 repairAverageWorkingDays = averageWorkingDays;
 
-                console.log("tallied = " + repairAverageWorkingDays);
+                // console.log("tallied = " + repairAverageWorkingDays);
                 //Send to hbs template used
                 res.render('AWDPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician: technician, repairAverageWorkingDays: repairAverageWorkingDays, notDefault: true});
             });
