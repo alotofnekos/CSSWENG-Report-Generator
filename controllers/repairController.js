@@ -389,7 +389,7 @@ const repairController = {
                             // console.log("tempint 1 = " + tempInt1);
                             // console.log("tempint 2 = " + tempInt2);
                             //Average working days = summation of date finished - summation of date started
-                            averageWorkingDays = tempInt2 - tempInt1;
+                            averageWorkingDays = (tempInt2 - tempInt1) / repair.length;
                 
                             //Store averageWorkingDays to repairAverageWorkingDays
                             repairAverageWorkingDays[i] = averageWorkingDays;
@@ -430,7 +430,7 @@ const repairController = {
                 };
 
                 //Average working days = summation of date finished - summation of date started
-                averageWorkingDays = tempInt2 - tempInt1;
+                averageWorkingDays = (tempInt2 - tempInt1) / repair.length;
                 // console.log(averageWorkingDays);
 
                 //Store averageWorkingDays to repairAverageWorkingDays

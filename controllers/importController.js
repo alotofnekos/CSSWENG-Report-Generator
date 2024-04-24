@@ -123,6 +123,8 @@ const importController = {
             insertRepair(excelValues);
         });
     }
+
+    
 };
 
 //Export importController to be used
