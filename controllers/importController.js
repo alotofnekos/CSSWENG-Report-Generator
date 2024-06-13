@@ -118,6 +118,8 @@ const importController = {
             // console.log("fields data = " + fields.data);
             // base64_decode(fields.data, fields.file);
 
+
+            // console.log(fields.excelValues)
             //Parse passed JSON object
             var excelValues = JSON.parse(fields.excelValues);
             insertRepair(excelValues);

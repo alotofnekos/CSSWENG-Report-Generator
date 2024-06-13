@@ -1,7 +1,7 @@
 const mainController = {
     //Login feature
     login: async function(req, res) {
-        res.render('login');
+        res.render('login');    
     },
 
     //Load Home Page

@@ -101,6 +101,17 @@ const dbController = {
         });
          
         res.redirect(`/table`);
+    },
+
+    deleteAll: async function(req, res) {
+        await repairModel.deleteAll().then(reservation => {
+            console.log("this is reservation: ");
+            console.log(reservation);
+        }).catch(error => {
+            console.log("delete error: " + error);
+        });
+
+        res.redirect(`/table`);
     }
 };
 
