@@ -79,8 +79,8 @@ const dbController = {
             repairDateReturned: repairDateReturned,
             repairStatus: repairStatus,
             repairDefect: repairDefect
-        }).then(reservation => {
-            console.log(reservation);
+        }).then(repair => {
+            console.log(repair);
         }).catch(error => {
             console.log("update error: " + error);
         });
@@ -94,8 +94,8 @@ const dbController = {
 
         console.log(repairId);
 
-        await repairModel.deleteOne({repairId: repairId}).then(reservation => {
-            console.log(reservation)
+        await repairModel.deleteOne({repairId: repairId}).then(repair => {
+            console.log(repair)
         }).catch(error => {
             console.log("delete error: " + error);
         });
@@ -104,9 +104,9 @@ const dbController = {
     },
 
     deleteAll: async function(req, res) {
-        await repairModel.deleteAll().then(reservation => {
-            console.log("this is reservation: ");
-            console.log(reservation);
+        await repairModel.deleteAll().then(repair => {
+            console.log("this is repair: ");
+            console.log(repair);
         }).catch(error => {
             console.log("delete error: " + error);
         });
@@ -115,5 +115,5 @@ const dbController = {
     }
 };
 
-//Export importController to be used
+//Export dbController to be used
 module.exports = dbController;
