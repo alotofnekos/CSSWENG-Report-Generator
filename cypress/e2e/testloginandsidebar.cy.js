@@ -18,6 +18,12 @@ describe('User should be able to login', () => {
     cy.get('#login').click()
     cy.get('#loginError').should('contain','Invalid password' )
   })
+
+  it('Should be not be able to login with no input', () => {
+    cy.visit('http://localhost:3000/')
+    cy.get('#login').click()
+    cy.get('#loginError').should('contain','Invalid username' )
+  })
 })
 
 describe('User should be able to interact with the sidebar menu', () => {
