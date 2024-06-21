@@ -13,11 +13,11 @@ const mainController = {
             if(password == 12345678) {
                 res.render('home');
             } else {
-                const error = "Invalid password";
+                const error = "Invalid username or password";
                 res.render('login', {error: error});
             }
         } else {
-            const error = "Invalid username";
+            const error = "Invalid username or password";
             res.render('login', {error: error});
         };
     },

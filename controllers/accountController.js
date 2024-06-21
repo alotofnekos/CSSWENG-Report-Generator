@@ -7,13 +7,17 @@ const accountController = {
         const userEmail = req.body.userEmail;
         const userPassword = req.body.userPassword;
         
-        const newUser = new userModel ({
-            userId: this.userId,
-            userType: userType,
-            userName: userName,
-            userEmail: userEmail,
-            userPassword: userPassword
-        });
+        try {
+            const newUser = new userModel ({
+                userId: this.userId,
+                userType: userType,
+                userName: userName,
+                userEmail: userEmail,
+                userPassword: userPassword
+            });
+        } catch(error) {
+            console.log(error);
+        }
 
         await newUser.save().then(newUser => {
             console.log(newUser);
