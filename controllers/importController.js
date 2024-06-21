@@ -9,7 +9,7 @@ const repairModel = require('../models/repairSchema.js');
 const repairIdModel = require('../models/repairIdSchema.js');
 
 async function insertRepair(excelValues) {
-    const hatdog = parseInt(excelValues[1]);
+    // const hatdog = parseInt(excelValues[1]);
     // console.log(hatdog);
     console.log("this is the final value ", excelValues);
     const excelValuesLength = excelValues.length;
@@ -101,13 +101,6 @@ const importController = {
         var form = new formidable.IncomingForm();
         try {
             form.parse(req, async function (err, fields, files) {
-                // console.log("files = " + files);
-                // console.log("fields = " + fields);
-                // console.log("fields data = " + fields.data);
-                // base64_decode(fields.data, fields.file);
-
-
-                // console.log(fields.excelValues)
                 //Parse passed JSON object
                 var excelValues = JSON.parse(fields.excelValues);
                 insertRepair(excelValues);

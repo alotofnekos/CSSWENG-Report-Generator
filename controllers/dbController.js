@@ -91,7 +91,6 @@ const dbController = {
     //Import file into database
     delete: async function(req, res) {
         const repairId = req.body.repairId;
-
         console.log(repairId);
 
         await repairModel.deleteOne({repairId: repairId}).then(repair => {
