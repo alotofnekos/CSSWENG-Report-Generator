@@ -151,6 +151,8 @@ const repairController = {
             
             //Send to hbs template used
             res.render('table', {repair: repair});
+        }).catch(error => {
+            console.log("Getting all repairs error: " + error);
         });
     },
 
@@ -228,6 +230,8 @@ const repairController = {
                             //Store temporary int to repairTalliedQuantities
                             repairTalliedQuantities[i] = tempInt;
                         };
+                    }).catch(error => {
+                        console.log(error);
                     });             
                     console.log("tallied = " + repairTalliedQuantities);
                     console.log("repairTech1 = "  + repairTechnician1);
@@ -235,7 +239,11 @@ const repairController = {
                     console.log("unique technicains = " + distinctArray);
                     //Send to hbs template used
                     res.render('TIQPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician1: repairTechnician1, repairTechnician2: repairTechnician2, repairTalliedQuantities: repairTalliedQuantities, distinctArray: distinctArray, notDefault: false});
+                }).catch(error => {
+                    console.log("Finding repairModel repairTechnician 2 error: " + error);
                 });
+            }).catch(error => {
+                console.log("Finding repairModel repairTechnician 1 error: " + error);
             });
         } else {
             //Find all repairs associated with the technician parameter with repairDate greater than dateFrom and repairDate 
@@ -261,6 +269,8 @@ const repairController = {
                 console.log("tallied = " + repairTalliedQuantities);
                 //Send to hbs template used
                 res.render('TIQPT', {quart: quarterVal, date: req.body.dateFrom, repairTechnician: technician, repairTalliedQuantities: repairTalliedQuantities, notDefault: true});
+            }).catch(error => {
+                console.log(error);
             });
         };
     },
