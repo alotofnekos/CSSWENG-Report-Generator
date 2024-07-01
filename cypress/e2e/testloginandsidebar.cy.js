@@ -10,19 +10,19 @@ describe('User should be able to login', () => {
     cy.visit('http://localhost:3000/')
     cy.get('#password').type('12345678')
     cy.get('#login').click()
-    cy.get('#loginError').should('contain','Invalid username' )
+    cy.get('#loginError').should('contain','Invalid username or password' )
   })
   it('Should be not be able to login with no password', () => {
     cy.visit('http://localhost:3000/')
     cy.get('#username').type('Admin')
     cy.get('#login').click()
-    cy.get('#loginError').should('contain','Invalid password' )
+    cy.get('#loginError').should('contain','Invalid username or password' )
   })
 
   it('Should be not be able to login with no input', () => {
     cy.visit('http://localhost:3000/')
     cy.get('#login').click()
-    cy.get('#loginError').should('contain','Invalid username' )
+    cy.get('#loginError').should('contain','Invalid username or password' )
   })
 })
 

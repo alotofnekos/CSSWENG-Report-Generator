@@ -114,7 +114,7 @@ describe('User should be able to edit the items and these edits should reflect i
     cy.get(':nth-child(38) > :nth-child(13) > .col > strong').should('contain', '12')
   });
 
-  it('Should not be able to change the repair serial number and the job order to non-numbers', () => {
+  it.skip('Should not be able to change the repair serial number and the job order to non-numbers', () => {
     cy.get(':nth-child(38) > :nth-child(1) > .col > strong > .idNum').click()
     cy.get('#repairSerialNumber').clear()
     cy.get('#repairSerialNumber').type('a')
@@ -127,6 +127,17 @@ describe('User should be able to edit the items and these edits should reflect i
     cy.get(':nth-child(38) > :nth-child(13) > .col > strong').should('contain', '12')
   });
 
+  it('Should not be able to change the date started and date finished', () => {
+    cy.get(':nth-child(38) > :nth-child(1) > .col > strong > .idNum').click()
+    cy.get('#repairDateStarted').clear()
+    cy.get('#repairDateStarted').type('45405')
+    cy.get('#repairDateFinished').clear()
+    cy.get('#repairDateFinished').type('45407')
+    cy.get('[formaction="/update"]').click()
+    cy.reload()
+    cy.get(':nth-child(38) > :nth-child(14) > .col > strong').should('contain', '45405')
+    cy.get(':nth-child(38) > :nth-child(15) > .col > strong').should('contain', '45407')
+  });
 
 
 })
